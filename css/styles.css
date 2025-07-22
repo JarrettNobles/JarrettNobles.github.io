@@ -11932,4 +11932,16 @@ a.d-block:hover img {
   color: #e0e0e0;
 }
 
+/* 🔧 Mobile support: always show overlay content */
+@media (max-width: 768px) {
+  .instagram-footer .overlay-content {
+    opacity: 1;
+  }
+
+  .instagram-footer::after {
+    opacity: 1;
+  }
+}
+
+
 }
