@@ -11731,4 +11731,37 @@ html {
     width: 1.5vw;
     left: -2vw;
   }
+
+  /* Portfolio image overlay effect */
+.overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5); /* dark semi-transparent overlay */
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-bottom-left-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+}
+
+.position-relative:hover .overlay {
+    opacity: 1;
+}
+
+.overlay-text {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Optional: make the images zoom a bit on hover */
+a.d-block img {
+    transition: transform 0.3s ease;
+}
+a.d-block:hover img {
+    transform: scale(1.02);
+}
 }
