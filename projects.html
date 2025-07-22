@@ -1,126 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Coral Olson Photography</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;900&display=swap" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Portfolio | Coral Olson Photography</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;900&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="css/styles.css" rel="stylesheet" />
+  <style>
+    .portfolio-grid {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.5rem;
+    }
+    .portfolio-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .portfolio-item:hover img {
+      transform: scale(1.05);
+    }
+    .portfolio-overlay {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.55);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-weight: bold;
+      font-size: 1.25rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .portfolio-item:hover .portfolio-overlay {
+      opacity: 1;
+    }
+    .navbar-light .nav-link {
+      color: #000 !important;
+    }
+  </style>
 </head>
 <body class="d-flex flex-column h-100 bg-light">
 <main class="flex-shrink-0">
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-        <div class="container px-5">
-            <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Coral Olson Photography</span></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="projects.html">Portfolio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                </ul>
-            </div>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+    <div class="container px-5">
+      <a class="navbar-brand fw-bold" href="index.html">Coral Olson Photography</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="projects.html">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Portfolio Grid -->
+  <section class="portfolio-grid">
+    <div class="container px-5">
+      <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">Portfolio</h1>
+        <p class="text-muted">Recent sessions and timeless moments</p>
+      </div>
+      <div class="row g-4">
+        <!-- Elly and Dalton Engagement -->
+        <div class="col-12 col-sm-6 col-md-4">
+          <a href="vincentengagment.html" class="portfolio-item d-block">
+            <img src="assets/Engagement.jpg" alt="Elly and Dalton Engagement">
+            <div class="portfolio-overlay">Elly & Dalton Engagement</div>
+          </a>
         </div>
-    </nav>
 
-    <!-- Projects Section -->
-    <section class="py-5">
-        <div class="container px-5 mb-5">
-            <div class="text-center mb-5">
-                <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Portfolio</span></h1>
-            </div>
-            <div class="row gx-5 justify-content-center">
-                <div class="col-lg-11 col-xl-9 col-xxl-8">
-
-                    <!-- Project Card: Elly and Dalton Engagement -->
-                    <a href="vincentengagment.html" class="text-decoration-none">
-                        <div class="card shadow rounded-4 border-0 mb-5 p-4">
-                            <div class="row g-0 align-items-center">
-                                <!-- Image section -->
-                                <div class="col-md-5">
-                                    <img src="assets/Engagement.jpg" class="img-fluid rounded-4" alt="Elly and Dalton Engagement" />
-                                </div>
-                                <!-- Text section -->
-                                <div class="col-md-7">
-                                    <div class="card-body">
-                                        <div class="mb-2 text-primary fw-bold">July 19th 2025</div>
-                                        <h5 class="card-title fw-bolder">Elly and Dalton Engagement</h5>
-                                        <p class="mb-2 small text-muted">Captured at a lakeside retreat during golden hour.</p>
-                                        <ul class="mb-0 small">
-                                            <li><strong>Golden Light:</strong> Backlit tones enhanced by natural reflections.</li>
-                                            <li><strong>Natural Posing:</strong> Couples guided into natural, candid expressions.</li>
-                                            <li><strong>Location:</strong> New Orleans lake front.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-                     <!-- Project Card: Marina Minishoot -->
-                    <a href="marinashoot.html" class="text-decoration-none">
-                        <div class="card shadow rounded-4 border-0 mb-5 p-4">
-                            <div class="row g-0 align-items-center">
-                                <!-- Image section -->
-                                <div class="col-md-5">
-                                    <img src="assets/marina1.jpg" class="img-fluid rounded-4" alt="marinashoot" />
-                                </div>
-                                <!-- Text section -->
-                                <div class="col-md-7">
-                                    <div class="card-body">
-                                        <div class="mb-2 text-primary fw-bold">June 19th 2025</div>
-                                        <h5 class="card-title fw-bolder">Marina Minishoot</h5>
-                                        <p class="mb-2 small text-muted">Captured in the Great Smokey Mountains.</p>
-                                        <ul class="mb-0 small">
-                                            <!--<li><strong>Golden Light:</strong> Backlit tones enhanced by natural reflections.</li>
-                                            <li><strong>Natural Posing:</strong> Couples guided into natural, candid expressions.</li>-->
-                                            <li><strong>Location:</strong> Cades Cove, Tennessee.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- You can add more project cards here -->
-
-                </div>
-            </div>
+        <!-- Marina Minishoot -->
+        <div class="col-12 col-sm-6 col-md-4">
+          <a href="marinashoot.html" class="portfolio-item d-block">
+            <img src="assets/marina1.jpg" alt="Marina Minishoot">
+            <div class="portfolio-overlay">Marina Minishoot</div>
+          </a>
         </div>
-    </section>
 
-    <!-- Call to action section -->
-    <section class="py-5 bg-gradient-primary-to-secondary text-white">
-        <div class="container px-5 my-5">
-            <div class="text-center">
-                <h2 class="display-4 fw-bolder mb-4">Contact me for your photography needs!</h2>
-                <a class="btn btn-outline-light btn-lg px-5 py-3 fs-6 fw-bolder" href="contact.html">Contact me</a>
-            </div>
+        <!-- Add more sessions below -->
+        <!-- Example:
+        <div class="col-12 col-sm-6 col-md-4">
+          <a href="another-gallery.html" class="portfolio-item d-block">
+            <img src="assets/photo3.jpg" alt="Gallery Title">
+            <div class="portfolio-overlay">Gallery Title</div>
+          </a>
         </div>
-    </section>
+        -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-5 bg-gradient-primary-to-secondary text-white">
+    <div class="container px-5 my-5">
+      <div class="text-center">
+        <h2 class="display-4 fw-bolder mb-4">Contact me for your photography needs!</h2>
+        <a class="btn btn-outline-light btn-lg px-5 py-3 fs-6 fw-bolder" href="contact.html">Contact me</a>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- Footer -->
 <footer class="bg-white py-4 mt-auto">
-    <div class="container px-5">
-        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-            <div class="col-auto"><div class="small m-0">Copyright &copy; Coral Olson Photography 2025</div></div>
-            <div class="col-auto">
-                <a class="small" href="#!">Privacy</a>
-                <span class="mx-1">&middot;</span>
-                <a class="small" href="#!">Terms</a>
-                <span class="mx-1">&middot;</span>
-                <a class="small" href="contact.html">Contact</a>
-            </div>
-        </div>
+  <div class="container px-5">
+    <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+      <div class="col-auto"><div class="small m-0">Copyright &copy; Coral Olson Photography 2025</div></div>
+      <div class="col-auto">
+        <a class="small" href="#">Privacy</a>
+        <span class="mx-1">&middot;</span>
+        <a class="small" href="#">Terms</a>
+        <span class="mx-1">&middot;</span>
+        <a class="small" href="contact.html">Contact</a>
+      </div>
     </div>
+  </div>
 </footer>
 
 <!-- Bootstrap core JS -->
