@@ -95,6 +95,81 @@
     .portfolio-card:hover .portfolio-overlay {
       opacity: 1;
     }
+    .instagram-footer {
+  position: relative;
+  height: 300px;
+  background-color: #1a1a1a;
+  overflow: hidden;
+}
+
+.instagram-footer .overlay-link {
+  display: block;
+  height: 100%;
+  width: 100%;
+  color: white;
+  text-decoration: none;
+  position: relative;
+}
+
+.instagram-footer .overlay-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.instagram-footer .overlay-link:hover .overlay-content {
+  opacity: 1;
+}
+
+.instagram-footer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6); /* darken effect */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.instagram-footer .overlay-link:hover::after {
+  opacity: 1;
+}
+
+.instagram-footer i.bi-instagram {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.instagram-footer h2 {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.instagram-footer p {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: #e0e0e0;
+}
+
+/* 🔧 Mobile support: always show overlay content */
+@media (max-width: 768px) {
+  .instagram-footer .overlay-content {
+    opacity: 1;
+  }
+
+  .instagram-footer::after {
+    opacity: 1;
+  }
+}
+
   </style>
 </head>
 <body class="d-flex flex-column h-100 bg-light">
