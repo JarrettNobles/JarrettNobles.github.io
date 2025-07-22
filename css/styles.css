@@ -11764,4 +11764,26 @@ a.d-block img {
 a.d-block:hover img {
     transform: scale(1.02);
 }
+.hero {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.hero img {
+    height: 100vh;
+    object-fit: cover;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
+.hero-text {
+    z-index: 2;
+}
+
+/*.carousel-item {
+    transition: opacity 1s ease-in-out;
+}*/
+
 }
