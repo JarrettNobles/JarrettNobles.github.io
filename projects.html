@@ -11,19 +11,40 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
   <link href="css/styles.css" rel="stylesheet" />
   <style>
+    /* Navbar floating over image */
+    .navbar-custom {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 10;
+    }
+
+    .navbar-custom .nav-link,
+    .navbar-custom .navbar-brand {
+      color: white !important;
+    }
+
+    .navbar-custom .nav-link.active {
+      text-decoration: underline;
+    }
+
+    /* Hero section */
     .portfolio-hero {
       height: 100vh;
       overflow: hidden;
       position: relative;
     }
+
     .portfolio-hero img {
       position: absolute;
       top: 0;
       left: 0;
       height: 100%;
+      width: 100%;
       object-fit: cover;
       z-index: 1;
     }
+
     .hero-overlay-text {
       position: absolute;
       top: 50%;
@@ -34,18 +55,44 @@
       text-align: center;
       text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
     }
+
+    /* Portfolio grid layout */
     .portfolio-grid {
       padding: 4rem 0;
     }
-    .portfolio-grid .col img {
+
+    .portfolio-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .portfolio-card img {
       width: 100%;
       height: auto;
-      border-radius: 12px;
       display: block;
       transition: transform 0.3s ease;
+      border-radius: 12px;
     }
-    .portfolio-grid .col a:hover img {
-      transform: scale(1.02);
+
+    .portfolio-card:hover img {
+      transform: scale(1.03);
+    }
+
+    .portfolio-overlay {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.6);
+      color: white;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .portfolio-card:hover .portfolio-overlay {
+      opacity: 1;
     }
   </style>
 </head>
@@ -53,15 +100,15 @@
 <main class="flex-shrink-0">
 
   <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+  <nav class="navbar navbar-expand-lg navbar-light navbar-custom py-3">
     <div class="container px-5">
-      <a class="navbar-brand fw-bold" href="index.html">Coral Olson Photography</a>
+      <a class="navbar-brand fw-bold" href="index2.html">Coral Olson Photography</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="index2.html">Home</a></li>
           <li class="nav-item"><a class="nav-link active" href="projects.html">Portfolio</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
@@ -70,8 +117,8 @@
   </nav>
 
   <!-- Hero Banner -->
-  <header class="portfolio-hero position-relative">
-    <img src="assets/balloons.jpg" alt="Hero background" class="img-fluid w-100 h-100 object-fit-cover">
+  <header class="portfolio-hero">
+    <img src="assets/balloons.jpg" alt="Hero background">
     <div class="hero-overlay-text">
       <h1 class="display-4 fw-bold">My Portfolio</h1>
       <p class="fs-5 fst-italic">Every photo tells a story</p>
@@ -82,21 +129,25 @@
   <section class="portfolio-grid">
     <div class="container px-5">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+
         <!-- Project 1 -->
         <div class="col">
-          <a href="vincentengagment.html">
+          <a href="vincentengagment.html" class="portfolio-card d-block">
             <img src="assets/Engagement.jpg" alt="Elly and Dalton Engagement">
+            <div class="portfolio-overlay fw-semibold">Elly & Dalton Engagement</div>
           </a>
         </div>
 
         <!-- Project 2 -->
         <div class="col">
-          <a href="marinashoot.html">
+          <a href="marinashoot.html" class="portfolio-card d-block">
             <img src="assets/marina3.jpg" alt="Cades Cove Minishoot">
+            <div class="portfolio-overlay fw-semibold">Marina Minishoot</div>
           </a>
         </div>
 
-        <!-- Add more items here if needed -->
+        <!-- Add more cards here -->
+
       </div>
     </div>
   </section>
@@ -130,6 +181,5 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/scripts.js"></script>
 </body>
 </html>
