@@ -11785,5 +11785,89 @@ a.d-block:hover img {
 /*.carousel-item {
     transition: opacity 1s ease-in-out;
 }*/
+.portfolio-hero {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.portfolio-hero img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.hero-overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.hero-overlay-text h1,
+.hero-overlay-text p {
+    margin: 0;
+    color: white;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.6);
+}
+.portfolio-item {
+  transition: transform 0.3s ease;
+}
+
+.portfolio-item:hover img {
+  transform: scale(1.02);
+}
+
+.portfolio-title-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  text-align: center;
+  padding: 0.75rem 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.portfolio-item:hover .portfolio-title-overlay {
+  opacity: 1;
+}
+.portfolio-tile img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.portfolio-tile:hover img {
+  transform: scale(1.02);
+}
+
+.tile-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 0.75rem 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.portfolio-tile:hover .tile-overlay {
+  opacity: 1;
+}
+
 
 }
