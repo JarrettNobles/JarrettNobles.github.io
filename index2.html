@@ -251,7 +251,6 @@
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<<<<<<< Updated upstream
 <!-- Carousel Autoplay -->
 <script>
   const carousel = document.querySelector('#heroCarousel');
@@ -273,17 +272,6 @@
     images.forEach(img => {
       img.addEventListener('contextmenu', e => e.preventDefault());
       img.setAttribute('draggable', 'false');
-=======
-    // Content Protection Script to disable cut copy paste and image saving
-    document.addEventListener('DOMContentLoaded', () => {
-      ['cut', 'copy', 'paste'].forEach(evt =>
-        document.body.addEventListener(evt, e => e.preventDefault())
-      );
-      document.querySelectorAll('img').forEach(img => {
-        img.addEventListener('contextmenu', e => e.preventDefault());
-        img.setAttribute('draggable', 'false');
-      });
->>>>>>> Stashed changes
     });
   });
 
