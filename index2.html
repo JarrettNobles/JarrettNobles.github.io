@@ -260,6 +260,21 @@
     pause: false,
     wrap: true
   });
+  //protection script
+  document.addEventListener('DOMContentLoaded', function () {
+    // Disable cut, copy, paste
+    document.body.addEventListener('cut', e => e.preventDefault());
+    document.body.addEventListener('copy', e => e.preventDefault());
+    document.body.addEventListener('paste', e => e.preventDefault());
+
+    // Disable right-click and drag on images
+    const images = document.querySelectorAll('img');
+    images.forEach(img => {
+      img.addEventListener('contextmenu', e => e.preventDefault());
+      img.setAttribute('draggable', 'false');
+    });
+  });
+
 </script>
 </body>
 </html>
