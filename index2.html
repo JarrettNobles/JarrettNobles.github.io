@@ -41,6 +41,7 @@
       text-align: center;
       color: white;
       z-index: 2;
+      padding: 0 1rem;
     }
 
     .hero-text h1 {
@@ -85,7 +86,6 @@
       font-weight: 400;
     }
 
-    /* Instagram Footer Styles */
     .instagram-footer {
       position: relative;
       height: 300px;
@@ -139,9 +139,37 @@
       font-size: 0.85rem;
     }
 
+    /* Mobile Optimizations */
     @media (max-width: 768px) {
-      .instagram-footer .overlay-content {
-        opacity: 1;
+      .hero-text h1 {
+        font-size: 2rem;
+      }
+
+      .hero-text p {
+        font-size: 1rem;
+      }
+
+      .hero-text .btn {
+        display: block;
+        margin: 0.5rem auto;
+        width: 80%;
+      }
+
+      .navbar-brand {
+        font-size: 1rem;
+      }
+
+      .navbar-nav .nav-link {
+        font-size: 0.95rem;
+      }
+
+      .instagram-footer h2 {
+        font-size: 1.25rem;
+      }
+
+      .instagram-footer p {
+        font-size: 0.65rem;
+        letter-spacing: 1px;
       }
     }
   </style>
@@ -197,8 +225,6 @@
 
 <!-- Footer with Instagram CTA and Copyright -->
 <footer class="mt-auto">
-
-  <!-- Instagram Banner Section -->
   <section class="instagram-footer">
     <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3" target="_blank" class="overlay-link">
       <div class="overlay-content">
@@ -209,7 +235,6 @@
     </a>
   </section>
 
-  <!-- Copyright -->
   <div class="py-4" style="background-color: #1a1a1a; color: white;">
     <div class="container px-5">
       <div class="row align-items-center justify-content-between flex-column flex-sm-row">
