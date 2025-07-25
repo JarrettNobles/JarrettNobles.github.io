@@ -43,40 +43,20 @@
     }
 
     .portfolio-card {
-      position: relative;
       overflow: hidden;
       border-radius: 12px;
+      transition: transform 0.3s ease;
     }
 
     .portfolio-card img {
       width: 100%;
       height: auto;
       display: block;
-      transition: transform 0.3s ease;
       border-radius: 12px;
     }
 
-    .portfolio-card:hover img {
-      transform: scale(1.03);
-    }
-
-    .portfolio-overlay {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      padding: 1rem;
-      background: rgba(0, 0, 0, 0.6);
-      color: white;
-      text-align: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      letter-spacing: 1px;
-    }
-
-    .portfolio-card:hover .portfolio-overlay {
-      opacity: 1;
+    .portfolio-card:hover {
+      transform: scale(1.01);
     }
 
     .instagram-footer {
@@ -154,18 +134,16 @@
           <h1 class="page-heading">Portfolio</h1>
         </div>
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-          <div class="col">
-            <a href="vincentengagment.html" class="portfolio-card d-block">
+        <div class="d-flex flex-column align-items-center gap-4">
+          <div class="card portfolio-card" style="max-width: 800px; width: 100%;">
+            <a href="vincentengagment.html">
               <img src="assets/Engagement.jpg" alt="Wedding & Engagement">
-              <div class="portfolio-overlay">Wedding & Engagement</div>
             </a>
           </div>
 
-          <div class="col">
-            <a href="marinashoot.html" class="portfolio-card d-block">
+          <div class="card portfolio-card" style="max-width: 800px; width: 100%;">
+            <a href="marinashoot.html">
               <img src="assets/marina3.jpg" alt="Portraits">
-              <div class="portfolio-overlay">Portraits</div>
             </a>
           </div>
         </div>
