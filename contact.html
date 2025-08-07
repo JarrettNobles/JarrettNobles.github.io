@@ -150,9 +150,17 @@
                 <label for="contact_phone">Preferred Phone</label>
               </div>
 
-              <!-- Session Type -->
+              <!-- Session Type Dropdown -->
               <div class="form-floating mb-3">
-                <input class="form-control" id="session_type" name="session_type" type="text" placeholder="e.g. Wedding, Engagement, Family" required />
+                <select class="form-select" id="session_type" name="session_type" required>
+                  <option value="" disabled selected>Select a session type</option>
+                  <option value="Wedding">Wedding</option>
+                  <option value="Engagement">Engagement</option>
+                  <option value="Family">Family</option>
+                  <option value="Maternity">Maternity</option>
+                  <option value="Senior">Senior</option>
+                  <option value="Other">Other</option>
+                </select>
                 <label for="session_type">Session Type</label>
               </div>
 
@@ -167,6 +175,19 @@
                 <button class="btn btn-primary btn-lg" type="submit">Submit</button>
               </div>
             </form>
+
+            <script>
+              document.getElementById('contactForm').addEventListener('submit', function (event) {
+                const form = event.target;
+                const email = form.contact_email.value.trim();
+                const phone = form.contact_phone.value.trim();
+
+                if (!email && !phone) {
+                  alert('Please provide at least one preferred method of contact: email or phone.');
+                  event.preventDefault();
+                }
+              });
+            </script>
           </div>
         </div>
       </div>
