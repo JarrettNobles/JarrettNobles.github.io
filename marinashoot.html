@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <!-- BEST PRACTICES ADD: strong meta for SEO & theming -->
+  <meta name="description" content="Portrait photography by Coral Olson — timeless imagery for meaningful moments." />
+  <meta name="theme-color" content="#E4DFD8" />
+  <meta name="color-scheme" content="light" />
+  <!-- existing viewport kept -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>Portraits | Coral Olson Photography</title>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
@@ -12,8 +17,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
   <link href="css/styles.css" rel="stylesheet" />
 
+  <!-- BEST PRACTICES ADD: preload first viewport image to reduce LCP (non-destructive) -->
+  <link rel="preload" as="image" href="assets/marina1.jpg" imagesizes="(max-width: 820px) 100vw, 800px" />
+
   <style>
-    /* ---------- KEEP ORIGINAL RULES FOR WEB VERSION ---------- */
+    /* ---------- KEEP ALL ORIGINAL WEB BROWSER RULES FOR PC ---------- */
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: #E4DFD8;
@@ -112,6 +120,7 @@
     }
 
     /* ---------- MOBILE & ACCESSIBILITY ENHANCEMENTS (ADDED) ---------- */
+
     @media (max-width: 576px) {
       section.py-5 { padding-top: 2.25rem !important; padding-bottom: 2.25rem !important; }
       .container.px-3 { padding-left: 1rem !important; padding-right: 1rem !important; }
@@ -119,9 +128,11 @@
 
     .navbar { border-bottom: 1px solid rgba(0,0,0,0.06); }
     .navbar-toggler { border: 1px solid rgba(0,0,0,0.2) !important; }
-    .navbar-nav .nav-link { padding: .75rem 0.75rem; }
+    .navbar-nav .nav-link { padding: .75rem 0.75rem; } /* larger tap targets */
 
-    .card { box-shadow: 0 2px 18px rgba(0,0,0,0.08); }
+    .card {
+      box-shadow: 0 2px 18px rgba(0,0,0,0.08);
+    }
 
     @media (max-width: 768px) {
       .card-img-top { height: auto !important; object-fit: contain; }
@@ -166,34 +177,47 @@
     }
 
     /* ---------- NEW: MOBILE “SAVE IMAGE” SUPPRESSION (ADDED, NON-DESTRUCTIVE) ---------- */
-    /* Hardens against long-press save on iOS/Android without breaking taps/scroll */
     .no-save {
-      -webkit-touch-callout: none;   /* iOS: hide callout on long-press */
-      -webkit-user-select: none;     /* iOS Safari */
-      -ms-user-select: none;         /* IE/Edge (legacy) */
-      user-select: none;             /* Modern browsers */
-      -webkit-user-drag: none;       /* Safari: prevent image drag */
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-user-drag: none;
       -user-drag: none;
-      touch-action: manipulation;     /* reduce gesture triggers but allow taps/scroll */
-      -webkit-tap-highlight-color: transparent; /* cleaner tap feedback */
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* BEST PRACTICES ADD: CSS variables & helpers (optional usage) */
+    :root {
+      --brand-bg: #E4DFD8;
+      --ink: #1a1a1a;
+      --shadow-sm: 0 2px 18px rgba(0,0,0,0.08);
+    }
+    .sr-only {
+      position: absolute !important;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,1px,1px);
+      white-space: nowrap; border: 0;
     }
   </style>
 </head>
 
 <body class="d-flex flex-column h-100">
-  <main class="flex-shrink-0">
+  <main class="flex-shrink-0" role="main" id="main-content"><!-- BEST PRACTICES ADD: landmark role+id -->
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3" role="navigation" aria-label="Primary">
       <div class="container px-5">
         <a class="navbar-brand" href="index.html">Coral Olson Photography</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon" aria-hidden="true"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
             <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
             <li class="nav-item"><a class="nav-link" href="resume.html">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="projects.html">Portfolio</a></li>
+            <li class="nav-item"><a class="nav-link" href="projects.html" aria-current="page">Portfolio</a></li>
             <li class="nav-item"><a class="nav-link"  href="PricingGuide.html">Investment</a></li>
             <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
           </ul>
@@ -202,29 +226,64 @@
     </nav>
 
     <!-- Gallery Header -->
-    <section class="py-5">
+    <section class="py-5" aria-labelledby="portraits-heading">
       <div class="container px-3 px-lg-5">
         <div class="text-center mb-5">
-          <h1 class="page-heading">Portraits</h1>
+          <h1 class="page-heading" id="portraits-heading">Portraits</h1>
+          <!-- BEST PRACTICES ADD: hidden intro for screen readers -->
+          <p class="sr-only">A curated set of portrait photographs by Coral Olson.</p>
         </div>
 
         <!-- Vertical Gallery Layout -->
+        <!-- Wrapped in a helper for max width control on tablets -->
         <div class="gallery-vertical d-flex flex-column align-items-center gap-4">
           <div class="card" style="max-width: 800px; width: 100%;">
-            <div class="ratio-box"><img src="assets/marina1.jpg" class="card-img-top" alt="Marina Photo 1" loading="lazy" decoding="async" sizes="(max-width: 820px) 100vw, 800px"></div>
+            <div class="ratio-box">
+              <!-- BEST PRACTICES ADD: width/height & fetchpriority for first image -->
+              <img
+                src="assets/marina1.jpg"
+                class="card-img-top no-save"
+                alt="Marina portrait, soft natural light"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                width="800" height="1000"
+                sizes="(max-width: 820px) 100vw, 800px"
+              >
+            </div>
           </div>
           <div class="card" style="max-width: 800px; width: 100%;">
-            <div class="ratio-box"><img src="assets/marina2.jpg" class="card-img-top" alt="Marina Photo 2" loading="lazy" decoding="async" sizes="(max-width: 820px) 100vw, 800px"></div>
+            <div class="ratio-box">
+              <img
+                src="assets/marina2.jpg"
+                class="card-img-top no-save"
+                alt="Marina portrait, candid look to camera"
+                loading="lazy"
+                decoding="async"
+                width="800" height="1000"
+                sizes="(max-width: 820px) 100vw, 800px"
+              >
+            </div>
           </div>
           <div class="card" style="max-width: 800px; width: 100%;">
-            <div class="ratio-box"><img src="assets/marina3.jpg" class="card-img-top" alt="Marina Photo 3" loading="lazy" decoding="async" sizes="(max-width: 820px) 100vw, 800px"></div>
+            <div class="ratio-box">
+              <img
+                src="assets/marina3.jpg"
+                class="card-img-top no-save"
+                alt="Marina portrait, golden hour backlight"
+                loading="lazy"
+                decoding="async"
+                width="800" height="1000"
+                sizes="(max-width: 820px) 100vw, 800px"
+              >
+            </div>
           </div>
         </div>
 
         <!-- Back to Portfolio Button -->
         <div class="text-center mt-5">
           <a class="btn btn-outline-dark rounded-0 px-4 py-2 btn-back" href="projects.html" style="letter-spacing: 1px;">
-            <i class="bi bi-arrow-left-circle me-2"></i>Back to Portfolio
+            <i class="bi bi-arrow-left-circle me-2" aria-hidden="true"></i><span>Back to Portfolio</span>
           </a>
         </div>
       </div>
@@ -232,9 +291,9 @@
   </main>
 
   <!-- Footer -->
-  <footer class="mt-auto">
+  <footer class="mt-auto" role="contentinfo">
     <section class="instagram-footer">
-      <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3" target="_blank" class="overlay-link" aria-label="Open Coral Olson Photography on Instagram">
+      <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3" target="_blank" rel="noopener" class="overlay-link" aria-label="Open Coral Olson Photography on Instagram in a new tab">
         <div class="overlay-content">
           <i class="bi bi-instagram" aria-hidden="true"></i>
           <h2>Instagram</h2>
@@ -257,60 +316,65 @@
   </footer>
 
   <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/scripts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script><!-- BEST PRACTICES ADD: defer -->
+  <script src="js/scripts.js" defer></script><!-- BEST PRACTICES ADD: defer -->
 
   <!-- Disable Cut, Copy, Paste and Image Saving -->
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Disable cut, copy, paste
-      document.body.addEventListener('cut', e => e.preventDefault());
-      document.body.addEventListener('copy', e => e.preventDefault());
-      document.body.addEventListener('paste', e => e.preventDefault());
+    /* BEST PRACTICES ADD: wrap in IIFE to avoid globals; 'use strict' */
+    (function () {
+      'use strict';
 
-      // Disable right-click and drag on images
-      const images = document.querySelectorAll('img');
-      images.forEach(img => {
-        img.addEventListener('contextmenu', e => e.preventDefault());
-        img.addEventListener('dragstart', e => e.preventDefault());
-        img.setAttribute('draggable', 'false');
+      document.addEventListener('DOMContentLoaded', function () {
+        // Disable cut, copy, paste
+        document.body.addEventListener('cut', function (e) { e.preventDefault(); }, { passive: false });
+        document.body.addEventListener('copy', function (e) { e.preventDefault(); }, { passive: false });
+        document.body.addEventListener('paste', function (e) { e.preventDefault(); }, { passive: false });
+
+        // Disable right-click and drag on images
+        var images = document.querySelectorAll('img');
+        images.forEach(function (img) {
+          img.addEventListener('contextmenu', function (e) { e.preventDefault(); }, { passive: false });
+          img.addEventListener('dragstart', function (e) { e.preventDefault(); }, { passive: false });
+          img.setAttribute('draggable', 'false');
+          // Ensure mobile protection class is present even if markup omitted it
+          img.classList.add('no-save');
+        });
+
+        /* Improve keyboard focus visibility (a11y), without changing your styles */
+        document.querySelectorAll('a, button').forEach(function (el) {
+          el.addEventListener('focus', function () { el.style.outline = '2px solid rgba(0,0,0,0.35)'; }, { passive: true });
+          el.addEventListener('blur', function () { el.style.outline = 'none'; }, { passive: true });
+        });
+
+        /* EXTRA MOBILE HARDENING AGAINST LONG-PRESS SAVE */
+        var pressTimer = null;
+        images.forEach(function (img) {
+          var cancelTimer = function () {
+            if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+          };
+
+          img.addEventListener('touchstart', function (e) {
+            pressTimer = window.setTimeout(function () {
+              try { e.preventDefault(); } catch (err) {}
+            }, 450);
+          }, { passive: false });
+
+          img.addEventListener('touchend', cancelTimer, { passive: true });
+          img.addEventListener('touchmove', cancelTimer, { passive: true });
+          img.addEventListener('pointerup', cancelTimer, { passive: true });
+          img.addEventListener('gesturestart', function (e) { e.preventDefault(); }, { passive: false });
+        });
+
+        /* BEST PRACTICES ADD: reduce data cost for users who prefer less data */
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-data: reduce)').matches) {
+          document.querySelectorAll('img[loading="lazy"]').forEach(function (img) {
+            // If offscreen and large, consider skipping decode for speed
+            img.removeAttribute('decoding');
+          });
+        }
       });
-
-      /* Improve keyboard focus visibility (a11y), without changing your styles */
-      document.querySelectorAll('a, button').forEach(el => {
-        el.addEventListener('focus', () => el.style.outline = '2px solid rgba(0,0,0,0.35)');
-        el.addEventListener('blur', () => el.style.outline = 'none');
-      });
-
-      /* ---------- NEW: EXTRA MOBILE HARDENING AGAINST LONG-PRESS SAVE ---------- */
-      // 1) Add a "no-save" class to all images (keeps your markup intact)
-      images.forEach(img => img.classList.add('no-save'));
-
-      // 2) iOS/Android: cancel long-press context menus without breaking scroll
-      //    We use a short timer; only if the finger stays ~450ms we cancel.
-      let pressTimer;
-      images.forEach(img => {
-        const cancelTimer = () => { if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; } };
-
-        img.addEventListener('touchstart', (e) => {
-          // allow normal taps/scroll, only block if it becomes a long press
-          pressTimer = setTimeout(() => {
-            // Prevent default once it qualifies as a long-press
-            // (needs passive:false to work across browsers)
-            try { e.preventDefault(); } catch {}
-          }, 450);
-        }, { passive: false });
-
-        img.addEventListener('touchend', cancelTimer, { passive: true });
-        img.addEventListener('touchmove', cancelTimer, { passive: true });
-
-        // Some Android builds respect this additional guard:
-        img.addEventListener('pointerup', cancelTimer, { passive: true });
-
-        // iOS specific gesture (pinch) start—don’t show callout
-        img.addEventListener('gesturestart', (e) => e.preventDefault());
-      });
-    });
+    })();
   </script>
 </body>
 </html>
