@@ -13,6 +13,7 @@
   <link href="css/styles.css" rel="stylesheet" />
 
   <style>
+    /* ---------- KEEP ORIGINAL DESKTOP FORMATTING ---------- */
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: #E4DFD8;
@@ -109,6 +110,75 @@
         font-size: 2.2rem;
       }
     }
+
+    /* ---------- MOBILE & ACCESSIBILITY ENHANCEMENTS (ADDED) ---------- */
+
+    /* Better rhythm on small screens */
+    @media (max-width: 576px) {
+      /* tighten top spacing a bit for portrait phones */
+      section.py-5 { padding-top: 2.25rem !important; padding-bottom: 2.25rem !important; }
+      .container.px-3 { padding-left: 1rem !important; padding-right: 1rem !important; }
+    }
+
+    /* Improve navbar usability on touch + keep desktop unchanged */
+    .navbar { border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .navbar-toggler { border: 1px solid rgba(0,0,0,0.2) !important; }
+    .navbar-nav .nav-link { padding: .75rem 0.75rem; } /* larger tap targets */
+
+    /* Subtle elevation for image cards (looks premium on mobile) */
+    .card {
+      box-shadow: 0 2px 18px rgba(0,0,0,0.08);
+    }
+
+    /* On small screens, don't force image height: keep natural aspect ratio */
+    @media (max-width: 768px) {
+      .card-img-top { height: auto !important; object-fit: contain; }
+    }
+
+    /* Only scale on devices that support hover (prevents janky zoom on tap) */
+    @media (hover: hover) and (pointer: fine) {
+      .card:hover .card-img-top { transform: scale(1.02); }
+    }
+    @media (hover: none) {
+      .card:hover .card-img-top { transform: none; }
+    }
+
+    /* Constrain gallery width nicely on tablets while remaining centered */
+    .gallery-vertical { max-width: 900px; margin-left: auto; margin-right: auto; }
+
+    /* Make the "Back to Portfolio" button full-width on small screens */
+    @media (max-width: 576px) {
+      .btn-back { display: block; width: 100%; }
+    }
+
+    /* Instagram footer: shorter on phones, tighter type */
+    @media (max-width: 576px) {
+      .instagram-footer { height: 220px; }
+      .instagram-footer h2 { font-size: 1.25rem; }
+      .instagram-footer i.bi-instagram { font-size: 1.25rem; }
+      .instagram-footer p { font-size: 0.7rem; letter-spacing: 1.5px; }
+    }
+
+    /* Respect reduced motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+
+    /* Small utility to prevent layout shift while images load */
+    .ratio-box {
+      position: relative;
+      width: 100%;
+      /* 4:5 portrait-friendly default; adjust per image if you want */
+      padding-top: 125%;
+      overflow: hidden;
+    }
+    .ratio-box > img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   </style>
 </head>
 
@@ -118,7 +188,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
       <div class="container px-5">
         <a class="navbar-brand" href="index.html">Coral Olson Photography</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation"><!-- added aria-label for a11y -->
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -141,21 +211,26 @@
         </div>
 
         <!-- Vertical Gallery Layout -->
-        <div class="d-flex flex-column align-items-center gap-4">
+        <!-- Wrapped in a helper for max width control on tablets -->
+        <div class="gallery-vertical d-flex flex-column align-items-center gap-4">
+          <!-- 
+            Added a lightweight aspect-ratio wrapper (.ratio-box) to reduce layout shift
+            on mobile while images load. Does not delete your original <img>; it only wraps it.
+          -->
           <div class="card" style="max-width: 800px; width: 100%;">
-            <img src="assets/marina1.jpg" class="card-img-top" alt="Marina Photo 1">
+            <div class="ratio-box"><img src="assets/marina1.jpg" class="card-img-top" alt="Marina Photo 1" loading="lazy" decoding="async" sizes="(max-width: 820px) 100vw, 800px"></div>
           </div>
           <div class="card" style="max-width: 800px; width: 100%;">
-            <img src="assets/marina2.jpg" class="card-img-top" alt="Marina Photo 2">
+            <div class="ratio-box"><img src="assets/marina2.jpg" class="card-img-top" alt="Marina Photo 2" loading="lazy" decoding="async" sizes="(max-width: 820px) 100vw, 800px"></div>
           </div>
           <div class="card" style="max-width: 800px; width: 100%;">
-            <img src="assets/marina3.jpg" class="card-img-top" alt="Marina Photo 3">
+            <div class="ratio-box"><img src="assets/marina3.jpg" class="card-img-top" alt="Marina Photo 3" loading="lazy" decoding="async" sizes="(max-width: 820px) 100vw, 800px"></div>
           </div>
         </div>
 
         <!-- Back to Portfolio Button -->
         <div class="text-center mt-5">
-          <a class="btn btn-outline-dark rounded-0 px-4 py-2" href="projects.html" style="letter-spacing: 1px;">
+          <a class="btn btn-outline-dark rounded-0 px-4 py-2 btn-back" href="projects.html" style="letter-spacing: 1px;">
             <i class="bi bi-arrow-left-circle me-2"></i>Back to Portfolio
           </a>
         </div>
@@ -166,9 +241,9 @@
   <!-- Footer -->
   <footer class="mt-auto">
     <section class="instagram-footer">
-      <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3" target="_blank" class="overlay-link">
+      <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3" target="_blank" class="overlay-link" aria-label="Open Coral Olson Photography on Instagram">
         <div class="overlay-content">
-          <i class="bi bi-instagram"></i>
+          <i class="bi bi-instagram" aria-hidden="true"></i>
           <h2>Instagram</h2>
           <p>@coralolsonphotography</p>
         </div>
@@ -205,6 +280,12 @@
       images.forEach(img => {
         img.addEventListener('contextmenu', e => e.preventDefault());
         img.setAttribute('draggable', 'false');
+      });
+
+      /* Improve keyboard focus visibility (a11y), without changing your styles */
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('focus', () => el.style.outline = '2px solid rgba(0,0,0,0.35)');
+        el.addEventListener('blur', () => el.style.outline = 'none');
       });
     });
   </script>
