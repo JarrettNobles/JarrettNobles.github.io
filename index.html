@@ -12,77 +12,73 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
   <link href="css/styles.css" rel="stylesheet" />
   <style>
+    /* Base typography (same as contact page) */
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #E4DFD8; /* matches contact page */
+      background-color: #E4DFD8;
     }
 
+    /* ---- NAVBAR: identical behavior to contact page ---- */
+    .navbar { border-bottom: 1px solid rgba(0,0,0,0.06); }
+
+    /* Brand + links use Playfair, contact-page size */
+    .navbar-brand,
+    .navbar-nav .nav-link {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      font-size: 0.95rem !important;
+      text-transform: uppercase;
+    }
+
+    /* Contact-page colors:
+       - brand: solid dark
+       - inactive links: gray
+       - hover: darker gray
+       - active link: near-black
+    */
+    .navbar-light .navbar-brand { color: #212529; }
+    .navbar-light .navbar-brand:hover,
+    .navbar-light .navbar-brand:focus { color: #212529; }
+
+    .navbar-light .navbar-nav .nav-link { color: rgba(0,0,0,.55); }
+    .navbar-light .navbar-nav .nav-link:hover,
+    .navbar-light .navbar-nav .nav-link:focus { color: rgba(0,0,0,.7); text-decoration: underline; }
+    .navbar-light .navbar-nav .nav-link.active,
+    .navbar-light .navbar-nav .show > .nav-link { color: rgba(0,0,0,.9); }
+
+    /* Hero */
     .hero {
       position: relative;
       height: 100vh;
       overflow: hidden;
     }
-
     .hero .carousel-inner,
     .hero .carousel-item,
-    .hero .carousel-item img {
-      height: 100vh;
-    }
-
-    .hero .carousel-item img {
-      object-fit: cover;
-      width: 100%;
-    }
+    .hero .carousel-item img { height: 100vh; }
+    .hero .carousel-item img { object-fit: cover; width: 100%; }
 
     .hero-text {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
       color: white;
       z-index: 2;
     }
-
     .hero-text h1 {
       font-family: 'Playfair Display', serif;
       font-size: 3rem;
       font-weight: 400;
       letter-spacing: 1px;
     }
-
     .hero-text p {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 1.25rem;
       font-weight: 300;
       letter-spacing: 0.5px;
     }
-
-    .navbar-custom {
-      position: absolute;
-      top: 0;
-      width: 100%;
-      z-index: 3;
-    }
-
-    /* ✅ Unified navbar style (same as contact page) */
-    .navbar-brand,
-    .navbar-nav .nav-link {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      color: white !important;
-      letter-spacing: 0.5px;
-      font-size: 0.95rem !important; /* match contact page */
-      text-transform: uppercase;
-    }
-
-    .nav-link:hover {
-      text-decoration: underline;
-    }
-
-    .carousel-caption {
-      display: none;
-    }
+    .carousel-caption { display: none; }
 
     .btn-outline-light {
       font-family: 'Playfair Display', serif;
@@ -90,85 +86,53 @@
       font-weight: 400;
     }
 
-    /* Instagram Footer Styles */
+    /* Instagram Footer */
     .instagram-footer {
       position: relative;
       height: 300px;
       background-color: #1a1a1a;
       overflow: hidden;
     }
-
     .instagram-footer .overlay-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      width: 100%;
-      color: white;
-      text-decoration: none;
-      position: relative;
-      z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      height: 100%; width: 100%;
+      color: white; text-decoration: none;
+      position: relative; z-index: 2;
       transition: background-color 0.3s ease;
       font-family: 'Playfair Display', serif;
     }
-
-    .instagram-footer .overlay-link:hover {
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    .instagram-footer .overlay-content {
-      text-align: center;
-    }
-
-    .instagram-footer i.bi-instagram {
-      font-size: 1.5rem;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-
+    .instagram-footer .overlay-link:hover { background-color: rgba(0,0,0,0.4); }
+    .instagram-footer .overlay-content { text-align: center; }
+    .instagram-footer i.bi-instagram { font-size: 1.5rem; display: block; margin-bottom: 0.5rem; }
     .instagram-footer h2 {
       font-family: 'Playfair Display', serif;
-      font-weight: bold;
-      font-size: 1.5rem;
-      margin-bottom: 0.25rem;
+      font-weight: bold; font-size: 1.5rem; margin-bottom: 0.25rem;
     }
-
     .instagram-footer p {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      text-transform: uppercase;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      color: #e0e0e0;
+      text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; color: #e0e0e0;
     }
+    footer .small { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; }
 
-    footer .small {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.85rem;
-    }
-
-    @media (max-width: 768px) {
-      .instagram-footer .overlay-content {
-        opacity: 1;
-      }
-    }
+    @media (max-width: 768px) { .instagram-footer .overlay-content { opacity: 1; } }
   </style>
 </head>
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+  <!-- Navigation (same structure/classes as contact page) -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white py-3" role="navigation" aria-label="Primary">
     <div class="container px-5">
       <a class="navbar-brand" href="index.html">Coral Olson Photography</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon" aria-hidden="true"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+          <li class="nav-item"><a class="nav-link active" href="index.html" aria-current="page">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="resume.html">About</a></li>
           <li class="nav-item"><a class="nav-link" href="projects.html">Portfolio</a></li>
-          <li class="nav-item"><a class="nav-link"  href="PricingGuide.html">Investment</a></li>
+          <li class="nav-item"><a class="nav-link" href="PricingGuide.html">Investment</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -202,21 +166,18 @@
   </header>
 </main>
 
-<!-- Footer with Instagram CTA and Copyright -->
+<!-- Footer -->
 <footer class="mt-auto">
-
-  <!-- Instagram Banner Section -->
   <section class="instagram-footer">
-    <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3" target="_blank" class="overlay-link">
+    <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3" target="_blank" rel="noopener" class="overlay-link" aria-label="Open Coral Olson Photography on Instagram in a new tab">
       <div class="overlay-content">
-        <i class="bi bi-instagram"></i>
+        <i class="bi bi-instagram" aria-hidden="true"></i>
         <h2>Instagram</h2>
         <p>@coralolsonphotography</p>
       </div>
     </a>
   </section>
 
-  <!-- Copyright -->
   <div class="py-4" style="background-color: #1a1a1a; color: white;">
     <div class="container px-5">
       <div class="row align-items-center justify-content-between flex-column flex-sm-row">
@@ -233,7 +194,7 @@
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Carousel Autoplay -->
+<!-- Carousel Autoplay + protections -->
 <script>
   const carousel = document.querySelector('#heroCarousel');
   const bootstrapCarousel = new bootstrap.Carousel(carousel, {
@@ -243,7 +204,6 @@
     wrap: true
   });
 
-  // Protection script
   document.addEventListener('DOMContentLoaded', function () {
     // Disable cut, copy, paste
     document.body.addEventListener('cut', e => e.preventDefault());
