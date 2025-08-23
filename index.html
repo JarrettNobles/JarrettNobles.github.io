@@ -12,16 +12,16 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
   <link href="css/styles.css" rel="stylesheet" />
   <style>
-    /* Base typography (same as contact page) */
+    /* ---------- BASE TYPOGRAPHY ---------- */
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: #E4DFD8;
+      color: #212529; /* dark readable text like contact page */
     }
 
-    /* ---- NAVBAR: identical behavior to contact page ---- */
+    /* ---------- NAVBAR ---------- */
     .navbar { border-bottom: 1px solid rgba(0,0,0,0.06); }
 
-    /* Brand + links use Playfair, contact-page size */
     .navbar-brand,
     .navbar-nav .nav-link {
       font-family: 'Playfair Display', serif;
@@ -31,23 +31,20 @@
       text-transform: uppercase;
     }
 
-    /* Contact-page colors:
-       - brand: solid dark
-       - inactive links: gray
-       - hover: darker gray
-       - active link: near-black
-    */
     .navbar-light .navbar-brand { color: #212529; }
     .navbar-light .navbar-brand:hover,
     .navbar-light .navbar-brand:focus { color: #212529; }
 
     .navbar-light .navbar-nav .nav-link { color: rgba(0,0,0,.55); }
     .navbar-light .navbar-nav .nav-link:hover,
-    .navbar-light .navbar-nav .nav-link:focus { color: rgba(0,0,0,.7); text-decoration: underline; }
+    .navbar-light .navbar-nav .nav-link:focus { 
+      color: rgba(0,0,0,.7); 
+      /*text-decoration: underline; */
+    }
     .navbar-light .navbar-nav .nav-link.active,
     .navbar-light .navbar-nav .show > .nav-link { color: rgba(0,0,0,.9); }
 
-    /* Hero */
+    /* ---------- HERO ---------- */
     .hero {
       position: relative;
       height: 100vh;
@@ -86,7 +83,7 @@
       font-weight: 400;
     }
 
-    /* Instagram Footer */
+    /* ---------- INSTAGRAM FOOTER ---------- */
     .instagram-footer {
       position: relative;
       height: 300px;
@@ -120,7 +117,7 @@
 <body class="d-flex flex-column h-100">
 <main class="flex-shrink-0">
 
-  <!-- Navigation (same structure/classes as contact page) -->
+  <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light bg-white py-3" role="navigation" aria-label="Primary">
     <div class="container px-5">
       <a class="navbar-brand" href="index.html">Coral Olson Photography</a>
@@ -144,13 +141,13 @@
     <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="assets/hero.jpg" class="d-block w-100" alt="Hero image">
+          <img src="assets/friends.jpg" class="d-block w-100" alt="friends at the mountains">
         </div>
         <div class="carousel-item">
           <img src="assets/sailboat.jpg" class="d-block w-100" alt="Sailboat image">
         </div>
         <div class="carousel-item">
-          <img src="assets/sunset.jpg" class="d-block w-100" alt="Engagement image">
+          <img src="assets/friends2.jpg" class="d-block w-100" alt="friends on a beach">
         </div>
       </div>
     </div>
