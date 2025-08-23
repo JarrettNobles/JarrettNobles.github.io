@@ -13,7 +13,8 @@
   <link href="css/styles.css" rel="stylesheet" />
   <style>
     body {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #E4DFD8; /* matches contact page */
     }
 
     .hero {
@@ -44,12 +45,14 @@
     }
 
     .hero-text h1 {
+      font-family: 'Playfair Display', serif;
       font-size: 3rem;
       font-weight: 400;
       letter-spacing: 1px;
     }
 
     .hero-text p {
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 1.25rem;
       font-weight: 300;
       letter-spacing: 0.5px;
@@ -62,13 +65,15 @@
       z-index: 3;
     }
 
+    /* ✅ Unified navbar style (same as contact page) */
     .navbar-brand,
-    .nav-link {
+    .navbar-nav .nav-link {
       font-family: 'Playfair Display', serif;
       font-weight: 400;
       color: white !important;
       letter-spacing: 0.5px;
-      font-size: 1.05rem;
+      font-size: 0.95rem !important; /* match contact page */
+      text-transform: uppercase;
     }
 
     .nav-link:hover {
@@ -122,12 +127,14 @@
     }
 
     .instagram-footer h2 {
+      font-family: 'Playfair Display', serif;
       font-weight: bold;
       font-size: 1.5rem;
       margin-bottom: 0.25rem;
     }
 
     .instagram-footer p {
+      font-family: 'Plus Jakarta Sans', sans-serif;
       text-transform: uppercase;
       font-size: 0.75rem;
       letter-spacing: 2px;
@@ -135,7 +142,7 @@
     }
 
     footer .small {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 0.85rem;
     }
 
@@ -236,7 +243,7 @@
     wrap: true
   });
 
-  //protection script
+  // Protection script
   document.addEventListener('DOMContentLoaded', function () {
     // Disable cut, copy, paste
     document.body.addEventListener('cut', e => e.preventDefault());
@@ -250,7 +257,6 @@
       img.setAttribute('draggable', 'false');
     });
   });
-
 </script>
 </body>
 </html>
