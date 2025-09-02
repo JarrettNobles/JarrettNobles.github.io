@@ -112,6 +112,89 @@
     footer .small { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.85rem; }
 
     @media (max-width: 768px) { .instagram-footer .overlay-content { opacity: 1; } }
+
+    /* ===========================
+       🔧 MOBILE OPTIMIZATIONS 
+       =========================== */
+
+    /* Use small-viewport height to avoid iOS 100vh jump */
+    @supports (height: 100svh) {
+      .hero,
+      .hero .carousel-inner,
+      .hero .carousel-item,
+      .hero .carousel-item img { height: 100svh; }
+    }
+
+    /* Add a subtle gradient overlay for text legibility on bright photos */
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,.25) 30%, rgba(0,0,0,.35));
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Keep text above overlay */
+    .hero-text { z-index: 2; }
+
+    /* Clamp-based fluid type that scales down gracefully on phones */
+    .hero-text h1 {
+      font-size: clamp(1.75rem, 4.5vw, 3rem);
+      line-height: 1.1;
+    }
+    .hero-text p {
+      font-size: clamp(0.95rem, 2.6vw, 1.25rem);
+      margin-top: .25rem;
+    }
+
+    /* Tighter vertical centering on short devices */
+    @media (max-height: 700px) {
+      .hero-text { transform: translate(-50%, -48%); }
+    }
+
+    /* Button layout: stack on very small screens, add comfortable touch targets */
+    .hero .btn {
+      padding: .75rem 1.15rem;
+      border-width: 2px;
+      line-height: 1.1;
+      touch-action: manipulation;
+    }
+    .hero .btn + .btn { margin-left: .75rem; }
+    @media (max-width: 420px) {
+      .hero .btn { display: block; width: 86%; margin: .5rem auto 0; }
+      .hero .btn + .btn { margin-left: auto; }
+    }
+
+    /* Sticky navbar on mobile so nav doesn't get lost after scroll */
+    @media (max-width: 991.98px) {
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1030;
+        background: #fff;
+        backdrop-filter: saturate(140%) blur(2px);
+      }
+      /* Larger tap targets for nav links on small screens */
+      .navbar-nav .nav-link { padding-top: .75rem; padding-bottom: .75rem; }
+      .navbar-toggler { padding: .75rem; }
+    }
+
+    /* Instagram footer scales down on phones */
+    @media (max-width: 576px) {
+      .instagram-footer { height: 220px; }
+      .instagram-footer i.bi-instagram { font-size: 1.25rem; }
+      .instagram-footer h2 { font-size: 1.25rem; }
+      .instagram-footer p { font-size: 0.7rem; letter-spacing: 1.6px; }
+    }
+
+    /* Prevent accidental image drag/long-press behavior on touch devices */
+    img { -webkit-user-drag: none; user-select: none; -webkit-touch-callout: none; }
+
+    /* Reduce motion: respect user preference for accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      .carousel-item { transition: none !important; }
+    }
   </style>
 </head>
 <body class="d-flex flex-column h-100">
@@ -141,13 +224,15 @@
     <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="assets/friends.jpg" class="d-block w-100" alt="friends at the mountains">
+          <!-- First image: keep eager/high priority for LCP on mobile -->
+          <img src="assets/friends.jpg" class="d-block w-100" alt="friends at the mountains" fetchpriority="high" decoding="async">
         </div>
         <div class="carousel-item">
-          <img src="assets/sailboat.jpg" class="d-block w-100" alt="Sailboat image">
+          <!-- Non-first slides lazy-loaded for mobile perf -->
+          <img src="assets/sailboat.jpg" class="d-block w-100" alt="Sailboat image" loading="lazy" decoding="async">
         </div>
         <div class="carousel-item">
-          <img src="assets/friends2.jpg" class="d-block w-100" alt="friends on a beach">
+          <img src="assets/friends2.jpg" class="d-block w-100" alt="friends on a beach" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -214,6 +299,15 @@
       img.setAttribute('draggable', 'false');
     });
   });
+
+  /* ===========================
+     ♿ Reduced-motion: stop auto-advance if user prefers less motion
+     =========================== */
+  try {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      bootstrapCarousel.pause();
+    }
+  } catch (e) {/* no-op */}
 </script>
 </body>
 </html>
