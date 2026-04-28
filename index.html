@@ -750,9 +750,9 @@
     <section class="cp-testimonials" aria-label="Testimonials">
       <div class="cp-testimonials-hd">
         <span class="cp-section-label">Testi<span class="cp-gold">monials</span></span>
-        <div class="cp-t-arrows" aria-hidden="true">
-          <button>&#8592;</button>
-          <button>&#8594;</button>
+        <div class="cp-t-arrows">
+          <button id="tPrev" aria-label="Previous testimonials">&#8592;</button>
+          <button id="tNext" aria-label="Next testimonials">&#8594;</button>
         </div>
       </div>
 
@@ -882,6 +882,31 @@
     mobileNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => mobileNav.classList.remove('open'));
     });
+
+    // Testimonial slider — show 3 at a time, shift by 1
+    (function () {
+      const items = Array.from(document.querySelectorAll('.cp-testimonial'));
+      const perPage = 3;
+      let offset = 0;
+
+      function render() {
+        items.forEach(function (el, i) {
+          el.style.display = (i >= offset && i < offset + perPage) ? '' : 'none';
+        });
+      }
+
+      render();
+
+      document.getElementById('tNext').addEventListener('click', function () {
+        offset = (offset + 1) % (items.length - perPage + 1);
+        render();
+      });
+
+      document.getElementById('tPrev').addEventListener('click', function () {
+        offset = offset === 0 ? items.length - perPage : offset - 1;
+        render();
+      });
+    })();
 
     // Image protections
     document.addEventListener('DOMContentLoaded', () => {
