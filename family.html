@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="description" content="Portfolio — Coral Olson Photography. Natural-light portraits, weddings, and engagements." />
+  <meta name="description" content="Family photography by Coral Olson — timeless imagery for meaningful moments." />
   <meta name="theme-color" content="#f9f8f4" />
   <meta name="color-scheme" content="light" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <title>Portfolio | Coral Olson Photography</title>
+  <title>Family | Coral Olson Photography</title>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,7 +18,7 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background-color: #fff;
+      background-color: #f9f8f4;
       color: #1c1c1e;
     }
 
@@ -80,138 +80,64 @@
       background-color: #f2f1ec;
       text-align: center;
       padding: 5rem 2rem 4.5rem;
-      margin: 0 5%;
     }
     .page-hero h1 {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
       font-size: 2.2rem;
-      letter-spacing: 10px;
+      letter-spacing: 12px;
       text-transform: uppercase;
       color: #1c1c1e;
-      margin-bottom: 1rem;
-    }
-    .page-hero .hero-sub {
-      font-size: 0.6rem;
-      font-weight: 400;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #7a8a7a;
-      margin-bottom: 1.75rem;
-    }
-    .page-hero p {
-      font-size: 0.78rem;
-      font-weight: 300;
-      line-height: 1.9;
-      color: #555;
-      max-width: 520px;
-      margin: 0 auto;
     }
 
-    /* ── 2-COLUMN PORTFOLIO GRID ── */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      padding: 8px 5% 0;
+    /* ── MASONRY GALLERY ── */
+    .gallery-section {
+      padding: 3rem 5% 1rem;
     }
-
-    .portfolio-item {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 3 / 4;
+    .masonry-grid {
+      column-count: 3;
+      column-gap: 8px;
+    }
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 8px;
+    }
+    .masonry-item img {
       display: block;
-      text-decoration: none;
-    }
-
-    .portfolio-item img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-      transition: transform 0.5s ease;
-      -webkit-user-drag: none;
-      user-select: none;
+      height: auto;
       -webkit-touch-callout: none;
-    }
-
-    .portfolio-item:hover img {
-      transform: scale(1.03);
-    }
-
-    .portfolio-item-label {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 300;
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.9);
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
       pointer-events: none;
     }
 
-    .portfolio-item-label.large {
-      font-size: 1.4rem;
-      letter-spacing: 8px;
-    }
-
-    /* Center a lone third tile in the 2-column grid */
-    .portfolio-item:last-child:nth-child(odd) {
-      grid-column: 1 / -1;
-      justify-self: center;
-      width: calc(50% - 4px);
-    }
-
-    /* ── YOU MAY BE INTERESTED ── */
-    .cp-interested {
-      background: #f2f1ec;
-      margin: 3.5rem 5% 0;
-      padding: 3.5rem 4rem;
+    /* ── CTA ── */
+    .cta-section {
       text-align: center;
+      padding: 3.5rem 2rem;
     }
-    .cp-interested h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300;
-      font-size: 1rem;
-      letter-spacing: 6px;
-      text-transform: uppercase;
-      color: #1c1c1e;
-      margin-bottom: 1.75rem;
-    }
-    .cp-interested hr {
-      border: none;
-      border-top: 1px solid rgba(0,0,0,0.15);
-      margin-bottom: 2.25rem;
-    }
-    .cp-interested-links {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .cp-interested-links a {
-      font-size: 0.62rem;
-      font-weight: 400;
-      letter-spacing: 3px;
-      text-transform: uppercase;
+    .btn-cta {
+      display: inline-block;
+      background: #1c1c1e;
+      color: #fff;
       text-decoration: none;
-      color: #1c1c1e;
-      transition: opacity 0.2s;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      padding: 1rem 2.75rem;
+      transition: background 0.2s;
     }
-    .cp-interested-links a:hover { opacity: 0.5; }
+    .btn-cta:hover { background: #3a3a3a; color: #fff; }
 
     /* ── FOOTER ── */
     .instagram-footer {
       background-color: #1a1a1a;
       padding: 4rem 2rem;
       text-align: center;
-      margin-top: 3.5rem;
     }
     .instagram-footer a {
       display: inline-block;
@@ -252,6 +178,8 @@
     }
 
     @media (max-width: 768px) {
+      .masonry-grid { column-count: 2; }
+
       .nav-group { display: none; }
       .nav-toggle { display: flex; }
 
@@ -269,20 +197,11 @@
         z-index: 100;
       }
       .site-nav.open .nav-group:first-child { border-top: 1px solid rgba(0,0,0,0.07); }
-
-      .page-hero { margin: 0; }
-      .portfolio-grid { grid-template-columns: 1fr; padding: 8px 0 0; gap: 8px; }
-      .portfolio-item { aspect-ratio: 4 / 3; }
-      .cp-interested { margin: 2rem 0 0; padding: 2.5rem 2rem; }
     }
 
     @media (max-width: 480px) {
-      .page-hero h1 { font-size: 1.6rem; letter-spacing: 6px; }
-      .cp-interested-links { flex-direction: column; gap: 1.5rem; }
-    }
-
-    @media (hover: none) {
-      .portfolio-item:hover img { transform: none; }
+      .masonry-grid { column-count: 1; }
+      .page-hero h1 { font-size: 1.6rem; letter-spacing: 8px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -298,7 +217,7 @@
     <div class="nav-group">
       <a class="nav-link" href="index.html">Home</a>
       <a class="nav-link" href="resume.html">About</a>
-      <a class="nav-link" href="projects.html" aria-current="page">Portfolio</a>
+      <a class="nav-link" href="projects.html">Portfolio</a>
     </div>
 
     <a class="nav-brand" href="index.html">Coral Olson</a>
@@ -314,47 +233,26 @@
   </nav>
 
   <!-- Hero -->
-  <section class="page-hero" aria-labelledby="portfolio-heading">
-    <h1 id="portfolio-heading">My Portfolio</h1>
-    <p class="hero-sub">Portraits &amp; Engagements</p>
-    <p>Every photo tells a story worth remembering. Browse through my work and see the moments that matter most.</p>
+  <section class="page-hero" aria-labelledby="family-heading">
+    <h1 id="family-heading">Family</h1>
   </section>
 
-  <!-- 2-Column Portfolio Grid -->
-  <main aria-label="Portfolio galleries">
-    <div class="portfolio-grid">
-
-      <a class="portfolio-item" href="vincentengagment.html" aria-label="Open Engagements gallery">
-        <img src="assets/CoralOlsonPORTRAITS-1-6.jpg" alt="Engagements"
+  <!-- Masonry Gallery -->
+  <section class="gallery-section" aria-label="Family photo gallery">
+    <div class="masonry-grid">
+      <!-- Add family images here, e.g.:
+      <div class="masonry-item">
+        <img src="assets/family1.jpg" alt="Family portrait"
              loading="eager" fetchpriority="high" decoding="async" draggable="false">
-        <span class="portfolio-item-label large">Engagements</span>
-      </a>
-
-      <a class="portfolio-item" href="marinashoot.html" aria-label="Open Portraits gallery">
-        <img src="assets/grad11.jpg" alt="Portraits"
-             loading="lazy" decoding="async" draggable="false">
-        <span class="portfolio-item-label large">Portraits</span>
-      </a>
-
-      <a class="portfolio-item" href="family.html" aria-label="Open Family gallery">
-        <img src="assets/friends.jpg" alt="Family"
-             loading="lazy" decoding="async" draggable="false">
-        <span class="portfolio-item-label large">Family</span>
-      </a>
-
-    </div>
-  </main>
-
-  <!-- You May Be Interested -->
-  <section class="cp-interested" aria-label="More links">
-    <h2>You May Be Interested</h2>
-    <hr>
-    <div class="cp-interested-links">
-      <a href="contact.html">Contact Me</a>
-      <a href="resume.html">Read About Me</a>
-      <a href="PricingGuide.html">Check Investment</a>
+      </div>
+      -->
     </div>
   </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <a class="btn-cta" href="contact.html">Book a Session</a>
+  </div>
 
   <!-- Footer -->
   <footer role="contentinfo">
