@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Admin | Coral Olson Photography</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+  <script src="https://upload-widget.cloudinary.com/global/all.js"></script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #f9f8f4;
+      color: #1c1c1e;
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: #fff;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      position: relative;
+    }
+    .nav-group {
+      display: flex;
+      gap: 2.25rem;
+      align-items: center;
+    }
+    .nav-link {
+      text-decoration: none;
+      color: #1c1c1e;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+    .nav-link:hover { opacity: 0.5; }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 300;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      color: #1c1c1e;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    /* hamburger (mobile) */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: #1c1c1e;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+
+    /* ── MAIN CONTENT ── */
+    .main-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 80px);
+      padding: 3rem 2rem;
+    }
+
+    /* ── PASSWORD GATE ── */
+    #password-gate {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 3.5rem 3rem;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+    }
+    #password-gate h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.6rem;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    #password-gate p {
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 2rem;
+    }
+    #password-input {
+      width: 100%;
+      border: 1px solid rgba(0,0,0,0.15);
+      background: #fafaf8;
+      padding: 0.85rem 1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      color: #1c1c1e;
+      outline: none;
+      margin-bottom: 1rem;
+      transition: border-color 0.2s;
+    }
+    #password-input:focus { border-color: #1c1c1e; }
+    #password-input.error { border-color: #c0392b; }
+    #password-error {
+      font-size: 0.6rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #c0392b;
+      margin-bottom: 1rem;
+      min-height: 1em;
+    }
+
+    /* ── ADMIN PANEL ── */
+    #admin-panel {
+      display: none;
+      background: #fff;
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 3.5rem 3rem;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+    }
+    #admin-panel h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.6rem;
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    #admin-panel p.subtitle {
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 2.5rem;
+    }
+
+    .form-row {
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+    .form-row label {
+      display: block;
+      font-size: 0.55rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 0.5rem;
+    }
+    #gallery-select {
+      width: 100%;
+      border: 1px solid rgba(0,0,0,0.15);
+      background: #fafaf8;
+      padding: 0.85rem 1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+      color: #1c1c1e;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%231c1c1e'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    #gallery-select:focus { border-color: #1c1c1e; }
+
+    /* ── BUTTONS ── */
+    .btn-dark {
+      display: inline-block;
+      background: #1c1c1e;
+      color: #fff;
+      border: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      padding: 1rem 2.75rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      width: 100%;
+    }
+    .btn-dark:hover { background: #3a3a3a; }
+
+    /* ── SUCCESS MESSAGE ── */
+    #success-area {
+      margin-top: 1.75rem;
+      text-align: left;
+      display: none;
+    }
+    #success-area h3 {
+      font-size: 0.55rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 0.75rem;
+    }
+    #uploaded-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    #uploaded-list li {
+      font-size: 0.65rem;
+      letter-spacing: 1px;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      color: #2d6a2d;
+    }
+    #uploaded-list li:last-child { border-bottom: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .site-nav { padding: 1.1rem 2rem; }
+    }
+    @media (max-width: 768px) {
+      .nav-group { display: none; }
+      .nav-toggle { display: flex; }
+
+      .site-nav.open .nav-group {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid rgba(0,0,0,0.07);
+        z-index: 100;
+      }
+      .site-nav.open .nav-group:first-child { border-top: 1px solid rgba(0,0,0,0.07); }
+
+      #password-gate,
+      #admin-panel {
+        padding: 2.5rem 1.75rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav" id="siteNav" role="navigation" aria-label="Primary">
+    <div class="nav-group">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="resume.html">About</a>
+      <a class="nav-link" href="projects.html">Portfolio</a>
+    </div>
+
+    <a class="nav-brand" href="index.html">Coral Olson</a>
+
+    <div class="nav-group">
+      <a class="nav-link" href="PricingGuide.html">Investment</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Main -->
+  <main class="main-content">
+
+    <!-- Password Gate -->
+    <div id="password-gate" role="form" aria-label="Admin login">
+      <h1>Admin</h1>
+      <p>Enter password to continue</p>
+      <input
+        type="password"
+        id="password-input"
+        placeholder="Password"
+        autocomplete="current-password"
+        aria-label="Admin password"
+      />
+      <div id="password-error" aria-live="polite"></div>
+      <button class="btn-dark" id="enter-btn" type="button">Enter</button>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="admin-panel" aria-label="Upload panel">
+      <h1>Upload Photos</h1>
+      <p class="subtitle">Select a gallery and upload images</p>
+
+      <div class="form-row">
+        <label for="gallery-select">Gallery</label>
+        <select id="gallery-select">
+          <option value="portraits">Portraits</option>
+          <option value="engagements">Engagements</option>
+          <option value="family">Family</option>
+        </select>
+      </div>
+
+      <button class="btn-dark" id="upload-btn" type="button">Upload Photos</button>
+
+      <div id="success-area" aria-live="polite">
+        <h3>Uploaded</h3>
+        <ul id="uploaded-list"></ul>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Mobile nav toggle -->
+  <script>
+    (function () {
+      'use strict';
+      var nav = document.getElementById('siteNav');
+      var btn = document.getElementById('navToggle');
+      if (btn && nav) {
+        btn.addEventListener('click', function () {
+          var open = nav.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+    })();
+  </script>
+
+  <!-- Admin logic -->
+  <script>
+    (function () {
+      'use strict';
+
+      var CORRECT_PASSWORD = 'CoralAdmin2025';
+
+      var passwordInput = document.getElementById('password-input');
+      var enterBtn      = document.getElementById('enter-btn');
+      var passwordError = document.getElementById('password-error');
+      var passwordGate  = document.getElementById('password-gate');
+      var adminPanel    = document.getElementById('admin-panel');
+      var uploadBtn     = document.getElementById('upload-btn');
+      var gallerySelect = document.getElementById('gallery-select');
+      var successArea   = document.getElementById('success-area');
+      var uploadedList  = document.getElementById('uploaded-list');
+
+      function showAdminPanel() {
+        passwordGate.style.display = 'none';
+        adminPanel.style.display = 'block';
+      }
+
+      function checkPassword() {
+        if (passwordInput.value === CORRECT_PASSWORD) {
+          passwordInput.classList.remove('error');
+          passwordError.textContent = '';
+          showAdminPanel();
+        } else {
+          passwordInput.classList.add('error');
+          passwordError.textContent = 'Incorrect password';
+          passwordInput.value = '';
+          passwordInput.focus();
+        }
+      }
+
+      enterBtn.addEventListener('click', checkPassword);
+      passwordInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') { checkPassword(); }
+      });
+
+      uploadBtn.addEventListener('click', function () {
+        var selectedGallery = gallerySelect.value;
+
+        var widget = cloudinary.createUploadWidget(
+          {
+            cloudName:    'dgqsc76ni',
+            uploadPreset: 'coral_gallery',
+            tags:         [selectedGallery],
+            sources:      ['local'],
+            multiple:     true,
+            cropping:     false
+          },
+          function (error, result) {
+            if (error) { return; }
+            if (result && result.event === 'success') {
+              var info = result.info;
+              successArea.style.display = 'block';
+              var li = document.createElement('li');
+              li.textContent = info.original_filename + '.' + info.format;
+              uploadedList.appendChild(li);
+            }
+          }
+        );
+
+        widget.open();
+      });
+
+    })();
+  </script>
+
+</body>
+</html>

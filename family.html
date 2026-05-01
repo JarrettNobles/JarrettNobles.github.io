@@ -374,5 +374,33 @@
     })();
   </script>
 
+  <!-- Cloudinary dynamic image loading -->
+  <script>
+    (function () {
+      'use strict';
+      fetch('https://res.cloudinary.com/dgqsc76ni/image/list/family.json')
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (!data.resources || data.resources.length === 0) { return; }
+          var cols = document.querySelectorAll('.masonry-col');
+          if (!cols || cols.length === 0) { return; }
+          cols.forEach(function (col) { col.innerHTML = ''; });
+          data.resources.forEach(function (resource, index) {
+            var item = document.createElement('div');
+            item.className = 'masonry-item';
+            var img = document.createElement('img');
+            img.src = 'https://res.cloudinary.com/dgqsc76ni/image/upload/q_auto,f_auto/' + resource.public_id;
+            img.alt = 'Family portrait';
+            img.loading = index === 0 ? 'eager' : 'lazy';
+            img.draggable = false;
+            img.style.pointerEvents = 'none';
+            item.appendChild(img);
+            cols[index % cols.length].appendChild(item);
+          });
+        })
+        .catch(function () { /* fetch failed — keep static images */ });
+    })();
+  </script>
+
 </body>
 </html>
