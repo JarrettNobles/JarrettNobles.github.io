@@ -2,288 +2,458 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <!-- BEST PRACTICES ADD: SEO + theming (non-destructive) -->
   <meta name="description" content="Contact Coral Olson Photography — inquire about sessions, availability, and bookings." />
-  <meta name="theme-color" content="#E4DFD8" />
+  <meta name="theme-color" content="#f9f8f4" />
   <meta name="color-scheme" content="light" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>Contact | Coral Olson Photography</title>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;900&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-  <link href="css/styles.css" rel="stylesheet" />
+
   <style>
-    /* --------------------  ORIGINAL RULES (kept) -------------------- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #E4DFD8;
+      font-family: 'Montserrat', sans-serif;
+      background: #fff;
+      color: #1c1c1e;
     }
-    .navbar-brand,
-    .navbar-nav .nav-link {
-      font-family: 'Playfair Display', serif;
-      font-weight: 400;
-      letter-spacing: 0.5px;
-      font-size: 1.05rem;
-    }
-    .navbar-nav .nav-link {
-      text-transform: uppercase;
-      font-size: 0.95rem;
-    }
-    .form-control {
-      font-size: 1rem;
-    }
-    /* Contact card styling - match navbar font & background */
-    .bg-light {
-      background-color: #E4DFD8 !important;
-      font-family: 'Playfair Display', serif !important;
-    }
-    .bg-light * {
-      font-family: inherit !important;
-    }
-    .feature {
-      font-size: 2rem;
-    }
-    .instagram-footer {
-      position: relative;
-      height: 300px;
-      background-color: #1a1a1a;
-      overflow: hidden;
-    }
-    .instagram-footer .overlay-link {
-      display: flex;
+
+    /* ── MOBILE NAV OVERLAY ── */
+    .cp-mobile-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15,12,10,0.96);
+      z-index: 999;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100%;
-      width: 100%;
+      gap: 2.5rem;
+    }
+    .cp-mobile-overlay.open { display: flex; }
+    .cp-mobile-overlay a {
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .cp-mobile-overlay a:hover { color: #fff; }
+    .cp-mobile-close {
+      position: absolute;
+      top: 1.75rem; right: 2rem;
+      background: none; border: none;
+      color: white; font-size: 1.5rem;
+      cursor: pointer; opacity: 0.7;
+      line-height: 1;
+    }
+    .cp-mobile-close:hover { opacity: 1; }
+
+    /* ── HERO ── */
+    .cp-hero {
+      position: relative;
+      height: 72vh;
+      min-height: 480px;
+      overflow: hidden;
+    }
+    .cp-hero img.hero-bg {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .cp-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.38);
+    }
+
+    /* ── NAV (overlaid) ── */
+    .cp-nav {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      padding: 1.75rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cp-nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2.25rem;
+    }
+    .cp-nav-links a {
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .cp-nav-links a:hover { color: #fff; }
+    .cp-nav-brand {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 300;
+      letter-spacing: 8px;
+      text-transform: uppercase;
       color: white;
       text-decoration: none;
-      position: relative;
+      white-space: nowrap;
+    }
+    .cp-nav-toggle {
+      display: none;
+      background: none; border: none;
+      cursor: pointer; padding: 0.4rem; z-index: 11;
+    }
+    .cp-nav-toggle span {
+      display: block;
+      width: 24px; height: 1.5px;
+      background: white;
+      margin: 5px 0;
+    }
+
+    /* ── HERO TEXT ── */
+    .cp-hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -55%);
+      text-align: center;
+      color: white;
       z-index: 2;
-      transition: background-color 0.3s ease;
+      width: 90%;
+      max-width: 680px;
     }
-    .instagram-footer .overlay-link:hover {
-      background-color: rgba(0, 0, 0, 0.4);
+    .cp-hero-text .hero-eyebrow {
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 1rem;
     }
-    .instagram-footer .overlay-content {
+    .cp-hero-text h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      letter-spacing: 10px;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .cp-hero-text p {
+      font-size: 0.75rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.82);
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ── FORM PANEL ── */
+    .contact-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 0 1.5rem 5rem;
+      background: #fff;
+      margin-top: -6rem;
+      position: relative;
+      z-index: 3;
+    }
+    .contact-panel {
+      background: #f2f1ec;
+      width: 100%;
+      max-width: 680px;
+      padding: 4rem 4rem 3.5rem;
+    }
+
+    /* ── FORM FIELDS ── */
+    .contact-panel .field {
+      margin-bottom: 2.25rem;
+    }
+    .contact-panel input,
+    .contact-panel select,
+    .contact-panel textarea {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid rgba(0,0,0,0.22);
+      background: transparent;
+      padding: 0.6rem 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: #1c1c1e;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+      border-radius: 0;
+    }
+    .contact-panel input::placeholder,
+    .contact-panel textarea::placeholder {
+      color: #888;
+      letter-spacing: 1px;
+    }
+    .contact-panel select {
+      color: #888;
+      cursor: pointer;
+    }
+    .contact-panel select.filled { color: #1c1c1e; }
+    .contact-panel textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .contact-panel input:focus,
+    .contact-panel select:focus,
+    .contact-panel textarea:focus {
+      border-bottom-color: #1c1c1e;
+    }
+
+    /* submit */
+    .btn-send {
+      display: block;
+      width: auto;
+      margin: 2.5rem auto 0;
+      background: #1c1c1e;
+      color: #fff;
+      border: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      padding: 1rem 3rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-send:hover { background: #3a3a3a; }
+
+    /* thank-you */
+    .thank-you {
+      display: none;
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      color: #3a6b4a;
+    }
+
+    /* ── FOOTER ── */
+    .instagram-footer {
+      background-color: #1a1a1a;
+      padding: 4rem 2rem;
       text-align: center;
     }
-    .instagram-footer i.bi-instagram {
-      font-size: 1.5rem;
+    .instagram-footer a {
+      display: inline-block;
+      color: #fff;
+      text-decoration: none;
+    }
+    .instagram-footer a:hover { opacity: 0.75; }
+    .instagram-footer i {
+      font-size: 1.4rem;
       display: block;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
     .instagram-footer h2 {
-      font-weight: bold;
-      font-size: 1.5rem;
-      margin-bottom: 0.25rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.4rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
     }
     .instagram-footer p {
-      text-transform: uppercase;
-      font-size: 0.75rem;
+      font-size: 0.6rem;
       letter-spacing: 2px;
-      color: #e0e0e0;
+      text-transform: uppercase;
+      color: #ccc;
     }
-    .btn-primary {
-      background-color: #0a714e !important;
-      border-color: #0a714e !important;
-    }
-    .btn-primary:hover,
-    .btn-primary:focus {
-      background-color: #085c3f !important; /* slightly darker on hover */
-      border-color: #085c3f !important;
-    }
-
-    /* -------------------- MOBILE & A11Y ENHANCEMENTS (ADDED) -------------------- */
-    /* Subtle divider + bigger tap targets */
-    .navbar { border-bottom: 1px solid rgba(0,0,0,0.06); }
-    .navbar-toggler { border: 1px solid rgba(0,0,0,0.2) !important; }
-    .navbar-nav .nav-link { padding: .75rem .75rem; }
-
-    /* Card-like elevation and rounded edges for the form block */
-    .contact-card {
-      box-shadow: 0 2px 18px rgba(0,0,0,0.08);
-      border-radius: 16px;
+    .footer-bottom {
+      background: #111;
+      color: #888;
+      padding: 1.1rem 3rem;
+      font-size: 0.6rem;
+      letter-spacing: 1px;
     }
 
-    /* Inputs: comfortable touch sizes on phones */
-    .form-control, .form-select, .btn {
-      min-height: 48px;
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .cp-nav-links { display: none; }
+      .cp-nav-toggle { display: block; }
+      .cp-nav-brand { font-size: 1.1rem; letter-spacing: 5px; }
+
+      .contact-wrap { margin-top: -3rem; padding: 0 0 4rem; }
+      .contact-panel { padding: 3rem 1.75rem 2.5rem; }
+      .cp-hero { height: 65vh; }
     }
 
-    /* Make submit button full-width on small screens */
-    @media (max-width: 576px) {
-      .btn-lg { width: 100%; }
+    @media (max-width: 480px) {
+      .cp-hero-text h1 { letter-spacing: 6px; }
+      .cp-hero { min-height: 400px; }
     }
 
-    /* Footer sizing on phones */
-    @media (max-width: 576px) {
-      .instagram-footer { height: 220px; }
-      .instagram-footer h2 { font-size: 1.25rem; }
-      .instagram-footer i.bi-instagram { font-size: 1.25rem; }
-      .instagram-footer p { font-size: 0.7rem; letter-spacing: 1.5px; }
-      section.py-5 { padding-top: 2.25rem !important; padding-bottom: 2.25rem !important; }
-    }
-
-    /* Respect reduced motion */
     @media (prefers-reduced-motion: reduce) {
-      * { transition: none !important; animation: none !important; }
-    }
-
-    /* LONG‑PRESS / SAVE PROTECTION (ADDED, NON‑DESTRUCTIVE) */
-    .no-save {
-      -webkit-touch-callout: none;   /* iOS: hide callout on long-press */
-      -webkit-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      -webkit-user-drag: none;
-      -user-drag: none;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    /* Screen-reader helper */
-    .sr-only {
-      position: absolute !important;
-      width: 1px; height: 1px;
-      padding: 0; margin: -1px;
-      overflow: hidden; clip: rect(0,0,1px,1px);
-      white-space: nowrap; border: 0;
+      * { transition: none !important; }
     }
   </style>
 </head>
 
-<body class="d-flex flex-column">
-  <main class="flex-shrink-0" role="main" id="main-content"><!-- landmark added -->
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3" role="navigation" aria-label="Primary">
-      <div class="container px-5">
-        <a class="navbar-brand" href="index.html">Coral Olson Photography</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon" aria-hidden="true"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="resume.html">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="projects.html">Portfolio</a></li>
-            <li class="nav-item"><a class="nav-link" href="PricingGuide.html">Investment</a></li>
-            <li class="nav-item"><a class="nav-link active" href="contact.html" aria-current="page">Contact</a></li>
-          </ul>
-        </div>
-      </div>
+<body>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="cp-mobile-overlay" id="cpMobileNav" role="dialog" aria-label="Site navigation">
+    <button class="cp-mobile-close" id="cpMobileClose" aria-label="Close menu">&#215;</button>
+    <a href="index.html">Home</a>
+    <a href="resume.html">About</a>
+    <a href="projects.html">Portfolio</a>
+    <a href="PricingGuide.html">Investment</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- Hero -->
+  <header class="cp-hero">
+    <img class="hero-bg" src="assets/engagmentback.jpg" alt="" aria-hidden="true"
+         fetchpriority="high" decoding="async">
+
+    <!-- Nav overlaid -->
+    <nav class="cp-nav" aria-label="Primary navigation">
+      <ul class="cp-nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="resume.html">About</a></li>
+        <li><a href="projects.html">Portfolio</a></li>
+      </ul>
+
+      <a class="cp-nav-brand" href="index.html">Coral Olson</a>
+
+      <ul class="cp-nav-links">
+        <li><a href="PricingGuide.html">Investment</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <button class="cp-nav-toggle" id="cpNavToggle" aria-label="Open navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
 
-    <!-- Contact Form Section -->
-    <section class="py-5" aria-labelledby="contact-heading">
-      <div class="container px-5">
-        <!-- ADDED: .contact-card wrapper class for elevation; aria-describedby ties heading to subcopy -->
-        <div class="bg-light rounded-4 py-5 px-4 px-md-5 contact-card" aria-describedby="contact-subcopy">
-          <div class="text-center mb-5">
-            <h1 id="contact-heading" class="fw-bolder">LET'S MAKE IT OFFICIAL!</h1>
-            <p id="contact-subcopy" class="lead fw-normal text-muted mb-0">Start your booking here!</p>
-          </div>
-          <div class="row gx-5 justify-content-center">
-            <div class="col-lg-8 col-xl-6">
-              <form id="contactForm" action="https://formspree.io/f/mnnzoqjz" method="POST" novalidate>
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_autoresponse" value="Thank you for contacting Coral Olson Photography! We'll be in touch shortly.">
+    <!-- Hero text -->
+    <div class="cp-hero-text">
+      <p class="hero-eyebrow">Let's Begin Your Story Together</p>
+      <h1>Contact Me</h1>
+      <p>I can't wait to hear your story and capture your special day. Leave me a message in the form below, and let's create something amazing together.</p>
+    </div>
+  </header>
 
-                <!-- Name -->
-                <div class="form-floating mb-3">
-                  <input class="form-control" id="name" name="name" type="text" placeholder="Enter your name..." required autocomplete="name" />
-                  <label for="name">Name</label>
-                </div>
+  <!-- Form Panel -->
+  <div class="contact-wrap">
+    <div class="contact-panel">
+      <form id="contactForm" action="https://formspree.io/f/mnnzoqjz" method="POST" novalidate>
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_autoresponse" value="Thank you for contacting Coral Olson Photography! We'll be in touch shortly.">
 
-                <!-- Preferred Contact Method - Email -->
-                <div class="form-floating mb-3">
-                  <input class="form-control" id="contact_email" name="contact_email" type="email" placeholder="you@example.com" autocomplete="email" inputmode="email" />
-                  <label for="contact_email">Preferred Email</label>
-                </div>
-
-                <!-- Preferred Contact Method - Phone -->
-                <div class="form-floating mb-3">
-                  <input class="form-control" id="contact_phone" name="contact_phone" type="tel" placeholder="(123) 456-7890" autocomplete="tel" inputmode="tel" />
-                  <label for="contact_phone">Preferred Phone</label>
-                </div>
-
-                <!-- Session Type Dropdown -->
-                <div class="form-floating mb-3">
-                  <select class="form-select" id="session_type" name="session_type" required>
-                    <option value="" disabled selected>Select a session type</option>
-                    <option value="Portrait-30">Portrait-30</option>
-                    <option value="Portrait-45">Portrait-45</option>
-                    <option value="Portrait-60">Portrait-60</option>
-                    <option value="Graduate-30">Graduate-30</option>
-                    <option value="Graduate-45">Graduate-45</option>
-                    <option value="Graduate-60">Graduate-60</option>
-                    <option value="Mini-15">Mini-15</option>
-                    <option value="Seperate Editing Services">Seperate Editing Services</option>
-                    <option value="Other">Other</option>
-                  </select>
-                  <label for="session_type">Session Type</label>
-                </div>
-
-                <!-- Date of Session -->
-                <div class="form-floating mb-3">
-                  <input class="form-control" id="session_date" name="session_date" type="date" required autocomplete="off" />
-                  <label for="session_date">Date of Session</label>
-                </div>
-
-                <!-- Submit -->
-                <div class="d-grid">
-                  <button class="btn btn-primary btn-lg" type="submit">Submit</button>
-                </div>
-
-                <!-- Custom Thank You Message -->
-                <div id="thankYouMessage" class="mt-4 alert alert-success d-none" role="status" aria-live="polite">
-                  Thank you! Your message has been sent successfully. We'll be in touch soon.
-                </div>
-              </form>
-            </div>
-          </div>
+        <div class="field">
+          <input type="text" id="name" name="name" placeholder="Name *" required autocomplete="name">
         </div>
-      </div>
-    </section>
-  </main>
 
-  <!-- Instagram Footer -->
-  <footer class="mt-auto" role="contentinfo">
+        <div class="field">
+          <input type="email" id="contact_email" name="contact_email" placeholder="Email *" autocomplete="email" inputmode="email">
+        </div>
+
+        <div class="field">
+          <input type="tel" id="contact_phone" name="contact_phone" placeholder="Phone" autocomplete="tel" inputmode="tel">
+        </div>
+
+        <div class="field">
+          <select id="session_type" name="session_type" required>
+            <option value="" disabled selected>Session Type *</option>
+            <option value="Portrait-30">Portrait — 30 min</option>
+            <option value="Portrait-45">Portrait — 45 min</option>
+            <option value="Portrait-60">Portrait — 60 min</option>
+            <option value="Graduate-30">Graduate — 30 min</option>
+            <option value="Graduate-45">Graduate — 45 min</option>
+            <option value="Graduate-60">Graduate — 60 min</option>
+            <option value="Mini-15">Mini — 15 min</option>
+            <option value="Seperate Editing Services">Separate Editing Services</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <input type="date" id="session_date" name="session_date" required autocomplete="off">
+        </div>
+
+        <button class="btn-send" type="submit">Send Message</button>
+
+        <div class="thank-you" id="thankYouMessage" role="status" aria-live="polite">
+          Thank you! Your message has been sent. We'll be in touch soon.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer role="contentinfo">
     <section class="instagram-footer">
-      <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3" target="_blank" rel="noopener" class="overlay-link" aria-label="Open Coral Olson Photography on Instagram in a new tab">
-        <div class="overlay-content">
-          <i class="bi bi-instagram" aria-hidden="true"></i>
-          <h2>Instagram</h2>
-          <p>@coralolsonphotography</p>
-        </div>
+      <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3"
+         target="_blank" rel="noopener"
+         aria-label="Open Coral Olson Photography on Instagram in a new tab">
+        <i class="bi bi-instagram" aria-hidden="true"></i>
+        <h2>Instagram</h2>
+        <p>@coralolsonphotography</p>
       </a>
     </section>
-    <div class="py-4" style="background-color: #1a1a1a; color: white;">
-      <div class="container px-5">
-        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-          <div class="col-auto">
-            <div class="small m-0 text-center text-sm-start">
-              Copyright &copy; Coral Olson 2025
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="footer-bottom">
+      Copyright &copy; Coral Olson 2025
     </div>
   </footer>
 
-  <!-- Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script><!-- defer added -->
-  <script src="js/scripts.js" defer></script><!-- defer added -->
+  <!-- Nav toggle -->
+  <script>
+    (function () {
+      'use strict';
+      var toggle  = document.getElementById('cpNavToggle');
+      var overlay = document.getElementById('cpMobileNav');
+      var close   = document.getElementById('cpMobileClose');
 
-  <!-- Contact Form Handling (kept) -->
+      toggle.addEventListener('click', function () {
+        overlay.classList.add('open');
+        toggle.setAttribute('aria-expanded', 'true');
+      });
+      close.addEventListener('click', function () {
+        overlay.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+      overlay.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () { overlay.classList.remove('open'); });
+      });
+
+      // Colour filled select
+      var sel = document.getElementById('session_type');
+      sel.addEventListener('change', function () {
+        sel.classList.toggle('filled', sel.value !== '');
+      });
+    })();
+  </script>
+
+  <!-- Form submission (Formspree + validation — kept from original) -->
   <script>
     document.getElementById('contactForm').addEventListener('submit', function (event) {
-      const form = event.target;
-      const email = form.contact_email.value.trim();
-      const phone = form.contact_phone.value.trim();
+      var form  = event.target;
+      var email = form.contact_email.value.trim();
+      var phone = form.contact_phone.value.trim();
 
       if (!email && !phone) {
         alert('Please provide at least one preferred method of contact: email or phone.');
@@ -293,65 +463,23 @@
 
       event.preventDefault();
 
-      const formData = new FormData(form);
       fetch(form.action, {
         method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      }).then(response => {
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(function (response) {
         if (response.ok) {
           form.reset();
-          document.getElementById('thankYouMessage').classList.remove('d-none');
+          document.getElementById('session_type').classList.remove('filled');
+          document.getElementById('thankYouMessage').style.display = 'block';
         } else {
           alert('Oops! There was a problem submitting your form.');
         }
-      }).catch(error => {
+      }).catch(function () {
         alert('There was an error sending your message.');
       });
     });
   </script>
 
-  <!-- Protection & A11Y Enhancements (ADDED, NON‑DESTRUCTIVE) -->
-  <script>
-    (function(){
-      'use strict';
-
-      document.addEventListener('DOMContentLoaded', function () {
-        // Add no-save protection to all images (e.g., footer/brand/any future images)
-        const images = document.querySelectorAll('img');
-        images.forEach(img => {
-          img.classList.add('no-save');
-          img.addEventListener('contextmenu', e => e.preventDefault(), { passive: false });
-          img.addEventListener('dragstart', e => e.preventDefault(), { passive: false });
-          img.setAttribute('draggable', 'false');
-        });
-
-        // Improve keyboard focus visibility without global CSS override
-        document.querySelectorAll('a, button, input, select, textarea').forEach(el => {
-          el.addEventListener('focus', () => { el.style.outline = '2px solid rgba(0,0,0,0.35)'; }, { passive: true });
-          el.addEventListener('blur',  () => { el.style.outline = 'none'; }, { passive: true });
-        });
-
-        // EXTRA: iOS/Android long-press guard (keeps taps/scroll intact)
-        let pressTimer;
-        images.forEach(img => {
-          const cancelTimer = () => { if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; } };
-
-          img.addEventListener('touchstart', (e) => {
-            pressTimer = setTimeout(() => { try { e.preventDefault(); } catch {} }, 450);
-          }, { passive: false });
-
-          img.addEventListener('touchend', cancelTimer, { passive: true });
-          img.addEventListener('touchmove', cancelTimer, { passive: true });
-          img.addEventListener('pointerup', cancelTimer, { passive: true });
-
-          // iOS gesture safeguard
-          img.addEventListener('gesturestart', (e) => e.preventDefault(), { passive: false });
-        });
-      });
-    })();
-  </script>
 </body>
 </html>
