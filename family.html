@@ -95,12 +95,15 @@
       padding: 3rem 5% 1rem;
     }
     .masonry-grid {
-      column-count: 3;
-      column-gap: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
     }
-    .masonry-item {
-      break-inside: avoid;
-      margin-bottom: 8px;
+    .masonry-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
     .masonry-item img {
       display: block;
@@ -178,7 +181,7 @@
     }
 
     @media (max-width: 768px) {
-      .masonry-grid { column-count: 2; }
+      .masonry-col:last-child { display: none; }
 
       .nav-group { display: none; }
       .nav-toggle { display: flex; }
@@ -200,7 +203,8 @@
     }
 
     @media (max-width: 480px) {
-      .masonry-grid { column-count: 1; }
+      .masonry-grid { flex-direction: column; }
+      .masonry-col:last-child { display: flex; }
       .page-hero h1 { font-size: 1.6rem; letter-spacing: 8px; }
     }
 
@@ -240,12 +244,63 @@
   <!-- Masonry Gallery -->
   <section class="gallery-section" aria-label="Family photo gallery">
     <div class="masonry-grid">
-      <!-- Add family images here, e.g.:
-      <div class="masonry-item">
-        <img src="assets/family1.jpg" alt="Family portrait"
-             loading="eager" fetchpriority="high" decoding="async" draggable="false">
+
+      <!-- Column 1: 4 images -->
+      <div class="masonry-col">
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-19.jpg" alt="Family portrait"
+               loading="eager" fetchpriority="high" decoding="async" draggable="false">
+        </div>
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-15.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+
+        
+      
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-20.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+        <!--
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-32.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>-->
       </div>
-      -->
+
+      <!-- Column 2: 3 images -->
+      <div class="masonry-col">
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-7.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-18.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-21.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+      </div>
+
+      <!-- Column 3: 3 images -->
+      <div class="masonry-col">
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-9.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-2.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-30.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+      </div>
+
     </div>
   </section>
 
