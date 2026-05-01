@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-  <script src="https://upload-widget.cloudinary.com/global/all.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -208,32 +208,49 @@
     }
     .btn-dark:hover { background: #3a3a3a; }
 
-    /* ── SUCCESS MESSAGE ── */
-    #success-area {
+    /* ── FILE INPUT ── */
+    #file-input { display: none; }
+
+    /* ── STATUS LIST ── */
+    #status-area {
       margin-top: 1.75rem;
       text-align: left;
       display: none;
     }
-    #success-area h3 {
+    #status-area h3 {
       font-size: 0.55rem;
       letter-spacing: 2.5px;
       text-transform: uppercase;
       color: #888;
       margin-bottom: 0.75rem;
     }
-    #uploaded-list {
+    #status-list {
       list-style: none;
       padding: 0;
       margin: 0;
     }
-    #uploaded-list li {
+    #status-list li {
       font-size: 0.65rem;
       letter-spacing: 1px;
-      padding: 0.4rem 0;
+      padding: 0.45rem 0;
       border-bottom: 1px solid rgba(0,0,0,0.06);
-      color: #2d6a2d;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
     }
-    #uploaded-list li:last-child { border-bottom: none; }
+    #status-list li:last-child { border-bottom: none; }
+    .status-name { color: #1c1c1e; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .status-badge {
+      font-size: 0.55rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .status-badge.compressing { color: #888; }
+    .status-badge.uploading   { color: #4a7fc1; }
+    .status-badge.done        { color: #2d6a2d; }
+    .status-badge.error       { color: #c0392b; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
@@ -324,11 +341,12 @@
         </select>
       </div>
 
-      <button class="btn-dark" id="upload-btn" type="button">Upload Photos</button>
+      <input type="file" id="file-input" accept="image/*" multiple>
+      <button class="btn-dark" id="upload-btn" type="button">Choose &amp; Upload Photos</button>
 
-      <div id="success-area" aria-live="polite">
-        <h3>Uploaded</h3>
-        <ul id="uploaded-list"></ul>
+      <div id="status-area" aria-live="polite">
+        <h3>Upload Status</h3>
+        <ul id="status-list"></ul>
       </div>
     </div>
 
@@ -354,7 +372,9 @@
     (function () {
       'use strict';
 
-      var CORRECT_PASSWORD = 'CoralAdmin2025';
+      var CLOUD         = 'dgqsc76ni';
+      var UPLOAD_PRESET = 'coral_gallery';
+      var PASSWORD      = 'CoralAdmin2025';
 
       var passwordInput = document.getElementById('password-input');
       var enterBtn      = document.getElementById('enter-btn');
@@ -362,20 +382,18 @@
       var passwordGate  = document.getElementById('password-gate');
       var adminPanel    = document.getElementById('admin-panel');
       var uploadBtn     = document.getElementById('upload-btn');
+      var fileInput     = document.getElementById('file-input');
       var gallerySelect = document.getElementById('gallery-select');
-      var successArea   = document.getElementById('success-area');
-      var uploadedList  = document.getElementById('uploaded-list');
+      var statusArea    = document.getElementById('status-area');
+      var statusList    = document.getElementById('status-list');
 
-      function showAdminPanel() {
-        passwordGate.style.display = 'none';
-        adminPanel.style.display = 'block';
-      }
-
+      /* ── Password ── */
       function checkPassword() {
-        if (passwordInput.value === CORRECT_PASSWORD) {
+        if (passwordInput.value === PASSWORD) {
           passwordInput.classList.remove('error');
           passwordError.textContent = '';
-          showAdminPanel();
+          passwordGate.style.display = 'none';
+          adminPanel.style.display   = 'block';
         } else {
           passwordInput.classList.add('error');
           passwordError.textContent = 'Incorrect password';
@@ -383,37 +401,82 @@
           passwordInput.focus();
         }
       }
-
       enterBtn.addEventListener('click', checkPassword);
       passwordInput.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') { checkPassword(); }
+        if (e.key === 'Enter') checkPassword();
       });
 
+      /* ── Upload button → open file picker ── */
       uploadBtn.addEventListener('click', function () {
-        var selectedGallery = gallerySelect.value;
+        fileInput.value = '';
+        fileInput.click();
+      });
 
-        var widget = cloudinary.createUploadWidget(
-          {
-            cloudName:    'dgqsc76ni',
-            uploadPreset: 'coral_gallery',
-            tags:         [selectedGallery],
-            sources:      ['local'],
-            multiple:     true,
-            cropping:     false
-          },
-          function (error, result) {
-            if (error) { return; }
-            if (result && result.event === 'success') {
-              var info = result.info;
-              successArea.style.display = 'block';
-              var li = document.createElement('li');
-              li.textContent = info.original_filename + '.' + info.format;
-              uploadedList.appendChild(li);
+      /* ── Process files once selected ── */
+      fileInput.addEventListener('change', function () {
+        var files = Array.from(fileInput.files);
+        if (!files.length) return;
+
+        statusArea.style.display = 'block';
+        uploadBtn.disabled = true;
+        uploadBtn.textContent = 'Uploading…';
+
+        var gallery = gallerySelect.value;
+        var done = 0;
+
+        files.forEach(function (file) {
+          /* create a status row */
+          var li       = document.createElement('li');
+          var nameSpan = document.createElement('span');
+          var badge    = document.createElement('span');
+          nameSpan.className = 'status-name';
+          nameSpan.textContent = file.name;
+          badge.className = 'status-badge compressing';
+          badge.textContent = 'Compressing…';
+          li.appendChild(nameSpan);
+          li.appendChild(badge);
+          statusList.appendChild(li);
+
+          /* compress then upload */
+          imageCompression(file, {
+            maxSizeMB: 9,
+            maxWidthOrHeight: 4000,
+            initialQuality: 0.9,
+            useWebWorker: true
+          })
+          .then(function (compressed) {
+            badge.className  = 'status-badge uploading';
+            badge.textContent = 'Uploading…';
+
+            var fd = new FormData();
+            fd.append('file',          compressed);
+            fd.append('upload_preset', UPLOAD_PRESET);
+            fd.append('tags',          gallery);
+
+            return fetch('https://api.cloudinary.com/v1_1/' + CLOUD + '/image/upload', {
+              method: 'POST',
+              body:   fd
+            });
+          })
+          .then(function (res) { return res.json(); })
+          .then(function (data) {
+            if (data.error) throw new Error(data.error.message);
+            badge.className  = 'status-badge done';
+            badge.textContent = 'Done';
+          })
+          .catch(function (err) {
+            badge.className  = 'status-badge error';
+            badge.textContent = 'Failed';
+            console.error(file.name, err);
+          })
+          .finally(function () {
+            done++;
+            if (done === files.length) {
+              uploadBtn.disabled = false;
+              uploadBtn.textContent = 'Choose & Upload Photos';
             }
-          }
-        );
-
-        widget.open();
+          });
+        });
       });
 
     })();
