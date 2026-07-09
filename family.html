@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="description" content="Family photography by Coral Olson — timeless imagery for meaningful moments." />
+  <meta name="theme-color" content="#f9f8f4" />
+  <meta name="color-scheme" content="light" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Family | Coral Olson Photography</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <style>
+    @font-face {
+  font-family: 'Juniper Bay';
+  src: url('fonts/JuniperBay-Regular.woff2') format('woff2'),
+       url('fonts/JuniperBay-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Juniper Bay', cursive;
+      background-color: #f9f8f4;
+      color: #1c1c1e;
+    }
+
+    /* ── NAV ── */
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 4rem;
+      background: #fff;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      position: relative;
+    }
+    .nav-group {
+      display: flex;
+      gap: 2.25rem;
+      align-items: center;
+    }
+    .nav-link {
+      text-decoration: none;
+      color: #1c1c1e;
+      font-size: 1.45rem;
+      font-weight: 400;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+    .nav-link:hover { opacity: 0.5; }
+    .nav-brand {
+      font-family: 'Juniper Bay', cursive;
+      font-size: 1.45rem;
+      font-weight: 300;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #1c1c1e;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: #1c1c1e;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+
+    /* ── HERO ── */
+    .page-hero {
+      background-color: #f2f1ec;
+      text-align: center;
+      padding: 5rem 2rem 4.5rem;
+    }
+    .page-hero h1 {
+      font-family: 'Juniper Bay', cursive;
+      font-weight: 300;
+      font-size: 2.2rem;
+      letter-spacing: 12px;
+      text-transform: uppercase;
+      color: #1c1c1e;
+    }
+
+    /* ── MASONRY GALLERY ── */
+    .gallery-section {
+      padding: 3rem 5% 1rem;
+    }
+    .masonry-grid {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .masonry-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .masonry-item img {
+      display: block;
+      width: 100%;
+      height: auto;
+      -webkit-touch-callout: none;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      text-align: center;
+      padding: 3.5rem 2rem;
+    }
+    .btn-cta {
+      display: inline-block;
+      background: #1c1c1e;
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Juniper Bay', cursive;
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      padding: 1rem 2.75rem;
+      transition: background 0.2s;
+    }
+    .btn-cta:hover { background: #3a3a3a; color: #fff; }
+
+    /* ── FOOTER ── */
+    .instagram-footer {
+      background-color: #1a1a1a;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .instagram-footer a {
+      display: inline-block;
+      color: #fff;
+      text-decoration: none;
+    }
+    .instagram-footer a:hover { opacity: 0.75; }
+    .instagram-footer i {
+      font-size: 1.4rem;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .instagram-footer h2 {
+      font-family: 'Juniper Bay', cursive;
+      font-weight: 300;
+      font-size: 1.4rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .instagram-footer p {
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #ccc;
+    }
+    .footer-bottom {
+      background: #111;
+      color: #888;
+      padding: 1.1rem 3rem;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .site-nav { padding: 1.1rem 2rem; }
+    }
+
+    @media (max-width: 768px) {
+      .masonry-col:last-child { display: none; }
+
+      .nav-group { display: none; }
+      .nav-toggle { display: flex; }
+
+      .site-nav.open .nav-group {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid rgba(0,0,0,0.07);
+        z-index: 100;
+      }
+      .site-nav.open .nav-group:first-child { border-top: 1px solid rgba(0,0,0,0.07); }
+    }
+
+    @media (max-width: 480px) {
+      .masonry-grid { flex-direction: column; }
+      .masonry-col:last-child { display: flex; }
+      .page-hero h1 { font-size: 1.6rem; letter-spacing: 8px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; animation: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="site-nav" id="siteNav" role="navigation" aria-label="Primary">
+    <div class="nav-group">
+      <a class="nav-link" href="/">Home</a>
+      <a class="nav-link" href="resume.html">About</a>
+      <a class="nav-link" href="projects.html">Portfolio</a>
+    </div>
+
+    <a class="nav-brand" href="/">Coral Olson Photography</a>
+
+    <div class="nav-group">
+      <a class="nav-link" href="PricingGuide.html">Investment</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Hero -->
+  <section class="page-hero" aria-labelledby="family-heading">
+    <h1 id="family-heading">Family</h1>
+  </section>
+
+  <!-- Masonry Gallery -->
+  <section class="gallery-section" aria-label="Family photo gallery">
+    <div class="masonry-grid">
+
+      <!-- Column 1: 4 images -->
+      <div class="masonry-col">
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-19.jpg" alt="Family portrait"
+               loading="eager" fetchpriority="high" decoding="async" draggable="false">
+        </div>
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-15.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+
+        
+      
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-20.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+        <!--
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-32.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>-->
+      </div>
+
+      <!-- Column 2: 3 images -->
+      <div class="masonry-col">
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-7.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-18.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-21.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+      </div>
+
+      <!-- Column 3: 3 images -->
+      <div class="masonry-col">
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-9.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-2.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+        <div class="masonry-item">
+          <img src="assets/CosuinFamilyPORTRAITS-30.jpg" alt="Family portrait"
+               loading="lazy" decoding="async" draggable="false">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <a class="btn-cta" href="contact.html">Book a Session</a>
+  </div>
+
+  <!-- Footer -->
+  <footer role="contentinfo">
+    <section class="instagram-footer">
+      <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3"
+         target="_blank" rel="noopener"
+         aria-label="Open Coral Olson Photography on Instagram in a new tab">
+        <i class="bi bi-instagram" aria-hidden="true"></i>
+        <h2>Instagram</h2>
+        <p>@coralolsonphotography</p>
+      </a>
+    </section>
+    <div class="footer-bottom">
+      Copyright &copy; Coral Olson 2025
+    </div>
+  </footer>
+
+  <!-- Mobile nav toggle -->
+  <script>
+    (function () {
+      'use strict';
+      var nav = document.getElementById('siteNav');
+      var btn = document.getElementById('navToggle');
+      if (btn && nav) {
+        btn.addEventListener('click', function () {
+          var open = nav.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+    })();
+  </script>
+
+  <!-- Image protection -->
+  <script>
+    (function () {
+      'use strict';
+      document.addEventListener('DOMContentLoaded', function () {
+        document.body.addEventListener('cut',   function (e) { e.preventDefault(); }, { passive: false });
+        document.body.addEventListener('copy',  function (e) { e.preventDefault(); }, { passive: false });
+        document.body.addEventListener('paste', function (e) { e.preventDefault(); }, { passive: false });
+
+        var images = document.querySelectorAll('img');
+        var pressTimer = null;
+
+        images.forEach(function (img) {
+          img.addEventListener('contextmenu', function (e) { e.preventDefault(); }, { passive: false });
+          img.addEventListener('dragstart',   function (e) { e.preventDefault(); }, { passive: false });
+          img.setAttribute('draggable', 'false');
+
+          var cancelTimer = function () {
+            if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
+          };
+          img.addEventListener('touchstart', function (e) {
+            pressTimer = window.setTimeout(function () {
+              try { e.preventDefault(); } catch (err) {}
+            }, 450);
+          }, { passive: false });
+          img.addEventListener('touchend',    cancelTimer, { passive: true });
+          img.addEventListener('touchmove',   cancelTimer, { passive: true });
+          img.addEventListener('pointerup',   cancelTimer, { passive: true });
+          img.addEventListener('gesturestart', function (e) { e.preventDefault(); }, { passive: false });
+        });
+      });
+    })();
+  </script>
+
+  <!-- Cloudinary dynamic image loading -->
+  <script>
+    (function () {
+      'use strict';
+      fetch('https://res.cloudinary.com/dgqsc76ni/image/list/family.json')
+        .then(function (res) { return res.json(); })
+        .then(function (data) {
+          if (!data.resources || data.resources.length === 0) { return; }
+          var cols = document.querySelectorAll('.masonry-col');
+          if (!cols || cols.length === 0) { return; }
+          cols.forEach(function (col) { col.innerHTML = ''; });
+          data.resources.forEach(function (resource, index) {
+            var item = document.createElement('div');
+            item.className = 'masonry-item';
+            var img = document.createElement('img');
+            img.src = 'https://res.cloudinary.com/dgqsc76ni/image/upload/q_auto,f_auto/' + resource.public_id;
+            img.alt = 'Family portrait';
+            img.loading = index === 0 ? 'eager' : 'lazy';
+            img.draggable = false;
+            img.style.pointerEvents = 'none';
+            item.appendChild(img);
+            cols[index % cols.length].appendChild(item);
+          });
+        })
+        .catch(function () { /* fetch failed — keep static images */ });
+    })();
+  </script>
+
+</body>
+</html>
