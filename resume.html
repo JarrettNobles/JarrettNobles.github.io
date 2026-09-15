@@ -262,6 +262,57 @@
       overflow: hidden; clip: rect(0,0,1px,1px);
       white-space: nowrap; border: 0;
     }
+
+    /* ── ABOUT PAGE PANELS ── */
+    /* Shared layout/typography for the two full-width content bands below (.stripes and .waves
+       supply the background patterns; this class handles spacing + text styling for both). */
+    .about-panel {
+      padding: 5rem 1.5rem;
+    }
+    .about-panel-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .about-panel h2 {
+      font-family: 'Black Mango', cursive;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 400;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #1c1c1e;
+      margin-bottom: 1.25rem;
+    }
+    .about-panel p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: #3a3a3a;
+      margin: 0;
+    }
+    @media (max-width: 576px) {
+      .about-panel { padding: 3rem 1.5rem; }
+    }
+
+    /* Diagonal cream/beige stripe background (first panel) */
+    .stripes {
+      background: repeating-linear-gradient(
+        100deg,               /* angle: slight tilt off-vertical */
+        #f4efe6 0px,           /* cream */
+        #f4efe6 60px,
+        #e8ddce 60px,          /* slightly darker beige */
+        #e8ddce 120px
+      );
+    }
+
+    /* Tiled soft sine-wave background (second panel) */
+    .waves {
+      background-color: #cfe3d8;  /* base mint */
+      background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='400'%20height='200'%20viewBox='0%200%20400%20200'%3E%3Cpath%20d='M0%20100%20C%2060%2060,%20140%2060,%20200%20100%20S%20340%20140,%20400%20100%20L400%20200%20L0%20200%20Z'%20fill='%23bcd8c8'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 400px 200px;   /* tile size = how "long" each wave is */
+    }
   </style>
 </head>
 <!-- d-flex flex-column h-100: Bootstrap utility classes that make the body a full-height flex column,
@@ -318,6 +369,22 @@
         width="1200" height="1600" />
     </div>
   </section>-->
+
+  <!-- About panel 1: diagonal stripe background -->
+  <section class="about-panel stripes" aria-labelledby="about-heading-1">
+    <div class="container about-panel-inner">
+      <h2 id="about-heading-1">Behind the Lens</h2>
+      <p>Hi, I'm Coral — a Louisiana based photographer with a love for golden light and genuine moments. What started as a hobby turned into a passion for capturing the people and memories that matter most, from engagements to family portraits and everything in between.</p>
+    </div>
+  </section>
+
+  <!-- About panel 2: tiled wave background -->
+  <section class="about-panel waves" aria-labelledby="about-heading-2">
+    <div class="container about-panel-inner">
+      <h2 id="about-heading-2">My Approach</h2>
+      <p>I believe the best photos happen when you feel comfortable, not posed. My goal is to make every session feel relaxed and fun, so what you get back are portraits that actually look like you — timeless, natural, and full of life.</p>
+    </div>
+  </section>
 
 </main>
 
