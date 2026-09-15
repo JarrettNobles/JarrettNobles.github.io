@@ -268,6 +268,12 @@
        supply the background patterns; this class handles spacing + text styling for both). */
     .about-panel {
       padding: 5rem 1.5rem;
+      border-bottom: 4px solid #FFB3AE; /* divider line between/after panels */
+    }
+    /* Pushes the panels further down from the nav bar */
+    .about-panel-top {
+      margin-top: 10rem;
+      border-top: 4px solid #FFB3AE; /* divider line above the first panel */
     }
     .about-panel-inner {
       max-width: 720px;
@@ -276,10 +282,8 @@
     }
     .about-panel h2 {
       font-family: 'Black Mango', cursive;
-      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-size: 1.5rem;
       font-weight: 400;
-      letter-spacing: 2px;
-      text-transform: uppercase;
       color: #1c1c1e;
       margin-bottom: 1.25rem;
     }
@@ -293,6 +297,7 @@
     }
     @media (max-width: 576px) {
       .about-panel { padding: 3rem 1.5rem; }
+      .about-panel-top { margin-top: 5rem; }
     }
 
     /* Diagonal cream/beige stripe background (first panel) */
@@ -371,7 +376,7 @@
   </section>-->
 
   <!-- About panel 1: diagonal stripe background -->
-  <section class="about-panel stripes" aria-labelledby="about-heading-1">
+  <section class="about-panel about-panel-top stripes" aria-labelledby="about-heading-1">
     <div class="container about-panel-inner">
       <h2 id="about-heading-1">Behind the Lens</h2>
       <p>Hi, I'm Coral — a Louisiana based photographer with a love for golden light and genuine moments. What started as a hobby turned into a passion for capturing the people and memories that matter most, from engagements to family portraits and everything in between.</p>
