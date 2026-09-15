@@ -57,10 +57,10 @@
       align-items: center;
       justify-content: space-between; /* pushes the three children (.nav-group, .nav-brand, .nav-group) apart */
       padding: 1.4rem 4rem;
-      /* Gradient fade: holds solid coral through most of the bar (0%–70%) so the vibrant color
-         stays dominant, then blends down into the body's background color (#ffc24b) only in the
-         last stretch, so the nav melts into the page instead of cutting off with a hard edge. */
-      background: linear-gradient(to bottom, #F47068 0%, #F47068 70%, #ffc24b 100%);
+      /* Gradient fade: holds solid coral through most of the bar (0%–70%), passes through a
+         lighter orange partway down, then blends into the body's background color (#ffc24b) at
+         the very bottom, so the nav melts into the page instead of cutting off with a hard edge. */
+      background: linear-gradient(to bottom, #F47068 0%, #FA9C5A 70%, #ffc24b 100%);
       position: relative; /* lets the mobile dropdown menu below be positioned relative to this bar */
     }
     /* Each side of the nav (Home/About/Portfolio on the left, Investment/Contact on the right) */
