@@ -57,8 +57,10 @@
       align-items: center;
       justify-content: space-between; /* pushes the three children (.nav-group, .nav-brand, .nav-group) apart */
       padding: 1.4rem 4rem;
-      background: #F47068; /* coral/salmon nav background */
-      border-bottom: 1px solid rgba(0,0,0,0.07); /* faint separator line under the nav */
+      /* Gradient fade: holds solid coral through most of the bar (0%–70%) so the vibrant color
+         stays dominant, then blends down into the body's background color (#ffc24b) only in the
+         last stretch, so the nav melts into the page instead of cutting off with a hard edge. */
+      background: linear-gradient(to bottom, #F47068 0%, #F47068 70%, #ffc24b 100%);
       position: relative; /* lets the mobile dropdown menu below be positioned relative to this bar */
     }
     /* Each side of the nav (Home/About/Portfolio on the left, Investment/Contact on the right) */
@@ -149,7 +151,7 @@
     /* The footer band that contains the "click to open Instagram" call-to-action */
     .instagram-footer {
       position: relative; /* anchors .overlay-link, which is position:relative/z-index:2 inside it */
-      height: 180px; /* fixed-height band (overridden to 220px on small phones below) */
+      height: 150px; /* fixed-height band (overridden to 220px on small phones below) */
       background-color: #FFF4F1; /* soft off-white/pink background */
       overflow: hidden;
     }
@@ -165,18 +167,21 @@
       text-decoration: none;
       position: relative;
       z-index: 2;
-      transition: background-color 0.3s ease; /* smooths the hover-darken effect below */
       font-family: 'Black Mango', cursive;
     }
 
-    /* Darkens the whole footer band with a semi-transparent black overlay on hover, as a visual "clickable" cue */
-    .instagram-footer .overlay-link:hover {
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    /* Centers the icon + heading + handle text block inside the overlay link */
+    /* Centers the icon + heading + handle text block inside the overlay link.
+       opacity:1 overrides the shared css/styles.css rule (.instagram-footer .overlay-content { opacity: 0; })
+       which otherwise hides this content until hover on screens wider than 768px. */
     .instagram-footer .overlay-content {
       text-align: center;
+      opacity: 1;
+    }
+
+    /* Neutralizes the shared css/styles.css ::after darkening layer (also opacity:0 until hover on desktop),
+       so no darken overlay ever appears over the Instagram band. */
+    .instagram-footer::after {
+      display: none;
     }
 
     /* The Bootstrap Icons Instagram glyph (<i class="bi bi-instagram">) */
@@ -204,7 +209,7 @@
     /* The small copyright line in the bottom-most footer strip ("Copyright © Coral Olson 2025") */
     footer .small {
       font-family: 'Black Mango', cursive;
-      font-size: 1rem;
+      font-size: 0.85rem;
     }
 
     /* --------- MOBILE & A11Y ENHANCEMENTS (ADDED) --------- */

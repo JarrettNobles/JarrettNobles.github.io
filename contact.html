@@ -1,276 +1,286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Character encoding for the document -->
   <meta charset="utf-8" />
+  <!-- SEO: description shown in search engine results and social link previews -->
   <meta name="description" content="Contact Coral Olson Photography — inquire about sessions, availability, and bookings." />
-  <meta name="theme-color" content="#f9f8f4" />
+  <!-- Sets the color of the browser UI (e.g. mobile browser address bar) to match resume.html/About's theme -->
+  <meta name="theme-color" content="#E4DFD8" />
+  <!-- Tells the browser this page only supports light mode (prevents forced dark-mode form controls, etc.) -->
   <meta name="color-scheme" content="light" />
+  <!-- Makes the page render at device width and scale 1 on phones/tablets instead of a zoomed-out desktop layout -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Browser tab title / search result title -->
   <title>Contact | Coral Olson Photography</title>
+  <!-- Browser tab favicon -->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Preconnect hints: open the connection to Google Fonts' domains early so the actual font request (below) is faster -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Loads the Google Fonts "Cormorant Garamond" and "Montserrat" families (used elsewhere on the site) -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet" />
+  <!-- Bootstrap Icons icon font, used below for the Instagram icon (<i class="bi bi-instagram">) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
 
+  <!-- All page-specific CSS for contact.html lives in this <style> block -->
   <style>
+    /* Custom font declaration: loads the local "Black Mango Regular.ttf" file from /fonts
+       and registers it under the family name 'Black Mango' so it can be used anywhere below via font-family.
+       (Matches the font used on resume.html/About.) */
     @font-face {
-  font-family: 'Juniper Bay';
-  src: url('fonts/JuniperBay-Regular.woff2') format('woff2'),
-       url('fonts/JuniperBay-Regular.woff') format('woff');
+  font-family: 'Black Mango';
+  src: url('fonts/Black Mango Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-  font-display: swap;
+  font-display: swap; /* show fallback text immediately, swap to Black Mango once it finishes loading (avoids invisible text) */
 }
 
+    /* Global reset: removes default browser margin/padding and makes width/height calculations
+       include border+padding (border-box) for every element on the page */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* Base page styling: applies to the whole <body> unless overridden by a more specific rule */
     body {
-      font-family: 'Juniper Bay', cursive;
-      background: #fff;
-      color: #1c1c1e;
+      font-family: 'Black Mango', cursive; /* custom display font, falls back to a generic cursive font if it fails to load */
+      background: #ffc24b; /* mustard/orange page background, matches resume.html/About */
+      color: #1c1c1e; /* default near-black text color */
     }
 
-    /* ── MOBILE NAV OVERLAY ── */
-    .cp-mobile-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(15,12,10,0.96);
-      z-index: 999;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2.5rem;
-    }
-    .cp-mobile-overlay.open { display: flex; }
-    .cp-mobile-overlay a {
-      font-size: 1.2rem;
-      font-weight: 300;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.85);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .cp-mobile-overlay a:hover { color: #fff; }
-    .cp-mobile-close {
-      position: absolute;
-      top: 1.75rem; right: 2rem;
-      background: none; border: none;
-      color: white; font-size: 1.5rem;
-      cursor: pointer; opacity: 0.7;
-      line-height: 1;
-    }
-    .cp-mobile-close:hover { opacity: 1; }
-
-    /* ── HERO ── */
-    .cp-hero {
-      position: relative;
-      height: 72vh;
-      min-height: 480px;
-      overflow: hidden;
-    }
-    .cp-hero img.hero-bg {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-    }
-    .cp-hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.38);
-    }
-
-    /* ── NAV (overlaid) ── */
-    .cp-nav {
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      z-index: 10;
-      padding: 1.75rem 2.5rem;
+    /* ── SPLIT NAV (matches resume.html/About) ── */
+    /* The top navigation bar: a flex row with links on the left, the site name/logo in the middle, and links on the right */
+    .site-nav {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: space-between; /* pushes the three children (.nav-group, .nav-brand, .nav-group) apart */
+      padding: 1.4rem 4rem;
+      /* Gradient fade: holds solid coral through most of the bar (0%–70%) so the vibrant color
+         stays dominant, then blends down into the body's background color (#ffc24b) only in the
+         last stretch, so the nav melts into the page instead of cutting off with a hard edge.
+         Matches resume.html/About exactly. */
+      background: linear-gradient(to bottom, #F47068 0%, #F47068 70%, #ffc24b 100%);
+      position: relative; /* lets the mobile dropdown menu below be positioned relative to this bar */
     }
-    .cp-nav-links {
+    /* Each side of the nav (Home/About/Portfolio on the left, Investment/Contact on the right) */
+    .nav-group {
       display: flex;
-      list-style: none;
-      gap: 2.25rem;
+      gap: 2.25rem; /* spacing between individual nav links */
+      align-items: center;
     }
-    .cp-nav-links a {
+    /* Individual nav link styling (Home, About, Portfolio, Investment, Contact) */
+    .nav-link {
+      text-decoration: none; /* removes the default underline on <a> tags */
+      color: #1c1c1e; /* near-black text */
       font-size: 1.45rem;
-      font-weight: 300;
-      letter-spacing: 2.5px;
+      font-weight: 400;
+      letter-spacing: 2.5px; /* extra spacing between letters for a stylized uppercase look */
       text-transform: uppercase;
-      color: rgba(255,255,255,0.88);
-      text-decoration: none;
-      transition: color 0.2s;
+      transition: opacity 0.2s; /* smooths the fade used by the :hover rule below */
     }
-    .cp-nav-links a:hover { color: #fff; }
-    .cp-nav-brand {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Juniper Bay', cursive;
+    /* Fades the link on mouse hover */
+    .nav-link:hover { opacity: 0.5; }
+    /* The center logo/site-name link ("Coral Olson Photography") that goes to the homepage */
+    .nav-brand {
+      font-family: 'Black Mango', cursive; /* uses the custom display font for the brand name */
       font-size: 1.45rem;
       font-weight: 300;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: white;
+      color: #1c1c1e;
       text-decoration: none;
-      white-space: nowrap;
+      white-space: nowrap; /* prevents "Coral Olson Photography" from wrapping onto two lines */
     }
-    .cp-nav-toggle {
-      display: none;
-      background: none; border: none;
-      cursor: pointer; padding: 0.4rem; z-index: 11;
+    /* The hamburger menu button, hidden by default and only shown on small screens (see media query below) */
+    .nav-toggle {
+      display: none; /* hidden on desktop; flipped to display:flex at <=768px */
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column; /* stacks the 3 <span> bars vertically to form the hamburger icon */
+      gap: 5px;
+      padding: 4px;
     }
-    .cp-nav-toggle span {
+    /* The three horizontal bars that make up the hamburger icon */
+    .nav-toggle span {
       display: block;
-      width: 24px; height: 1.5px;
-      background: white;
-      margin: 5px 0;
+      width: 22px;
+      height: 1.5px;
+      background: #1c1c1e;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    /* Slightly reduce the nav's horizontal padding on medium/tablet screens */
+    @media (max-width: 900px) { .site-nav { padding: 1.1rem 2rem; } }
+    /* Mobile nav behavior: collapse both link groups into a hamburger-triggered dropdown menu */
+    @media (max-width: 768px) {
+      .nav-group { display: none; } /* hide both left/right link groups by default on mobile */
+      .nav-toggle { display: flex; } /* show the hamburger button */
+      /* When JS adds the "open" class to #siteNav (see toggle script below), reveal the nav links
+         as a full-width dropdown panel positioned right under the nav bar */
+      .site-nav.open .nav-group {
+        display: flex;
+        flex-direction: column; /* stack links vertically in the dropdown */
+        gap: 1.25rem;
+        position: absolute;
+        top: 100%; /* sits directly below the nav bar */
+        left: 0; right: 0; /* stretches full width */
+        background: #fff;
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid rgba(0,0,0,0.07);
+        z-index: 100; /* sits above other page content */
+      }
+      /* Adds a divider line above the second .nav-group (Investment/Contact) so it's visually separated
+         from the first group (Home/About/Portfolio) when both are stacked in the open dropdown */
+      .site-nav.open .nav-group:first-child { border-top: 1px solid rgba(0,0,0,0.07); }
     }
 
-    /* ── HERO TEXT ── */
-    .cp-hero-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -55%);
+    /* ── CONTACT INTRO (replaces the old photo hero) ── */
+    /* Simple centered heading block that sits directly under the nav, in place of the photo
+       hero + white-on-photo text that used to overlay a background image */
+    .contact-intro {
       text-align: center;
-      color: white;
-      z-index: 2;
-      width: 90%;
+      padding: 4rem 1.5rem 2rem;
       max-width: 680px;
+      margin: 0 auto;
     }
-    .cp-hero-text .hero-eyebrow {
+    /* Small uppercase label above the "Contact Me" heading */
+    .contact-intro .hero-eyebrow {
       font-size: 1.1rem;
       font-weight: 400;
       letter-spacing: 4px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
+      color: #F47068; /* coral accent, ties back to the nav color */
       margin-bottom: 1rem;
     }
-    .cp-hero-text h1 {
-      font-family: 'Juniper Bay', cursive;
+    /* The large "Contact Me" heading */
+    .contact-intro h1 {
+      font-family: 'Black Mango', cursive;
       font-weight: 300;
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-size: clamp(2.5rem, 6vw, 4.5rem); /* scales fluidly between mobile and desktop sizes */
       letter-spacing: 10px;
       text-transform: uppercase;
       line-height: 1;
       margin-bottom: 1.5rem;
+      color: #1c1c1e;
     }
-    .cp-hero-text p {
+    /* The intro paragraph under the heading */
+    .contact-intro p {
       font-size: 1.2rem;
       font-weight: 300;
       line-height: 1.85;
-      color: rgba(255,255,255,0.82);
+      color: #3a3a3a; /* dark gray, readable on the mustard background */
       max-width: 480px;
       margin: 0 auto;
     }
 
     /* ── FORM PANEL ── */
+    /* Centers the contact form panel on the page */
     .contact-wrap {
       display: flex;
       justify-content: center;
       padding: 0 1.5rem 5rem;
-      background: #fff;
-      margin-top: -6rem;
-      position: relative;
-      z-index: 3;
+      background: #ffc24b; /* matches the mustard body background */
     }
+    /* The card containing the actual form fields, in resume.html/About's off-white/pink tone */
     .contact-panel {
-      background: #f2f1ec;
+      background: #FFF4F1;
       width: 100%;
       max-width: 680px;
       padding: 4rem 4rem 3.5rem;
     }
 
     /* ── FORM FIELDS ── */
+    /* Spacing between each label/input pair */
     .contact-panel .field {
       margin-bottom: 2.25rem;
     }
+    /* Shared "underline only" input styling for text/email/phone/date fields and the select/textarea */
     .contact-panel input,
     .contact-panel select,
     .contact-panel textarea {
       width: 100%;
       border: none;
-      border-bottom: 1px solid rgba(0,0,0,0.22);
+      border-bottom: 1px solid rgba(0,0,0,0.22); /* the only visible border, styled to look like a minimal underline field */
       background: transparent;
       padding: 0.6rem 0;
-      font-family: 'Juniper Bay', cursive;
+      font-family: 'Black Mango', cursive;
       font-size: 1.2rem;
       font-weight: 300;
       color: #1c1c1e;
-      outline: none;
-      -webkit-appearance: none;
+      outline: none; /* removes the default browser focus ring (replaced by border-bottom-color change below) */
+      -webkit-appearance: none; /* strips native OS styling from <select> in WebKit browsers */
       appearance: none;
       border-radius: 0;
     }
+    /* Placeholder text styling ("Name *", "Email *", etc.) */
     .contact-panel input::placeholder,
     .contact-panel textarea::placeholder {
       color: #888;
       letter-spacing: 1px;
     }
+    /* The "Session Type" <select> starts gray (looks like a placeholder) until a real option is chosen */
     .contact-panel select {
       color: #888;
       cursor: pointer;
     }
+    /* Toggled on via JS (see "Select styling helper" script below) once the user picks a non-empty option,
+       switching the select's text from placeholder-gray to normal text color */
     .contact-panel select.filled { color: #1c1c1e; }
     .contact-panel textarea {
-      resize: vertical;
+      resize: vertical; /* only allow resizing height, not width */
       min-height: 100px;
     }
+    /* Darkens the underline to signal which field is currently focused */
     .contact-panel input:focus,
     .contact-panel select:focus,
     .contact-panel textarea:focus {
       border-bottom-color: #1c1c1e;
     }
 
-    /* submit */
+    /* submit button */
     .btn-send {
       display: block;
       width: auto;
-      margin: 2.5rem auto 0;
-      background: #1c1c1e;
+      margin: 2.5rem auto 0; /* centers the button under the form fields */
+      background: #1697a6; /* teal accent, matches resume.html/About's footer strip color */
       color: #fff;
       border: none;
-      font-family: 'Juniper Bay', cursive;
+      font-family: 'Black Mango', cursive;
       font-size: 1.1rem;
       font-weight: 400;
       letter-spacing: 3.5px;
       text-transform: uppercase;
       padding: 1rem 3rem;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.2s; /* smooths the hover color change below */
     }
-    .btn-send:hover { background: #3a3a3a; }
+    .btn-send:hover { background: #12808f; }
 
-    /* thank-you */
+    /* thank-you message, shown after a successful form submission (see submission script below) */
     .thank-you {
-      display: none;
+      display: none; /* hidden until JS sets display:block on success */
       margin-top: 2rem;
       text-align: center;
       font-size: 1.2rem;
       font-weight: 300;
       letter-spacing: 1px;
-      color: #3a6b4a;
+      color: #3a6b4a; /* green, signals success */
     }
 
     /* ── FOOTER ── */
+    /* Off-white/pink band containing the "click to open Instagram" call-to-action, matching
+       resume.html/About's Instagram footer colors. Like that page, the icon, heading, and handle
+       are always fully visible; hovering only dims the link slightly (see :hover below). */
     .instagram-footer {
-      background-color: #1a1a1a;
+      background-color: #FFF4F1;
       padding: 4rem 2rem;
       text-align: center;
     }
     .instagram-footer a {
       display: inline-block;
-      color: #fff;
+      color: #1697a6; /* teal, matches resume.html/About's overlay-link color */
       text-decoration: none;
     }
+    /* Slight dim on hover as a "this is clickable" cue — content itself never disappears */
     .instagram-footer a:hover { opacity: 0.75; }
     .instagram-footer i {
       font-size: 1.4rem;
@@ -278,7 +288,7 @@
       margin-bottom: 0.75rem;
     }
     .instagram-footer h2 {
-      font-family: 'Juniper Bay', cursive;
+      font-family: 'Black Mango', cursive;
       font-weight: 300;
       font-size: 1.4rem;
       letter-spacing: 5px;
@@ -289,32 +299,28 @@
       font-size: 1rem;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #ccc;
+      color: #F47068; /* coral, matches resume.html/About's handle text color */
     }
+    /* Bottom-most strip with the copyright line, matches resume.html/About's teal footer strip */
     .footer-bottom {
-      background: #111;
-      color: #888;
+      background: #1697a6;
+      color: #fff;
       padding: 1.1rem 3rem;
-      font-size: 1rem;
+      font-size: 0.85rem; /* matches the slightly-reduced copyright size used on resume.html */
       letter-spacing: 1px;
     }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .cp-nav-links { display: none; }
-      .cp-nav-toggle { display: block; }
-      .cp-nav-brand { font-size: 1.1rem; letter-spacing: 5px; }
-
-      .contact-wrap { margin-top: -3rem; padding: 0 0 4rem; }
       .contact-panel { padding: 3rem 1.75rem 2.5rem; }
-      .cp-hero { height: 65vh; }
     }
 
     @media (max-width: 480px) {
-      .cp-hero-text h1 { letter-spacing: 6px; }
-      .cp-hero { min-height: 400px; }
+      .contact-intro h1 { letter-spacing: 6px; }
     }
 
+    /* Respect reduced motion: disables all CSS transitions site-wide for users who have enabled
+       "reduce motion" in their OS accessibility settings (helps with motion sensitivity) */
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; }
     }
@@ -323,53 +329,50 @@
 
 <body>
 
-  <!-- Mobile Nav Overlay -->
-  <div class="cp-mobile-overlay" id="cpMobileNav" role="dialog" aria-label="Site navigation">
-    <button class="cp-mobile-close" id="cpMobileClose" aria-label="Close menu">&#215;</button>
-    <a href="/">Home</a>
-    <a href="resume.html">About</a>
-    <a href="projects.html">Portfolio</a>
-    <a href="PricingGuide.html">Investment</a>
-    <a href="contact.html">Contact</a>
-  </div>
-
-  <!-- Hero -->
-  <header class="cp-hero">
-    <img class="hero-bg" src="assets/engagmentback.jpg" alt="" aria-hidden="true"
-         fetchpriority="high" decoding="async">
-
-    <!-- Nav overlaid -->
-    <nav class="cp-nav" aria-label="Primary navigation">
-      <ul class="cp-nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="resume.html">About</a></li>
-        <li><a href="projects.html">Portfolio</a></li>
-      </ul>
-
-      <a class="cp-nav-brand" href="/">Coral Olson Photography</a>
-
-      <ul class="cp-nav-links">
-        <li><a href="PricingGuide.html">Investment</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-
-      <button class="cp-nav-toggle" id="cpNavToggle" aria-label="Open navigation" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-
-    <!-- Hero text -->
-    <div class="cp-hero-text">
-      <p class="hero-eyebrow">Let's Begin Your Story Together</p>
-      <h1>Contact Me</h1>
-      <p>I can't wait to hear your story and capture your special day. Leave me a message in the form below, and let's create something amazing together.</p>
+  <!-- Navigation (matches resume.html/About's split-nav design: left links, center brand, right links,
+       with a hamburger dropdown on mobile). id="siteNav" is targeted by the toggle script below, which
+       adds/removes the "open" class to show/hide the mobile dropdown menu. -->
+  <nav class="site-nav" id="siteNav" role="navigation" aria-label="Primary">
+    <!-- Left-hand nav links -->
+    <div class="nav-group">
+      <a class="nav-link" href="/">Home</a>
+      <a class="nav-link" href="resume.html">About</a>
+      <a class="nav-link" href="projects.html">Portfolio</a>
     </div>
-  </header>
+
+    <!-- Center brand/logo link, goes back to the homepage -->
+    <a class="nav-brand" href="/">Coral Olson Photography</a>
+
+    <!-- Right-hand nav links -->
+    <div class="nav-group">
+      <a class="nav-link" href="PricingGuide.html">Investment</a>
+      <a class="nav-link" href="contact.html">Contact</a> <!-- this page -->
+    </div>
+
+    <!-- Hamburger menu button, only visible on mobile widths (<=768px). Clicking it runs the toggle
+         script below, which flips the "open" class on <nav id="siteNav"> and updates aria-expanded
+         for screen readers. -->
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span> <!-- the 3 bars of the hamburger icon -->
+    </button>
+  </nav>
+
+  <!-- Intro heading: replaces the old full-bleed photo hero. Plain text on the white page
+       background instead of white text overlaid on a photo. -->
+  <section class="contact-intro">
+    <p class="hero-eyebrow">Let's Begin Your Story Together</p>
+    <h1>Contact Me</h1>
+    <p>I can't wait to hear your story and capture your special day. Leave me a message in the form below, and let's create something amazing together.</p>
+  </section>
 
   <!-- Form Panel -->
   <div class="contact-wrap">
     <div class="contact-panel">
+      <!-- Submits to Formspree (a third-party form backend); JS below intercepts the submit event
+           to show an inline thank-you message instead of navigating away to Formspree's own page -->
       <form id="contactForm" action="https://formspree.io/f/mnnzoqjz" method="POST" novalidate>
+        <!-- Formspree config fields: disables their built-in captcha and sets the text of the
+             auto-reply email sent back to whoever filled out the form -->
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_autoresponse" value="Thank you for contacting Coral Olson Photography! We'll be in touch shortly.">
 
@@ -386,6 +389,7 @@
         </div>
 
         <div class="field">
+          <!-- required, but starts on a disabled placeholder option so the user must actively choose one -->
           <select id="session_type" name="session_type" required>
             <option value="" disabled selected>Session Type *</option>
             <option value="Portrait-30">Portrait — 30 min</option>
@@ -406,6 +410,9 @@
 
         <button class="btn-send" type="submit">Send Message</button>
 
+        <!-- Hidden by default (.thank-you { display:none }); shown by the submission script below
+             after a successful fetch() to Formspree. aria-live="polite" announces it to screen readers
+             once it appears without needing focus to move. -->
         <div class="thank-you" id="thankYouMessage" role="status" aria-live="polite">
           Thank you! Your message has been sent. We'll be in touch soon.
         </div>
@@ -415,41 +422,47 @@
 
   <!-- Footer -->
   <footer role="contentinfo">
+    <!-- Instagram call-to-action band: clicking anywhere opens the Instagram profile in a new tab -->
     <section class="instagram-footer">
       <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3"
          target="_blank" rel="noopener"
          aria-label="Open Coral Olson Photography on Instagram in a new tab">
-        <i class="bi bi-instagram" aria-hidden="true"></i>
+        <i class="bi bi-instagram" aria-hidden="true"></i> <!-- decorative icon; aria-hidden because the aria-label above already describes the link -->
         <h2>Instagram</h2>
         <p>@coralolsonphotography</p>
       </a>
     </section>
+    <!-- Bottom-most copyright strip -->
     <div class="footer-bottom">
       Copyright &copy; Coral Olson 2025
     </div>
   </footer>
 
-  <!-- Nav toggle -->
+  <!-- Mobile nav toggle -->
+  <!-- Wires up the hamburger button (#navToggle) to open/close the mobile nav dropdown (#siteNav).
+       Same pattern used on resume.html/About. -->
   <script>
     (function () {
       'use strict';
-      var toggle  = document.getElementById('cpNavToggle');
-      var overlay = document.getElementById('cpMobileNav');
-      var close   = document.getElementById('cpMobileClose');
+      var nav = document.getElementById('siteNav'); // the <nav class="site-nav"> element
+      var btn = document.getElementById('navToggle'); // the hamburger <button>
+      if (btn && nav) { // guard in case either element is missing from the page
+        btn.addEventListener('click', function () {
+          // toggle() returns true if the "open" class ended up added, false if removed
+          var open = nav.classList.toggle('open');
+          // keep the button's ARIA state in sync with the visual state for screen readers
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+    })();
+  </script>
 
-      toggle.addEventListener('click', function () {
-        overlay.classList.add('open');
-        toggle.setAttribute('aria-expanded', 'true');
-      });
-      close.addEventListener('click', function () {
-        overlay.classList.remove('open');
-        toggle.setAttribute('aria-expanded', 'false');
-      });
-      overlay.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', function () { overlay.classList.remove('open'); });
-      });
-
-      // Colour filled select
+  <!-- Select styling helper -->
+  <!-- Switches the "Session Type" <select> from placeholder-gray to normal text color once the
+       user has chosen a real option (see .contact-panel select.filled in the CSS above) -->
+  <script>
+    (function () {
+      'use strict';
       var sel = document.getElementById('session_type');
       sel.addEventListener('change', function () {
         sel.classList.toggle('filled', sel.value !== '');
@@ -458,29 +471,34 @@
   </script>
 
   <!-- Form submission (Formspree + validation — kept from original) -->
+  <!-- Intercepts the native form submit so we can: (1) require at least one contact method,
+       (2) submit via fetch() instead of a full page navigation, and (3) show the inline
+       thank-you message on success instead of redirecting to Formspree's own confirmation page. -->
   <script>
     document.getElementById('contactForm').addEventListener('submit', function (event) {
       var form  = event.target;
       var email = form.contact_email.value.trim();
       var phone = form.contact_phone.value.trim();
 
+      // Neither field is individually required in HTML (so the user can fill in just one),
+      // but at least one method of contact must be provided
       if (!email && !phone) {
         alert('Please provide at least one preferred method of contact: email or phone.');
         event.preventDefault();
         return;
       }
 
-      event.preventDefault();
+      event.preventDefault(); // always stop the native navigation; we submit via fetch() below
 
       fetch(form.action, {
         method: 'POST',
         body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
+        headers: { 'Accept': 'application/json' } // tells Formspree to respond with JSON instead of redirecting
       }).then(function (response) {
         if (response.ok) {
-          form.reset();
-          document.getElementById('session_type').classList.remove('filled');
-          document.getElementById('thankYouMessage').style.display = 'block';
+          form.reset(); // clears all fields back to their defaults
+          document.getElementById('session_type').classList.remove('filled'); // reset select back to placeholder-gray
+          document.getElementById('thankYouMessage').style.display = 'block'; // reveal the inline success message
         } else {
           alert('Oops! There was a problem submitting your form.');
         }
