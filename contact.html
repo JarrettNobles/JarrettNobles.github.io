@@ -6,7 +6,7 @@
   <!-- SEO: description shown in search engine results and social link previews -->
   <meta name="description" content="Contact Coral Olson Photography — inquire about sessions, availability, and bookings." />
   <!-- Sets the color of the browser UI (e.g. mobile browser address bar) to match this page's cream background -->
-  <meta name="theme-color" content="#FFF4F1" />
+  <meta name="theme-color" content="#fff" />
   <!-- Tells the browser this page only supports light mode (prevents forced dark-mode form controls, etc.) -->
   <meta name="color-scheme" content="light" />
   <!-- Makes the page render at device width and scale 1 on phones/tablets instead of a zoomed-out desktop layout -->
@@ -43,7 +43,7 @@
     /* Base page styling: applies to the whole <body> unless overridden by a more specific rule */
     body {
       font-family: 'Black Mango', cursive; /* custom display font, falls back to a generic cursive font if it fails to load */
-      background: #FFF4F1; /* cream page background, matches the form panel and the Instagram/footer band below */
+      background: #fff; /* white page background, matches index.html */
       color: #1c1c1e; /* default near-black text color */
     }
 
@@ -52,13 +52,13 @@
     .site-nav {
       display: flex;
       align-items: center;
-      justify-content: space-between; /* pushes the three children (.nav-group, .nav-brand, .nav-group) apart */
+      justify-content: center; /* single unified link list, centered now that the logo has moved out of the navbar (matches index.html) */
       padding: 1.4rem 4rem;
       background: #fff; /* plain white nav, matches projects.html/family.html/etc. */
       border-bottom: 1px solid rgba(0,0,0,0.07);
       position: relative; /* lets the mobile dropdown menu below be positioned relative to this bar */
     }
-    /* Each side of the nav (Home/About/Portfolio on the left, Investment/Contact on the right) */
+    /* The nav links */
     .nav-group {
       display: flex;
       gap: 2.25rem; /* spacing between individual nav links */
@@ -87,22 +87,15 @@
       width: auto;
       display: block;
     }
-    /* The center logo/site-name link ("Coral Olson Photography") that goes to the homepage */
-    .nav-brand {
-      font-family: 'Black Mango', cursive; /* uses the custom display font for the brand name */
-      font-size: 1.45rem;
-      font-weight: 300;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #1c1c1e;
-      text-decoration: none;
-      white-space: nowrap; /* prevents "Coral Olson Photography" from wrapping onto two lines */
+    /* ── LOGO (moved out of the navbar; its own block below it, matches index.html) ── */
+    .logo-block {
+      text-align: center;
+      padding: 2.5rem 1.5rem 2rem;
     }
-    /* The logo image inside .nav-brand (replaces the text wordmark) */
-    .nav-brand img {
-      height: 72px;
+    .logo-block img {
+      height: 180px;
       width: auto;
-      display: block;
+      display: inline-block;
     }
     /* The hamburger menu button, hidden by default and only shown on small screens (see media query below) */
     .nav-toggle {
@@ -123,12 +116,17 @@
       transition: transform 0.25s, opacity 0.25s;
     }
     /* Slightly reduce the nav's horizontal padding on medium/tablet screens */
-    @media (max-width: 900px) { .site-nav { padding: 1.1rem 2rem; } }
-    /* Mobile nav behavior: collapse both link groups into a hamburger-triggered dropdown menu */
+    @media (max-width: 900px) {
+      .site-nav { padding: 1.1rem 2rem; }
+      .logo-block img { height: 130px; }
+    }
+    /* Mobile nav behavior: collapse the link group into a hamburger-triggered dropdown menu */
     @media (max-width: 768px) {
-      .nav-group { display: none; } /* hide both left/right link groups by default on mobile */
+      .site-nav { justify-content: flex-end; } /* the hamburger is now the only visible nav child, so push it to the right edge */
+      .nav-group { display: none; } /* hide the link group by default on mobile */
       .nav-toggle { display: flex; } /* show the hamburger button */
       .nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
+      .logo-block img { height: 100px; }
       /* When JS adds the "open" class to #siteNav (see toggle script below), reveal the nav links
          as a full-width dropdown panel positioned right under the nav bar */
       .site-nav.open .nav-group {
@@ -143,9 +141,6 @@
         border-bottom: 1px solid rgba(0,0,0,0.07);
         z-index: 100; /* sits above other page content */
       }
-      /* Adds a divider line above the second .nav-group (Investment/Contact) so it's visually separated
-         from the first group (Home/About/Portfolio) when both are stacked in the open dropdown */
-      .site-nav.open .nav-group:first-child { border-top: 1px solid rgba(0,0,0,0.07); }
     }
 
     /* ── CONTACT INTRO (replaces the old photo hero) ── */
@@ -193,11 +188,10 @@
       display: flex;
       justify-content: center;
       padding: 0 1.5rem 5rem;
-      background: #FFF4F1; /* matches the cream body background */
+      background: #fff; /* matches the white body background */
     }
     /* The card containing the actual form fields, in resume.html/About's off-white/pink tone.
-       Since the page background is the same cream color, a soft shadow keeps the card visually
-       distinct instead of blending flush into the page. */
+       Kept as its own cream card (with a soft shadow) so it stands out against the white page. */
     .contact-panel {
       background: #FFF4F1;
       width: 100%;
@@ -303,7 +297,7 @@
     }
     .instagram-footer a {
       display: inline-block;
-      color: #1697a6; /* teal, matches resume.html/About's overlay-link color */
+      color: #1697a6; /* teal, matches resume.html/About's Instagram footer color */
       text-decoration: none;
     }
     /* Slight dim on hover as a "this is clickable" cue — content itself never disappears */
@@ -359,20 +353,11 @@
        with a hamburger dropdown on mobile). id="siteNav" is targeted by the toggle script below, which
        adds/removes the "open" class to show/hide the mobile dropdown menu. -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="Primary">
-    <!-- Left-hand nav links -->
+    <!-- Nav links, merged into a single centered group now that the logo lives below the nav -->
     <div class="nav-group">
       <a class="nav-link" href="/">Home</a>
       <a class="nav-link" href="resume.html">About</a>
       <a class="nav-link" href="projects.html">Portfolio</a>
-    </div>
-
-    <!-- Center brand/logo link, goes back to the homepage -->
-    <a class="nav-brand" href="/">
-      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography">
-    </a>
-
-    <!-- Right-hand nav links -->
-    <div class="nav-group">
       <a class="nav-link" href="PricingGuide.html">Investment</a>
       <a class="nav-link" href="contact.html">Contact</a> <!-- this page -->
     </div>
@@ -386,6 +371,13 @@
 
     <img src="assets/seashell.jpg" alt="" class="nav-decor" aria-hidden="true">
   </nav>
+
+  <!-- Logo (moved out of the navbar) -->
+  <div class="logo-block">
+    <a href="/" aria-label="Coral Olson Photography — Home">
+      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography">
+    </a>
+  </div>
 
   <!-- Intro heading: replaces the old full-bleed photo hero. Plain text on the white page
        background instead of white text overlaid on a photo. -->

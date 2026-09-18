@@ -492,10 +492,21 @@
       background-color: #FFF4F1;
       padding: 4rem 2rem;
       text-align: center;
+      /* Overrides css/styles.css's old .instagram-footer rules (position/height/overflow),
+         which are leftovers from the original dark hover-reveal design and no longer apply here */
+      position: static;
+      height: auto;
+      overflow: visible;
+    }
+    /* css/styles.css also adds an invisible ::after overlay for that old design
+       (position:absolute; inset:0), which — even at opacity:0 — sits on top of the link
+       and silently blocks clicks. Removing it entirely fixes the Instagram link. */
+    .instagram-footer::after {
+      display: none;
     }
     .instagram-footer a {
       display: inline-block;
-      color: #1697a6; /* teal, matches contact.html's overlay-link color */
+      color: #1697a6; /* teal, matches contact.html's Instagram footer color */
       text-decoration: none;
     }
     .instagram-footer a:hover { opacity: 0.75; }

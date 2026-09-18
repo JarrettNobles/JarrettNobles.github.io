@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <!-- BEST PRACTICES ADD: SEO + theming (non-destructive) -->
   <meta name="description" content="Pricing Guide — Coral Olson Photography. Packages and investment details for portraits, weddings, and engagements." />
-  <meta name="theme-color" content="#E4DFD8" />
+  <meta name="theme-color" content="#fff" />
   <meta name="color-scheme" content="light" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -38,14 +38,14 @@
 
     body {
       font-family: 'Juniper Bay', cursive;
-      background-color: #f9f8f4;
+      background-color: #fff; /* white page background, matches index.html */
     }
 
     /* ── SPLIT NAV ── */
     .site-nav {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center; /* single unified link list, centered now that the logo has moved out of the navbar (matches index.html) */
       padding: 1.4rem 4rem;
       background: #fff;
       border-bottom: 1px solid rgba(0,0,0,0.07);
@@ -79,21 +79,15 @@
       width: auto;
       display: block;
     }
-    .nav-brand {
-      font-family: 'Juniper Bay', cursive;
-      font-size: 1.45rem;
-      font-weight: 300;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #1c1c1e;
-      text-decoration: none;
-      white-space: nowrap;
+    /* ── LOGO (moved out of the navbar; its own block below it, matches index.html) ── */
+    .logo-block {
+      text-align: center;
+      padding: 2.5rem 1.5rem 2rem;
     }
-    /* The logo image inside .nav-brand (replaces the text wordmark) */
-    .nav-brand img {
-      height: 72px;
+    .logo-block img {
+      height: 180px;
       width: auto;
-      display: block;
+      display: inline-block;
     }
     .nav-toggle {
       display: none;
@@ -111,11 +105,16 @@
       background: #1c1c1e;
       transition: transform 0.25s, opacity 0.25s;
     }
-    @media (max-width: 900px) { .site-nav { padding: 1.1rem 2rem; } }
+    @media (max-width: 900px) {
+      .site-nav { padding: 1.1rem 2rem; }
+      .logo-block img { height: 130px; }
+    }
     @media (max-width: 768px) {
+      .site-nav { justify-content: flex-end; } /* the hamburger is now the only visible nav child, so push it to the right edge */
       .nav-group { display: none; }
       .nav-toggle { display: flex; }
       .nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
+      .logo-block img { height: 100px; }
       .site-nav.open .nav-group {
         display: flex;
         flex-direction: column;
@@ -128,7 +127,6 @@
         border-bottom: 1px solid rgba(0,0,0,0.07);
         z-index: 100;
       }
-      .site-nav.open .nav-group:first-child { border-top: 1px solid rgba(0,0,0,0.07); }
     }
 
     .about-image-section {
@@ -142,57 +140,56 @@
       display: block;
     }
 
+    /* The footer band that contains the "click to open Instagram" call-to-action, matches
+       index.html/contact.html's Instagram footer exactly. */
     .instagram-footer {
-      position: relative;
-      height: 300px;
-      background-color: #1a1a1a;
-      overflow: hidden;
-    }
-
-    .instagram-footer .overlay-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      width: 100%;
-      color: white;
-      text-decoration: none;
-      position: relative;
-      z-index: 2;
-      transition: background-color 0.3s ease;
-      font-family: 'Juniper Bay', cursive;
-    }
-
-    .instagram-footer .overlay-link:hover {
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    .instagram-footer .overlay-content {
+      background-color: #FFF4F1;
+      padding: 4rem 2rem;
       text-align: center;
+      /* Overrides css/styles.css's old .instagram-footer rules (position/height/overflow),
+         which are leftovers from the original dark hover-reveal design and no longer apply here */
+      position: static;
+      height: auto;
+      overflow: visible;
     }
-
-    .instagram-footer i.bi-instagram {
-      font-size: 1.5rem;
+    /* css/styles.css also adds an invisible ::after overlay for that old design
+       (position:absolute; inset:0), which — even at opacity:0 — sits on top of the link
+       and silently blocks clicks. Removing it entirely fixes the Instagram link. */
+    .instagram-footer::after {
+      display: none;
+    }
+    .instagram-footer a {
+      display: inline-block;
+      color: #1697a6; /* teal, matches index.html's Instagram footer */
+      text-decoration: none;
+    }
+    .instagram-footer a:hover { opacity: 0.75; }
+    .instagram-footer i {
+      font-size: 1.4rem;
       display: block;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
     }
-
     .instagram-footer h2 {
-      font-weight: bold;
-      font-size: 1.5rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .instagram-footer p {
+      font-family: 'Black Mango', cursive;
+      font-weight: 300;
+      font-size: 1.4rem;
+      letter-spacing: 5px;
       text-transform: uppercase;
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-      color: #e0e0e0;
+      margin-bottom: 0.4rem;
     }
-
-    footer .small {
-      font-family: 'Juniper Bay', cursive;
+    .instagram-footer p {
       font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #F47068; /* coral, matches the @coralolsonphotography handle on index.html */
+    }
+    /* Bottom-most strip with the copyright line, matches index.html/contact.html's teal footer strip */
+    .footer-bottom {
+      background: #1697a6;
+      color: #fff;
+      padding: 1.1rem 3rem;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
     }
 
     /* --------- MOBILE & A11Y ENHANCEMENTS (ADDED) --------- */
@@ -208,13 +205,9 @@
     /* Gentle elevation for the pricing images (kept subtle) */
     .about-image-section img { box-shadow: 0 2px 18px rgba(0,0,0,0.06); }
 
-    /* Phone-friendly spacing and footer sizing */
+    /* Phone-friendly spacing */
     @media (max-width: 576px) {
       .about-image-section { padding: 2.25rem 0; }
-      .instagram-footer { height: 220px; }
-      .instagram-footer h2 { font-size: 1.25rem; }
-      .instagram-footer i.bi-instagram { font-size: 1.25rem; }
-      .instagram-footer p { font-size: 0.7rem; letter-spacing: 1.5px; }
     }
 
     /* Avoid iOS white gaps: ensure images keep natural aspect on small screens */
@@ -261,13 +254,6 @@
       <a class="nav-link" href="/">Home</a>
       <a class="nav-link" href="resume.html">About</a>
       <a class="nav-link" href="projects.html">Portfolio</a>
-    </div>
-
-    <a class="nav-brand" href="/">
-      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography">
-    </a>
-
-    <div class="nav-group">
       <a class="nav-link" href="PricingGuide.html">Investment</a>
       <a class="nav-link" href="contact.html">Contact</a>
     </div>
@@ -278,6 +264,13 @@
 
     <img src="assets/seashell.jpg" alt="" class="nav-decor" aria-hidden="true">
   </nav>
+
+  <!-- Logo (moved out of the navbar) -->
+  <div class="logo-block">
+    <a href="/" aria-label="Coral Olson Photography — Home">
+      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography">
+    </a>
+  </div>
 
   <!-- About Image Section -->
   <section class="about-image-section" aria-labelledby="pricing-heading">
@@ -303,26 +296,20 @@
 
 <!-- Footer -->
 <footer class="mt-auto" role="contentinfo">
+  <!-- Instagram call-to-action band: clicking anywhere opens the Instagram profile in a new tab.
+       Matches index.html/contact.html's Instagram footer exactly. -->
   <section class="instagram-footer">
-    <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3" target="_blank" rel="noopener" class="overlay-link" aria-label="Open Coral Olson Photography on Instagram in a new tab">
-      <div class="overlay-content">
-        <i class="bi bi-instagram" aria-hidden="true"></i>
-        <h2>Instagram</h2>
-        <p>@coralolsonphotography</p>
-      </div>
+    <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3"
+       target="_blank" rel="noopener"
+       aria-label="Open Coral Olson Photography on Instagram in a new tab">
+      <i class="bi bi-instagram" aria-hidden="true"></i>
+      <h2>Instagram</h2>
+      <p>@coralolsonphotography</p>
     </a>
   </section>
-
-  <div class="py-4" style="background-color: #1a1a1a; color: white;">
-    <div class="container px-5">
-      <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-        <div class="col-auto">
-          <div class="small m-0 text-center text-sm-start">
-            Copyright &copy; Coral Olson 2025
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- Bottom-most copyright strip -->
+  <div class="footer-bottom">
+    Copyright &copy; Coral Olson 2025
   </div>
 </footer>
 

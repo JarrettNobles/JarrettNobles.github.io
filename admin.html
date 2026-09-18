@@ -33,7 +33,7 @@
 
     body {
       font-family: 'Juniper Bay', cursive;
-      background-color: #f9f8f4;
+      background-color: #fff; /* white page background, matches index.html */
       color: #1c1c1e;
       min-height: 100vh;
     }
@@ -42,7 +42,7 @@
     .site-nav {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center; /* single unified link list, centered now that the logo has moved out of the navbar (matches index.html) */
       padding: 1.4rem 4rem;
       background: #fff;
       border-bottom: 1px solid rgba(0,0,0,0.07);
@@ -76,21 +76,15 @@
       width: auto;
       display: block;
     }
-    .nav-brand {
-      font-family: 'Juniper Bay', cursive;
-      font-size: 1.45rem;
-      font-weight: 300;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #1c1c1e;
-      text-decoration: none;
-      white-space: nowrap;
+    /* ── LOGO (moved out of the navbar; its own block below it, matches index.html) ── */
+    .logo-block {
+      text-align: center;
+      padding: 2.5rem 1.5rem 2rem;
     }
-    /* The logo image inside .nav-brand (replaces the text wordmark) */
-    .nav-brand img {
-      height: 72px;
+    .logo-block img {
+      height: 180px;
       width: auto;
-      display: block;
+      display: inline-block;
     }
 
     /* hamburger (mobile) */
@@ -291,11 +285,14 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .site-nav { padding: 1.1rem 2rem; }
+      .logo-block img { height: 130px; }
     }
     @media (max-width: 768px) {
+      .site-nav { justify-content: flex-end; } /* the hamburger is now the only visible nav child, so push it to the right edge */
       .nav-group { display: none; }
       .nav-toggle { display: flex; }
       .nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
+      .logo-block img { height: 100px; }
 
       .site-nav.open .nav-group {
         display: flex;
@@ -310,7 +307,6 @@
         border-bottom: 1px solid rgba(0,0,0,0.07);
         z-index: 100;
       }
-      .site-nav.open .nav-group:first-child { border-top: 1px solid rgba(0,0,0,0.07); }
 
       #password-gate,
       #admin-panel {
@@ -332,13 +328,6 @@
       <a class="nav-link" href="/">Home</a>
       <a class="nav-link" href="resume.html">About</a>
       <a class="nav-link" href="projects.html">Portfolio</a>
-    </div>
-
-    <a class="nav-brand" href="/">
-      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography">
-    </a>
-
-    <div class="nav-group">
       <a class="nav-link" href="PricingGuide.html">Investment</a>
       <a class="nav-link" href="contact.html">Contact</a>
     </div>
@@ -349,6 +338,13 @@
 
     <img src="assets/seashell.jpg" alt="" class="nav-decor" aria-hidden="true">
   </nav>
+
+  <!-- Logo (moved out of the navbar) -->
+  <div class="logo-block">
+    <a href="/" aria-label="Coral Olson Photography — Home">
+      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography">
+    </a>
+  </div>
 
   <!-- Main -->
   <main class="main-content">
