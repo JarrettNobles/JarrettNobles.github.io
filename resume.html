@@ -6,8 +6,8 @@
   <!-- BEST PRACTICES ADD: SEO + theming (non-destructive) -->
   <!-- SEO: description shown in search engine results and social link previews -->
   <meta name="description" content="Meet Coral Olson — Louisiana based photographer specializing in timeless, natural-light imagery." />
-  <!-- Sets the color of the browser UI (e.g. mobile browser address bar) to match the site's cream/beige theme -->
-  <meta name="theme-color" content="#E4DFD8" />
+  <!-- Sets the color of the browser UI (e.g. mobile browser address bar) to match this page's cream background -->
+  <meta name="theme-color" content="#FFF4F1" />
   <!-- Tells the browser this page only supports light mode (prevents forced dark-mode form controls, etc.) -->
   <meta name="color-scheme" content="light" />
 
@@ -47,7 +47,7 @@
     /* Base page styling: applies to the whole <body> unless overridden by a more specific rule */
     body {
       font-family: 'Black Mango', cursive; /* custom display font, falls back to a generic cursive font if it fails to load */
-      background-color: #ffc24b; /* mustard/orange page background */
+      background-color: #FFF4F1; /* cream page background, matches the Instagram/footer band below */
     }
 
     /* ── SPLIT NAV ── */
@@ -57,10 +57,8 @@
       align-items: center;
       justify-content: space-between; /* pushes the three children (.nav-group, .nav-brand, .nav-group) apart */
       padding: 1.4rem 4rem;
-      /* Gradient fade: holds solid coral through most of the bar (0%–70%), passes through a
-         lighter orange partway down, then blends into the body's background color (#ffc24b) at
-         the very bottom, so the nav melts into the page instead of cutting off with a hard edge. */
-      background: linear-gradient(to bottom, #F47068 0%, #FA9C5A 70%, #ffc24b 100%);
+      background: #fff; /* plain white nav, matches projects.html/family.html/etc. */
+      border-bottom: 1px solid rgba(0,0,0,0.07);
       position: relative; /* lets the mobile dropdown menu below be positioned relative to this bar */
     }
     /* Each side of the nav (Home/About/Portfolio on the left, Investment/Contact on the right) */
@@ -72,15 +70,26 @@
     /* Individual nav link styling (Home, About, Portfolio, Investment, Contact) */
     .nav-link {
       text-decoration: none; /* removes the default underline on <a> tags */
-      color: #1c1c1e; /* near-black text */
+      color: #1697a6; /* teal, matches index.html's navbar text color */
       font-size: 1.45rem;
       font-weight: 400;
       letter-spacing: 2.5px; /* extra spacing between letters for a stylized uppercase look */
       text-transform: uppercase;
-      transition: opacity 0.2s; /* smooths the fade used by the :hover rule below */
+      transition: color 0.2s;
     }
-    /* Fades the link on mouse hover */
-    .nav-link:hover { opacity: 0.5; }
+    /* Coral on hover, matches index.html's navbar hover + the @coralolsonphotography handle color */
+    .nav-link:hover { color: #F47068; }
+    /* Decorative seashell image pinned to the navbar's right corner (desktop only; hidden on
+       mobile below so it doesn't collide with the hamburger button, which takes that spot). */
+    .nav-decor {
+      position: absolute;
+      right: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 60px;
+      width: auto;
+      display: block;
+    }
     /* The center logo/site-name link ("Coral Olson Photography") that goes to the homepage */
     .nav-brand {
       font-family: 'Black Mango', cursive; /* uses the custom display font for the brand name */
@@ -122,6 +131,7 @@
     @media (max-width: 768px) {
       .nav-group { display: none; } /* hide both left/right link groups by default on mobile */
       .nav-toggle { display: flex; } /* show the hamburger button */
+      .nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
       /* When JS adds the "open" class to #siteNav (see toggle script below), reveal the nav links
          as a full-width dropdown panel positioned right under the nav bar */
       .site-nav.open .nav-group {
@@ -209,7 +219,7 @@
       text-transform: uppercase;
       font-size: 0.9rem;
       letter-spacing: 2px;
-      color: #F47068; /* coral color, matches the nav background */
+      color: #F47068; /* coral accent color */
     }
 
     /* The small copyright line in the bottom-most footer strip ("Copyright © Coral Olson 2025") */
@@ -360,6 +370,8 @@
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
       <span></span><span></span><span></span> <!-- the 3 bars of the hamburger icon -->
     </button>
+
+    <img src="assets/seashell.jpg" alt="" class="nav-decor" aria-hidden="true">
   </nav>
 
   <!--

@@ -22,6 +22,14 @@
   font-style: normal;
   font-display: swap;
 }
+    /* Used for the navbar links only, to match index.html/contact.html/resume.html's nav font */
+    @font-face {
+  font-family: 'Black Mango';
+  src: url('fonts/Black Mango Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -48,14 +56,27 @@
     }
     .nav-link {
       text-decoration: none;
-      color: #1c1c1e;
+      color: #1697a6; /* teal, matches index.html's navbar text color */
+      font-family: 'Black Mango', cursive;
       font-size: 1.45rem;
       font-weight: 400;
       letter-spacing: 2.5px;
       text-transform: uppercase;
-      transition: opacity 0.2s;
+      transition: color 0.2s;
     }
-    .nav-link:hover { opacity: 0.5; }
+    /* Coral on hover, matches index.html's navbar hover + the @coralolsonphotography handle color */
+    .nav-link:hover { color: #F47068; }
+    /* Decorative seashell image pinned to the navbar's right corner (desktop only; hidden on
+       mobile below so it doesn't collide with the hamburger button, which takes that spot). */
+    .nav-decor {
+      position: absolute;
+      right: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 60px;
+      width: auto;
+      display: block;
+    }
     .nav-brand {
       font-family: 'Juniper Bay', cursive;
       font-size: 1.45rem;
@@ -200,6 +221,7 @@
 
       .nav-group { display: none; }
       .nav-toggle { display: flex; }
+      .nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
 
       .site-nav.open .nav-group {
         display: flex;
@@ -251,6 +273,8 @@
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
+
+    <img src="assets/seashell.jpg" alt="" class="nav-decor" aria-hidden="true">
   </nav>
 
   <!-- Hero -->

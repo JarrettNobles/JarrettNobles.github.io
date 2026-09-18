@@ -5,8 +5,8 @@
   <meta charset="utf-8" />
   <!-- SEO: description shown in search engine results and social link previews -->
   <meta name="description" content="Contact Coral Olson Photography — inquire about sessions, availability, and bookings." />
-  <!-- Sets the color of the browser UI (e.g. mobile browser address bar) to match resume.html/About's theme -->
-  <meta name="theme-color" content="#E4DFD8" />
+  <!-- Sets the color of the browser UI (e.g. mobile browser address bar) to match this page's cream background -->
+  <meta name="theme-color" content="#FFF4F1" />
   <!-- Tells the browser this page only supports light mode (prevents forced dark-mode form controls, etc.) -->
   <meta name="color-scheme" content="light" />
   <!-- Makes the page render at device width and scale 1 on phones/tablets instead of a zoomed-out desktop layout -->
@@ -43,22 +43,19 @@
     /* Base page styling: applies to the whole <body> unless overridden by a more specific rule */
     body {
       font-family: 'Black Mango', cursive; /* custom display font, falls back to a generic cursive font if it fails to load */
-      background: #ffc24b; /* mustard/orange page background, matches resume.html/About */
+      background: #FFF4F1; /* cream page background, matches the form panel and the Instagram/footer band below */
       color: #1c1c1e; /* default near-black text color */
     }
 
-    /* ── SPLIT NAV (matches resume.html/About) ── */
+    /* ── SPLIT NAV (matches projects.html/family.html/etc.) ── */
     /* The top navigation bar: a flex row with links on the left, the site name/logo in the middle, and links on the right */
     .site-nav {
       display: flex;
       align-items: center;
       justify-content: space-between; /* pushes the three children (.nav-group, .nav-brand, .nav-group) apart */
       padding: 1.4rem 4rem;
-      /* Gradient fade: holds solid coral through most of the bar (0%–70%) so the vibrant color
-         stays dominant, then blends down into the body's background color (#ffc24b) only in the
-         last stretch, so the nav melts into the page instead of cutting off with a hard edge.
-         Matches resume.html/About exactly. */
-      background: linear-gradient(to bottom, #F47068 0%, #FA9C5A 70%, #ffc24b 100%);
+      background: #fff; /* plain white nav, matches projects.html/family.html/etc. */
+      border-bottom: 1px solid rgba(0,0,0,0.07);
       position: relative; /* lets the mobile dropdown menu below be positioned relative to this bar */
     }
     /* Each side of the nav (Home/About/Portfolio on the left, Investment/Contact on the right) */
@@ -70,15 +67,26 @@
     /* Individual nav link styling (Home, About, Portfolio, Investment, Contact) */
     .nav-link {
       text-decoration: none; /* removes the default underline on <a> tags */
-      color: #1c1c1e; /* near-black text */
+      color: #1697a6; /* teal, matches index.html's navbar text color */
       font-size: 1.45rem;
       font-weight: 400;
       letter-spacing: 2.5px; /* extra spacing between letters for a stylized uppercase look */
       text-transform: uppercase;
-      transition: opacity 0.2s; /* smooths the fade used by the :hover rule below */
+      transition: color 0.2s;
     }
-    /* Fades the link on mouse hover */
-    .nav-link:hover { opacity: 0.5; }
+    /* Coral on hover, matches index.html's navbar hover + the @coralolsonphotography handle color */
+    .nav-link:hover { color: #F47068; }
+    /* Decorative seashell image pinned to the navbar's right corner (desktop only; hidden on
+       mobile below so it doesn't collide with the hamburger button, which takes that spot). */
+    .nav-decor {
+      position: absolute;
+      right: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 60px;
+      width: auto;
+      display: block;
+    }
     /* The center logo/site-name link ("Coral Olson Photography") that goes to the homepage */
     .nav-brand {
       font-family: 'Black Mango', cursive; /* uses the custom display font for the brand name */
@@ -120,6 +128,7 @@
     @media (max-width: 768px) {
       .nav-group { display: none; } /* hide both left/right link groups by default on mobile */
       .nav-toggle { display: flex; } /* show the hamburger button */
+      .nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
       /* When JS adds the "open" class to #siteNav (see toggle script below), reveal the nav links
          as a full-width dropdown panel positioned right under the nav bar */
       .site-nav.open .nav-group {
@@ -184,14 +193,17 @@
       display: flex;
       justify-content: center;
       padding: 0 1.5rem 5rem;
-      background: #ffc24b; /* matches the mustard body background */
+      background: #FFF4F1; /* matches the cream body background */
     }
-    /* The card containing the actual form fields, in resume.html/About's off-white/pink tone */
+    /* The card containing the actual form fields, in resume.html/About's off-white/pink tone.
+       Since the page background is the same cream color, a soft shadow keeps the card visually
+       distinct instead of blending flush into the page. */
     .contact-panel {
       background: #FFF4F1;
       width: 100%;
       max-width: 680px;
       padding: 4rem 4rem 3.5rem;
+      box-shadow: 0 20px 50px rgba(28,28,30,0.08);
     }
 
     /* ── FORM FIELDS ── */
@@ -371,6 +383,8 @@
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
       <span></span><span></span><span></span> <!-- the 3 bars of the hamburger icon -->
     </button>
+
+    <img src="assets/seashell.jpg" alt="" class="nav-decor" aria-hidden="true">
   </nav>
 
   <!-- Intro heading: replaces the old full-bleed photo hero. Plain text on the white page
