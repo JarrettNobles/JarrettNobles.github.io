@@ -90,6 +90,12 @@
       text-decoration: none;
       white-space: nowrap; /* prevents "Coral Olson Photography" from wrapping onto two lines */
     }
+    /* The logo image inside .nav-brand (replaces the text wordmark) */
+    .nav-brand img {
+      height: 72px;
+      width: auto;
+      display: block;
+    }
     /* The hamburger menu button, hidden by default and only shown on small screens (see media query below) */
     .nav-toggle {
       display: none; /* hidden on desktop; flipped to display:flex at <=768px */
@@ -217,6 +223,14 @@
       color: #888;
       letter-spacing: 1px;
     }
+    /* Small helper note under a field (e.g. the "prefer text over email" line under Phone) */
+    .contact-panel .field-hint {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      color: #888;
+    }
     /* The "Session Type" <select> starts gray (looks like a placeholder) until a real option is chosen */
     .contact-panel select {
       color: #888;
@@ -341,7 +355,9 @@
     </div>
 
     <!-- Center brand/logo link, goes back to the homepage -->
-    <a class="nav-brand" href="/">Coral Olson Photography</a>
+    <a class="nav-brand" href="/">
+      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography">
+    </a>
 
     <!-- Right-hand nav links -->
     <div class="nav-group">
@@ -362,7 +378,7 @@
   <section class="contact-intro">
     <p class="hero-eyebrow">Let's Begin Your Story Together</p>
     <h1>Contact Me</h1>
-    <p>I can't wait to hear your story and capture your special day. Leave me a message in the form below, and let's create something amazing together.</p>
+    <p>I can't wait to hear your story and capture your special day. Just fill out the form below and I'll be in touch within 48 hours.</p>
   </section>
 
   <!-- Form Panel -->
@@ -377,35 +393,64 @@
         <input type="hidden" name="_autoresponse" value="Thank you for contacting Coral Olson Photography! We'll be in touch shortly.">
 
         <div class="field">
-          <input type="text" id="name" name="name" placeholder="Name *" required autocomplete="name">
+          <input type="text" id="first_name" name="first_name" placeholder="First Name *" required autocomplete="given-name">
         </div>
 
         <div class="field">
-          <input type="email" id="contact_email" name="contact_email" placeholder="Email *" autocomplete="email" inputmode="email">
+          <input type="text" id="last_name" name="last_name" placeholder="Last Name *" required autocomplete="family-name">
         </div>
 
         <div class="field">
-          <input type="tel" id="contact_phone" name="contact_phone" placeholder="Phone" autocomplete="tel" inputmode="tel">
+          <input type="email" id="contact_email" name="contact_email" placeholder="Email *" required autocomplete="email" inputmode="email">
+        </div>
+
+        <div class="field">
+          <input type="tel" id="contact_phone" name="contact_phone" placeholder="Phone *" required autocomplete="tel" inputmode="tel">
+          <p class="field-hint">If you prefer text over email, just let me know in the notes section!</p>
         </div>
 
         <div class="field">
           <!-- required, but starts on a disabled placeholder option so the user must actively choose one -->
           <select id="session_type" name="session_type" required>
-            <option value="" disabled selected>Session Type *</option>
-            <option value="Portrait-30">Portrait — 30 min</option>
-            <option value="Portrait-45">Portrait — 45 min</option>
-            <option value="Portrait-60">Portrait — 60 min</option>
-            <option value="Graduate-30">Graduate — 30 min</option>
-            <option value="Graduate-45">Graduate — 45 min</option>
-            <option value="Graduate-60">Graduate — 60 min</option>
-            <option value="Mini-15">Mini — 15 min</option>
-            <option value="Seperate Editing Services">Separate Editing Services</option>
-            <option value="Other">Other</option>
+            <option value="" disabled selected>What type of session are you looking for? *</option>
+            <option value="Wedding/Elopement">Wedding/Elopement</option>
+            <option value="Couples">Couples</option>
+            <option value="Maternity">Maternity</option>
+            <option value="Family">Family</option>
+            <option value="Destination or Travel Wedding">Destination or Travel Wedding</option>
+            <option value="Content Creation">Content Creation</option>
           </select>
         </div>
 
         <div class="field">
-          <input type="date" id="session_date" name="session_date" required autocomplete="off">
+          <input type="text" id="session_date" name="session_date" placeholder="What date(s) are you interested in? *" required autocomplete="off">
+        </div>
+
+        <div class="field">
+          <select id="time_of_day" name="time_of_day">
+            <option value="" disabled selected>Time of day?</option>
+            <option value="Sunrise">Sunrise</option>
+            <option value="Sunset">Sunset</option>
+            <option value="Wedding coverage">Wedding coverage</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <textarea id="notes" name="notes" placeholder="Tell me more! I love getting to know my clients before we meet up so that I can best serve you during our session time."></textarea>
+        </div>
+
+        <div class="field">
+          <input type="text" id="instagram_handle" name="instagram_handle" placeholder="Instagram handle (if applicable)" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <select id="referral_source" name="referral_source" required>
+            <option value="" disabled selected>How did you hear about me? *</option>
+            <option value="Google">Google</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Facebook">Facebook</option>
+            <option value="From a friend">From a friend</option>
+          </select>
         </div>
 
         <button class="btn-send" type="submit">Send Message</button>
@@ -458,35 +503,29 @@
   </script>
 
   <!-- Select styling helper -->
-  <!-- Switches the "Session Type" <select> from placeholder-gray to normal text color once the
-       user has chosen a real option (see .contact-panel select.filled in the CSS above) -->
+  <!-- Switches each placeholder-style <select> (Session Type, Time of Day, How did you hear about
+       me) from placeholder-gray to normal text color once the user has chosen a real option
+       (see .contact-panel select.filled in the CSS above) -->
   <script>
     (function () {
       'use strict';
-      var sel = document.getElementById('session_type');
-      sel.addEventListener('change', function () {
-        sel.classList.toggle('filled', sel.value !== '');
+      var selects = document.querySelectorAll('#contactForm select');
+      selects.forEach(function (sel) {
+        sel.addEventListener('change', function () {
+          sel.classList.toggle('filled', sel.value !== '');
+        });
       });
     })();
   </script>
 
-  <!-- Form submission (Formspree + validation — kept from original) -->
-  <!-- Intercepts the native form submit so we can: (1) require at least one contact method,
-       (2) submit via fetch() instead of a full page navigation, and (3) show the inline
-       thank-you message on success instead of redirecting to Formspree's own confirmation page. -->
+  <!-- Form submission (Formspree — kept from original) -->
+  <!-- Intercepts the native form submit so we can submit via fetch() instead of a full page
+       navigation, and show the inline thank-you message on success instead of redirecting to
+       Formspree's own confirmation page. Required-field validation is handled natively via the
+       "required" attributes on the fields above. -->
   <script>
     document.getElementById('contactForm').addEventListener('submit', function (event) {
-      var form  = event.target;
-      var email = form.contact_email.value.trim();
-      var phone = form.contact_phone.value.trim();
-
-      // Neither field is individually required in HTML (so the user can fill in just one),
-      // but at least one method of contact must be provided
-      if (!email && !phone) {
-        alert('Please provide at least one preferred method of contact: email or phone.');
-        event.preventDefault();
-        return;
-      }
+      var form = event.target;
 
       event.preventDefault(); // always stop the native navigation; we submit via fetch() below
 
@@ -497,7 +536,9 @@
       }).then(function (response) {
         if (response.ok) {
           form.reset(); // clears all fields back to their defaults
-          document.getElementById('session_type').classList.remove('filled'); // reset select back to placeholder-gray
+          form.querySelectorAll('select').forEach(function (sel) {
+            sel.classList.remove('filled'); // reset selects back to placeholder-gray
+          });
           document.getElementById('thankYouMessage').style.display = 'block'; // reveal the inline success message
         } else {
           alert('Oops! There was a problem submitting your form.');

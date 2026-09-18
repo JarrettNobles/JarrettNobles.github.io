@@ -154,6 +154,12 @@
       white-space: nowrap;
     }
     .cp-nav-brand:hover { color: white; }
+    /* The logo image inside .cp-nav-brand (replaces the text wordmark) */
+    .cp-nav-brand img {
+      height: 80px;
+      width: auto;
+      display: block;
+    }
 
     .cp-nav-toggle {
       display: none;
@@ -591,6 +597,7 @@
     @media (max-width: 991px) {
       .cp-nav-links { display: none; }
       .cp-nav-brand { font-size: 0.72rem; letter-spacing: 3px; }
+      .cp-nav-brand img { height: 50px; }
       .cp-nav-toggle { display: block; }
 
       .cp-philosophy-inner { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -662,7 +669,9 @@
         <li><a href="projects.html">Portfolio</a></li>
       </ul>
 
-      <a class="cp-nav-brand" href="/">Coral Olson Photography</a>
+      <a class="cp-nav-brand" href="/">
+        <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography">
+      </a>
 
       <ul class="cp-nav-links" aria-label="Right navigation">
         <li><a href="PricingGuide.html">Investment</a></li>
