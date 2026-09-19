@@ -295,15 +295,14 @@
       .about-panel-top { margin-top: 5rem; }
     }
 
-    /* Diagonal cream/beige stripe background (first panel) */
+    /* Watercolor sea life pattern background (first panel, "Behind the Lens"), replaces the old
+       diagonal stripes. The text sits on a translucent white card so it stays readable over the art. */
     .stripes {
-      background: repeating-linear-gradient(
-        100deg,               /* angle: slight tilt off-vertical */
-        #f4efe6 0px,           /* cream */
-        #f4efe6 60px,
-        #e8ddce 60px,          /* slightly darker beige */
-        #e8ddce 120px
-      );
+      background: #cfe8ea url("assets/—Pngtree—watercolor sea life pattern with_18635358.jpg") center / cover no-repeat;
+    }
+    .stripes .about-panel-inner {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 2.5rem 2rem;
     }
 
     /* Tiled soft sine-wave background (second panel) */
