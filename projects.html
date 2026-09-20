@@ -1,140 +1,207 @@
 <!DOCTYPE html>
+<!-- lang="en" tells browsers, translation tools and screen readers that the page content is English -->
 <html lang="en">
 <head>
+  <!-- Character encoding: UTF-8 so special characters (em dashes, ©, &, etc.) display correctly -->
   <meta charset="utf-8" />
+  <!-- SEO: the short summary search engines (Google, etc.) show under the page title in results,
+       and that social platforms use for link previews -->
   <meta name="description" content="Portfolio — Coral Olson Photography. Natural-light portraits, weddings, and engagements." />
+  <!-- Color of the browser's own UI on mobile (address bar / tab strip); white to match the page background -->
   <meta name="theme-color" content="#fff" />
+  <!-- Declares that this page only supports a light color scheme, which stops browsers from
+       force-darkening form controls and default colors when the user's device is in dark mode -->
   <meta name="color-scheme" content="light" />
+  <!-- Makes the page render at the device's real width (scale 1) on phones/tablets instead of a
+       zoomed-out desktop layout; without this none of the @media queries below would behave properly -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Text shown in the browser tab and as the clickable headline in search results -->
   <title>Portfolio | Coral Olson Photography</title>
+  <!-- Tiny icon shown in the browser tab, bookmarks and history -->
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Preconnect hints: open the network connection to Google Fonts' two domains early, so the
+       font stylesheet on the next line downloads faster. (fonts.gstatic.com serves the actual
+       font files, which is why it needs the crossorigin attribute.) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Google Fonts: Cormorant Garamond and Montserrat. NOTE: nothing on this page currently sets
+       font-family to either of them (everything uses Black Mango), so this request is only kept for
+       consistency with the other pages and could be removed to save a network request. -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet" />
+  <!-- Bootstrap Icons icon font. Used below for the Instagram glyph in the footer (<i class="bi bi-instagram">) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
 
-  <!-- Preload the site font so the navbar renders in Black Mango immediately instead of flashing the fallback font -->
+  <!-- Preload the site font so the navbar renders in Black Mango immediately instead of flashing the fallback font.
+       Normally a browser only discovers a font after it has parsed the CSS and found text that uses it; preload
+       tells it to start downloading right away, in parallel. "crossorigin" is REQUIRED for font preloads (fonts
+       are always fetched in CORS mode), and without it the browser would download the file twice. The spaces in
+       the filename are written as %20 because this is a URL. -->
   <link rel="preload" href="fonts/Black%20Mango%20Regular.ttf" as="font" type="font/ttf" crossorigin />
 
+  <!-- All CSS for this page lives in this one <style> block -->
   <style>
-   
-    /* Site font, matches index.html/contact.html/resume.html */
+
+    /* ============================================================
+       FONT
+       ============================================================ */
+    /* Registers the local font file "fonts/Black Mango Regular.ttf" under the family name 'Black Mango'
+       so any rule below can use it via font-family: 'Black Mango'. It's the site-wide font (same on
+       index.html / contact.html / resume.html). */
     @font-face {
   font-family: 'Black Mango';
   src: url('fonts/Black Mango Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
+  /* swap = show text immediately in a fallback font, then swap to Black Mango once it has loaded
+     (avoids invisible text; the preload above keeps that swap from being noticeable) */
   font-display: swap;
 }
 
+    /* ============================================================
+       GLOBAL RESET + BASE
+       ============================================================ */
+    /* Removes every browser default margin/padding, and makes width/height include padding + border
+       (border-box) so sizing math below is predictable. IMPORTANT: because margins/paddings are zeroed
+       for ALL elements, anything that needs spacing (headings, <hr>, paragraphs) has to have it set
+       explicitly in the rules below. */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    /* Base styling inherited by all text on the page unless a rule below overrides it */
     body {
-      font-family: 'Black Mango', cursive;
-      background-color: #fff;
-      color: #1c1c1e;
+      font-family: 'Black Mango', cursive; /* 'cursive' is the fallback if the font file fails to load */
+      background-color: #fff;              /* white page background, matches index.html */
+      color: #1c1c1e;                      /* default near-black text color */
     }
 
-    /* ── NAV ── */
+    /* ============================================================
+       NAVIGATION BAR (top of page)
+       ============================================================ */
+    /* The bar itself: a flex row holding the link group (and, on mobile only, the hamburger button) */
     .site-nav {
       display: flex;
-      align-items: center;
+      align-items: center;     /* vertically centers the links inside the bar */
       justify-content: center; /* single unified link list, centered now that the logo has moved out of the navbar (matches index.html) */
-      padding: 1.4rem 4rem;
+      padding: 1.4rem 4rem;    /* top/bottom 1.4rem, left/right 4rem (reduced on smaller screens below) */
       background: #fff;
       border-bottom: 4px solid #FFB3AE; /* pink divider line, matches resume.html/About's panel divider */
-      position: relative;
+      position: relative;      /* makes this the positioning anchor for the seashell image and the mobile dropdown menu */
     }
+    /* Wrapper around the five links: lays them out in a row with even spacing */
     .nav-group {
       display: flex;
-      gap: 2.25rem;
+      gap: 2.25rem;            /* space between each nav link */
       align-items: center;
     }
+    /* Each nav link (Home, About, Portfolio, Investment, Contact) */
     .nav-link {
-      text-decoration: none;
-      color: #1697a6; /* teal, matches index.html's navbar text color */
+      text-decoration: none;   /* removes the default underline on links */
+      color: #1697a6;          /* teal, matches index.html's navbar text color */
       font-family: 'Black Mango', cursive;
       font-size: 1.45rem;
       font-weight: 400;
-      letter-spacing: 2.5px;
+      letter-spacing: 2.5px;   /* extra spacing between letters for the stylized look */
       text-transform: uppercase;
-      transition: color 0.2s;
+      transition: color 0.2s;  /* smooths the color change on hover instead of snapping */
     }
     /* Coral on hover, matches index.html's navbar hover + the @coralolsonphotography handle color */
     .nav-link:hover { color: #F47068; }
     /* Decorative seashell image pinned to the navbar's right corner (desktop only; hidden on
        mobile below so it doesn't collide with the hamburger button, which takes that spot). */
     .nav-decor {
-      position: absolute;
-      right: 1.25rem;
-      top: 50%;
-      transform: translateY(-50%);
+      position: absolute;          /* taken out of the flex flow so it doesn't push the links off-center */
+      right: 1.25rem;              /* distance from the bar's right edge */
+      top: 50%;                    /* start at the vertical middle of the bar... */
+      transform: translateY(-50%); /* ...then shift up by half its own height, which centers it exactly */
       height: 60px;
-      width: auto;
-      display: block;
+      width: auto;                 /* keeps the image's original proportions */
+      display: block;              /* removes the small gap browsers leave under inline images */
     }
-    /* ── LOGO (moved out of the navbar; its own block below it, matches index.html) ── */
+
+    /* ============================================================
+       LOGO (sits BELOW the navbar, not inside it; matches index.html)
+       ============================================================ */
+    /* Wrapper that centers the logo and gives it breathing room above and below */
     .logo-block {
       text-align: center;
-      padding: 2.5rem 1.5rem 2rem;
+      padding: 2.5rem 1.5rem 2rem; /* top / left+right / bottom */
     }
+    /* The logo image; only the height is set so the width scales automatically to keep its proportions.
+       The height is reduced on smaller screens in the @media queries near the bottom. */
     .logo-block img {
       height: 180px;
       width: auto;
       display: inline-block;
     }
 
+    /* ============================================================
+       HAMBURGER BUTTON (mobile menu toggle)
+       ============================================================ */
+    /* Hidden on desktop; the @media (max-width: 768px) block below switches it to display: flex.
+       It has no text, it's built from three stacked <span> bars. */
     .nav-toggle {
       display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      flex-direction: column;
-      gap: 5px;
-      padding: 4px;
+      background: none;        /* removes the default gray button background */
+      border: none;            /* removes the default button border */
+      cursor: pointer;         /* hand cursor so it reads as clickable */
+      flex-direction: column;  /* stacks the three bars vertically */
+      gap: 5px;                /* space between the bars */
+      padding: 4px;            /* a little extra click/tap area around the icon */
     }
+    /* Each of the three horizontal bars that form the hamburger icon */
     .nav-toggle span {
       display: block;
       width: 22px;
       height: 1.5px;
       background: #1c1c1e;
-      transition: transform 0.25s, opacity 0.25s;
+      transition: transform 0.25s, opacity 0.25s; /* reserved in case the icon is ever animated into an X */
     }
 
-    /* ── HERO ── */
+    /* ============================================================
+       PAGE HERO (the "My Portfolio" intro box)
+       ============================================================ */
+    /* Light gray-beige box below the logo. The 5% left/right margin insets it from the screen edges
+       (removed on mobile below so it goes edge to edge). */
     .page-hero {
       background-color: #f2f1ec;
       text-align: center;
       padding: 5rem 2rem 4.5rem;
       margin: 0 5%;
     }
+    /* "My Portfolio" heading */
     .page-hero h1 {
       font-family: 'Black Mango', cursive;
       font-weight: 300;
       font-size: 2.2rem;
-      letter-spacing: 10px;
+      letter-spacing: 10px;      /* wide tracking for the headline look */
       text-transform: uppercase;
       color: #1c1c1e;
-      margin-bottom: 1rem;
+      margin-bottom: 1rem;       /* margins were reset to 0 globally, so spacing under the heading is set here */
     }
+    /* Small subtitle line ("Portraits & Engagements"): a <p> with the extra class "hero-sub" */
     .page-hero .hero-sub {
       font-size: 0.85rem;
       font-weight: 400;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: #7a8a7a;
+      color: #7a8a7a;            /* muted sage green */
       margin-bottom: 1.75rem;
     }
+    /* Descriptive paragraph. This selector also matches the subtitle above (it's a <p> too), but the
+       .hero-sub rule is more specific, so it wins for the properties they both set. */
     .page-hero p {
       font-size: 1rem;
       font-weight: 300;
-      line-height: 1.9;
+      line-height: 1.9;          /* generous line spacing for readability */
       color: #555;
-      max-width: 520px;
-      margin: 0 auto;
+      max-width: 520px;          /* keeps the line length comfortable to read */
+      margin: 0 auto;            /* auto left/right margins center the narrow paragraph inside the box */
     }
 
-    /* ── 2-COLUMN PORTFOLIO GRID ── */
+    /* ============================================================
+       2-COLUMN PORTFOLIO GRID (the three gallery tiles)
+       ============================================================ */
+    /* CSS Grid with two equal columns. gap is the 8px space between tiles; the 5% side padding
+       lines the grid up with the .page-hero box above it. */
     .portfolio-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -142,72 +209,90 @@
       padding: 8px 5% 0;
     }
 
+    /* One clickable tile (an <a> containing a photo and a text label) */
     .portfolio-item {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 3 / 4;
-      display: block;
+      position: relative;    /* anchors the absolutely-positioned text label inside it */
+      overflow: hidden;      /* clips the photo when it zooms on hover so it can't spill outside the tile */
+      aspect-ratio: 3 / 4;   /* fixes every tile to a portrait 3:4 shape regardless of the photo's own size */
+      display: block;        /* lets the <a> take a width/height like a box */
       text-decoration: none;
     }
 
+    /* The photo inside a tile */
     .portfolio-item img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: center top;
+      object-fit: cover;              /* fills the whole tile, cropping the photo if its shape differs */
+      object-position: center top;    /* when cropping, keep the TOP of the photo (keeps faces in frame) */
       display: block;
-      transition: transform 0.5s ease;
-      -webkit-user-drag: none;
-      user-select: none;
-      -webkit-touch-callout: none;
+      transition: transform 0.5s ease; /* slow smooth zoom on hover */
+      -webkit-user-drag: none;        /* image-protection: blocks dragging the photo out of the page (Safari/Chrome) */
+      user-select: none;              /* image-protection: prevents selecting the photo */
+      -webkit-touch-callout: none;    /* image-protection: disables the iOS long-press "Save Image" menu */
     }
 
+    /* Slight zoom when the mouse is over a tile */
     .portfolio-item:hover img {
       transform: scale(1.03);
     }
 
+    /* The text label ("Engagements" / "Portraits" / "Family") centered over the photo */
     .portfolio-item-label {
       position: absolute;
-      inset: 0;
+      inset: 0;                       /* shorthand for top/right/bottom/left: 0, so it covers the whole tile */
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: center;            /* centers the text vertically... */
+      justify-content: center;        /* ...and horizontally */
       font-family: 'Black Mango', cursive;
       font-size: 0.7rem;
       font-weight: 300;
       letter-spacing: 5px;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.9);
-      pointer-events: none;
+      color: rgba(255,255,255,0.9);   /* white, slightly see-through, so it reads on the photo */
+      pointer-events: none;           /* clicks pass through the label to the tile link underneath */
     }
 
+    /* Bigger version of the label; all three tiles in the HTML use this "large" class */
     .portfolio-item-label.large {
       font-size: 1.4rem;
       letter-spacing: 8px;
     }
 
-    /* Center a lone third tile in the 2-column grid */
+    /* With three tiles in a 2-column grid, the third tile would sit alone on the left. This rule matches
+       a tile that is BOTH the last child AND an odd-numbered child (i.e. a lone tile on the last row),
+       makes it span the full row, and centers it at just under half width (calc(50% - 4px) = the width
+       of one column, accounting for half of the 8px gap).
+       NOTE: this rule is not reset in the mobile query, so on phones (where the grid is 1 column)
+       this tile keeps that half width. */
     .portfolio-item:last-child:nth-child(odd) {
-      grid-column: 1 / -1;
-      justify-self: center;
+      grid-column: 1 / -1;            /* span from the first to the last grid line = the full row */
+      justify-self: center;           /* center the narrower tile within that full-width row */
       width: calc(50% - 4px);
     }
 
-    /* ── YOU MAY BE INTERESTED ── */
+    /* ============================================================
+       "YOU MAY BE INTERESTED" SECTION (full-width band with shell artwork)
+       ============================================================ */
+    /* (The "cp-" prefix is just a leftover naming convention shared with index.html.) */
     .cp-interested {
+      /* Shorthand: fallback color, then the image, then position / size, then no-repeat.
+         #cfe8ea (light aqua) shows while the image loads. "center / cover" scales the image to fill the
+         whole band, cropping the edges as needed, with the middle of the art kept in view.
+         To swap the artwork, change the filename in url(...). */
       background: #cfe8ea url("assets/shell4.png") center / cover no-repeat;
-      margin: 3.5rem 0 0;
-      border-top: 4px solid #FFB3AE; /* coral divider line, matches the footer line below */
-      padding: 4rem;
+      margin: 3.5rem 0 0;                 /* white gap above the band; 0 sides = runs full width edge to edge */
+      border-top: 4px solid #FFB3AE;      /* coral divider line, matches the footer line below */
+      padding: 4rem;                      /* space between the band's edges and the white card inside */
       text-align: center;
     }
-    /* Translucent white card so the text stays readable over the artwork */
+    /* Translucent white card so the text stays readable over the busy artwork */
     .cp-interested-inner {
-      background: rgba(255, 255, 255, 0.85);
-      max-width: 900px;
-      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.85); /* white at 85% opacity: lower the 0.85 to show more of the art */
+      max-width: 900px;                      /* card never gets wider than this on big screens */
+      margin: 0 auto;                        /* centers the card horizontally inside the band */
       padding: 3rem 4rem;
     }
+    /* "You May Be Interested" heading */
     .cp-interested h2 {
       font-family: 'Black Mango', cursive;
       font-weight: 300;
@@ -217,18 +302,22 @@
       color: #1c1c1e;
       margin-bottom: 1.75rem;
     }
+    /* Thin divider line under the heading. Browsers give <hr> a default 3D-looking border, so it is
+       cleared first and replaced with a single faint 1px line. */
     .cp-interested hr {
       border: none;
-      border-top: 1px solid rgba(0,0,0,0.15);
+      border-top: 1px solid rgba(0,0,0,0.15); /* black at 15% opacity = a soft gray line */
       margin-bottom: 2.25rem;
     }
+    /* Row holding the three links */
     .cp-interested-links {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-around; /* distributes the links evenly across the row */
       align-items: center;
       gap: 1rem;
-      flex-wrap: wrap;
+      flex-wrap: wrap;               /* lets links drop to a new line if the row gets too narrow */
     }
+    /* Each link (Contact Me / Read About Me / Check Investment) */
     .cp-interested-links a {
       font-size: 0.9rem;
       font-weight: 400;
@@ -236,28 +325,37 @@
       text-transform: uppercase;
       text-decoration: none;
       color: #1c1c1e;
-      transition: opacity 0.2s;
+      transition: opacity 0.2s;      /* smooth fade on hover */
     }
+    /* Fades the link to half strength on hover */
     .cp-interested-links a:hover { opacity: 0.5; }
 
-    /* ── FOOTER ── */
+    /* ============================================================
+       FOOTER (Instagram band + copyright strip; identical on every page)
+       ============================================================ */
+    /* The cream band containing the Instagram call-to-action */
     .instagram-footer {
       background-color: #FFF4F1; /* cream, matches index.html/contact.html */
       border-top: 4px solid #FFB3AE; /* coral divider line between the page content and the footer */
       padding: 4rem 2rem;
       text-align: center;
     }
+    /* The link wrapping the icon + heading + handle. inline-block makes the clickable area hug that
+       content rather than stretch across the whole band. */
     .instagram-footer a {
       display: inline-block;
       color: #1697a6; /* teal, matches index.html's Instagram footer */
       text-decoration: none;
     }
+    /* Slight fade when hovering the link */
     .instagram-footer a:hover { opacity: 0.75; }
+    /* The Instagram glyph. display:block puts it on its own line above the heading. */
     .instagram-footer i {
       font-size: 1.4rem;
       display: block;
       margin-bottom: 0.75rem;
     }
+    /* The word "Instagram" */
     .instagram-footer h2 {
       font-family: 'Black Mango', cursive;
       font-weight: 300;
@@ -266,12 +364,14 @@
       text-transform: uppercase;
       margin-bottom: 0.4rem;
     }
+    /* The "@coralolsonphotography" handle */
     .instagram-footer p {
       font-size: 1rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: #F47068; /* coral, matches the @coralolsonphotography handle on index.html */
     }
+    /* The teal strip at the very bottom holding the copyright line */
     .footer-bottom {
       background: #1697a6;
       color: #fff;
@@ -280,49 +380,65 @@
       letter-spacing: 1px;
     }
 
-    /* ── RESPONSIVE ── */
+    /* ============================================================
+       RESPONSIVE RULES
+       max-width queries apply at that screen width AND SMALLER, and are ordered largest to smallest.
+       Because they come last in the file, they override the matching rules above.
+       ============================================================ */
+
+    /* Tablet and below (up to 900px wide) */
     @media (max-width: 900px) {
-      .site-nav { padding: 1.1rem 2rem; }
-      .logo-block img { height: 130px; }
+      .site-nav { padding: 1.1rem 2rem; }   /* tighter navbar padding */
+      .logo-block img { height: 130px; }    /* smaller logo (180px on desktop) */
     }
 
+    /* Phones and small tablets (up to 768px wide) */
     @media (max-width: 768px) {
-      .site-nav { justify-content: flex-end; } /* the hamburger is now the only visible nav child, so push it to the right edge */
-      .nav-group { display: none; }
-      .nav-toggle { display: flex; }
-      .nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
-      .logo-block img { height: 100px; }
+      /* The link group is hidden below, so the hamburger is the only visible navbar child; push it to the right edge */
+      .site-nav { justify-content: flex-end; }
+      .nav-group { display: none; }         /* hide the row of links */
+      .nav-toggle { display: flex; }        /* show the hamburger button */
+      .nav-decor { display: none; }         /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
+      .logo-block img { height: 100px; }    /* even smaller logo */
 
+      /* When the hamburger is tapped, the script at the bottom adds the class "open" to the navbar.
+         That turns the hidden link group into a full-width dropdown panel under the bar. */
       .site-nav.open .nav-group {
         display: flex;
-        flex-direction: column;
+        flex-direction: column;   /* stack the links vertically */
         gap: 1.25rem;
-        position: absolute;
-        top: 100%;
+        position: absolute;       /* float over the page content instead of pushing it down */
+        top: 100%;                /* start right at the bottom edge of the navbar */
         left: 0;
-        right: 0;
+        right: 0;                 /* left:0 + right:0 = stretch the full screen width */
         background: #fff;
         padding: 1.5rem 2rem;
-        border-bottom: 1px solid rgba(0,0,0,0.07);
-        z-index: 100;
+        border-bottom: 1px solid rgba(0,0,0,0.07); /* faint line under the open menu */
+        z-index: 100;             /* stack above the page content below it */
       }
 
-      .page-hero { margin: 0; }
+      .page-hero { margin: 0; }   /* hero box goes edge to edge (removes the 5% side margins) */
+      /* Grid collapses to a single column of tiles with no side padding */
       .portfolio-grid { grid-template-columns: 1fr; padding: 8px 0 0; gap: 8px; }
-      .portfolio-item { aspect-ratio: 4 / 3; }
-      .cp-interested { margin: 2rem 0 0; padding: 2rem 1rem; }
+      .portfolio-item { aspect-ratio: 4 / 3; }  /* tiles become landscape 4:3 so they aren't huge on a phone */
+      .cp-interested { margin: 2rem 0 0; padding: 2rem 1rem; }  /* smaller gap above, less padding around the card */
       .cp-interested-inner { padding: 2rem 1.25rem; }
     }
 
+    /* Small phones (up to 480px wide) */
     @media (max-width: 480px) {
-      .page-hero h1 { font-size: 1.6rem; letter-spacing: 6px; }
-      .cp-interested-links { flex-direction: column; gap: 1.5rem; }
+      .page-hero h1 { font-size: 1.6rem; letter-spacing: 6px; }      /* smaller heading so it fits without wrapping badly */
+      .cp-interested-links { flex-direction: column; gap: 1.5rem; }  /* stack the three links vertically */
     }
 
+    /* Touch devices (phones/tablets) have no real "hover", so turn the zoom effect off there;
+       otherwise a tap could leave the photo stuck in the zoomed state. */
     @media (hover: none) {
       .portfolio-item:hover img { transform: none; }
     }
 
+    /* Accessibility: if the visitor's device is set to "reduce motion", disable every transition and
+       animation on the page (the hover zoom and fades). !important is needed to beat the normal rules. */
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; animation: none !important; }
     }
@@ -331,53 +447,86 @@
 
 <body>
 
-  <!-- Navigation -->
+  <!-- ==========================================================
+       NAVIGATION BAR
+       Left to right: the five page links, then (mobile only) the hamburger button. The seashell image is
+       pinned to the right corner by CSS.
+       id="siteNav" is what the script at the bottom of the page grabs to open/close the mobile menu.
+       role + aria-label tell screen readers this is the main site navigation.
+       ========================================================== -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="Primary">
+    <!-- The five links, grouped in one wrapper so CSS can lay them out as a row (desktop) or a dropdown (mobile) -->
     <div class="nav-group">
       <a class="nav-link" href="/">Home</a>
       <a class="nav-link" href="resume.html">About</a>
+      <!-- aria-current="page" tells screen readers this link is the page the visitor is currently on -->
       <a class="nav-link" href="projects.html" aria-current="page">Portfolio</a>
       <a class="nav-link" href="PricingGuide.html">Investment</a>
       <a class="nav-link" href="contact.html">Contact</a>
     </div>
 
+    <!-- Hamburger menu button: hidden on desktop by CSS, visible at 768px and below.
+         aria-label gives it an accessible name (it has no visible text), and aria-expanded tells screen readers
+         whether the menu is open; the script at the bottom of the page keeps that value up to date. -->
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <!-- the three bars that make up the hamburger icon -->
       <span></span><span></span><span></span>
     </button>
 
+    <!-- Decorative seashell in the navbar's right corner. alt="" and aria-hidden="true" mark it as purely
+         decorative so screen readers skip it. -->
     <img src="assets/seashell.jpg" alt="" class="nav-decor" aria-hidden="true">
   </nav>
 
-  <!-- Logo (moved out of the navbar) -->
+  <!-- ==========================================================
+       LOGO
+       Sits below the navbar (moved out of it) and links back to the homepage.
+       The link's aria-label describes where it goes; the image's alt text is its accessible description.
+       ========================================================== -->
   <div class="logo-block">
     <a href="/" aria-label="Coral Olson Photography — Home">
       <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography">
     </a>
   </div>
 
-  <!-- Hero -->
+  <!-- ==========================================================
+       HERO / PAGE INTRO
+       aria-labelledby points to the id of the <h1> below, so screen readers announce this section as "My Portfolio"
+       ========================================================== -->
   <section class="page-hero" aria-labelledby="portfolio-heading">
     <h1 id="portfolio-heading">My Portfolio</h1>
-    <p class="hero-sub">Portraits &amp; Engagements</p>
+    <p class="hero-sub">Portraits &amp; Engagements</p> <!-- &amp; is how an "&" is written in HTML -->
     <p>Every photo tells a story worth remembering. Browse through my work and see the moments that matter most.</p>
   </section>
 
-  <!-- 2-Column Portfolio Grid -->
+  <!-- ==========================================================
+       2-COLUMN PORTFOLIO GRID
+       Three tiles, each linking to a separate gallery page. Each tile is one <a> containing a photo
+       plus a text label laid over it. <main> marks this as the primary content of the page.
+       ========================================================== -->
   <main aria-label="Portfolio galleries">
     <div class="portfolio-grid">
 
+      <!-- Tile 1: Engagements gallery.
+           loading="eager" + fetchpriority="high" make this first (above-the-fold) image load immediately at top
+           priority. decoding="async" lets the browser decode the image off the main thread so scrolling stays smooth.
+           draggable="false" is part of the image protection (also enforced by the script at the bottom). -->
       <a class="portfolio-item" href="vincentengagment.html" aria-label="Open Engagements gallery">
         <img src="assets/CoralOlsonPORTRAITS-1-6.jpg" alt="Engagements"
              loading="eager" fetchpriority="high" decoding="async" draggable="false">
         <span class="portfolio-item-label large">Engagements</span>
       </a>
 
+      <!-- Tile 2: Portraits gallery.
+           loading="lazy" means the browser only downloads this photo when the visitor scrolls near it,
+           which speeds up the initial page load. -->
       <a class="portfolio-item" href="marinashoot.html" aria-label="Open Portraits gallery">
         <img src="assets/grad11.jpg" alt="Portraits"
              loading="lazy" decoding="async" draggable="false">
         <span class="portfolio-item-label large">Portraits</span>
       </a>
 
+      <!-- Tile 3: Family gallery. As the last (odd) tile, CSS centers it on its own row on desktop. -->
       <a class="portfolio-item" href="family.html" aria-label="Open Family gallery">
         <img src="assets/CosuinFamilyPORTRAITS-19.jpg" alt="Family"
              loading="lazy" decoding="async" draggable="false">
@@ -387,11 +536,15 @@
     </div>
   </main>
 
-  <!-- You May Be Interested -->
+  <!-- ==========================================================
+       YOU MAY BE INTERESTED
+       Full-width band with the shell artwork as its background (set in CSS). The .cp-interested-inner
+       wrapper is the translucent white card that keeps the text readable over the artwork.
+       ========================================================== -->
   <section class="cp-interested" aria-label="More links">
     <div class="cp-interested-inner">
       <h2>You May Be Interested</h2>
-      <hr>
+      <hr> <!-- the thin divider line under the heading -->
       <div class="cp-interested-links">
         <a href="contact.html">Contact Me</a>
         <a href="resume.html">Read About Me</a>
@@ -400,65 +553,100 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- ==========================================================
+       FOOTER
+       Same footer as every other page: an Instagram call-to-action band, then a teal copyright strip.
+       role="contentinfo" identifies it to screen readers as the page footer.
+       ========================================================== -->
   <footer role="contentinfo">
     <section class="instagram-footer">
+      <!-- The whole icon + heading + handle block is ONE link that opens the Instagram profile in a new tab.
+           target="_blank" opens a new tab; rel="noopener" is a security measure so the new tab can't
+           access this page. aria-label gives screen readers a full description of where the link goes. -->
       <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3"
          target="_blank" rel="noopener"
          aria-label="Open Coral Olson Photography on Instagram in a new tab">
+        <!-- Instagram logo from the Bootstrap Icons font; aria-hidden because the link's aria-label already says it -->
         <i class="bi bi-instagram" aria-hidden="true"></i>
         <h2>Instagram</h2>
         <p>@coralolsonphotography</p>
       </a>
     </section>
+    <!-- Bottom-most strip with the copyright line. &copy; is how the © symbol is written in HTML. -->
     <div class="footer-bottom">
       Copyright &copy; Coral Olson 2025
     </div>
   </footer>
 
-  <!-- Mobile nav toggle -->
+  <!-- ==========================================================
+       SCRIPT 1: MOBILE MENU TOGGLE
+       Runs when the hamburger button is clicked: adds/removes the "open" class on the navbar (which the
+       CSS uses to show/hide the dropdown link list) and keeps aria-expanded in sync for screen readers.
+       ========================================================== -->
   <script>
+    // Wrapping everything in an immediately-invoked function keeps these variables private
+    // so they can't clash with any other script on the page.
     (function () {
-      'use strict';
-      var nav = document.getElementById('siteNav');
-      var btn = document.getElementById('navToggle');
-      if (btn && nav) {
+      'use strict'; // strict mode: catches common coding mistakes by turning them into errors
+      var nav = document.getElementById('siteNav');   // the <nav> element
+      var btn = document.getElementById('navToggle'); // the hamburger <button>
+      if (btn && nav) { // safety check: only wire it up if both elements actually exist
         btn.addEventListener('click', function () {
+          // classList.toggle adds "open" if it's missing (menu opens) or removes it if present (menu closes),
+          // and returns true when the class ended up ON
           var open = nav.classList.toggle('open');
+          // tells screen readers whether the menu is currently expanded
           btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
       }
     })();
   </script>
 
-  <!-- Image protection -->
+  <!-- ==========================================================
+       SCRIPT 2: IMAGE PROTECTION
+       Best-effort deterrents that make it harder to casually copy text or save/drag the photographs.
+       These are speed bumps, not real security: the image files can still be reached through the browser's
+       developer tools, view-source, or a screenshot.
+       ========================================================== -->
   <script>
     (function () {
       'use strict';
+      // Wait until the HTML has finished loading so every <img> exists before we attach listeners to it
       document.addEventListener('DOMContentLoaded', function () {
+        // Block cut / copy / paste anywhere on the page (preventDefault cancels the browser's normal action)
         document.body.addEventListener('cut',   function (e) { e.preventDefault(); }, { passive: false });
         document.body.addEventListener('copy',  function (e) { e.preventDefault(); }, { passive: false });
         document.body.addEventListener('paste', function (e) { e.preventDefault(); }, { passive: false });
 
+        // Grab every image currently on the page
         var images = document.querySelectorAll('img');
-        var pressTimer = null;
+        var pressTimer = null; // holds the long-press timer for touch screens (see below)
 
         images.forEach(function (img) {
+          // Right-click "Save image as..." menu: blocked
           img.addEventListener('contextmenu', function (e) { e.preventDefault(); }, { passive: false });
+          // Dragging the image out of the page to the desktop or another tab: blocked
           img.addEventListener('dragstart',   function (e) { e.preventDefault(); }, { passive: false });
+          // Belt and braces: also turn off HTML5 dragging via the attribute
           img.setAttribute('draggable', 'false');
 
+          // Clears a pending long-press timer
           var cancelTimer = function () {
             if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; }
           };
+          // Phones don't reliably fire "contextmenu", so this recreates the protection for touch: if a finger
+          // stays on an image for 450ms it is treated as a long-press (what triggers iOS's "Save Image"
+          // sheet) and suppressed. A quick tap or a scroll cancels the timer, so normal use is unaffected.
           img.addEventListener('touchstart', function (e) {
             pressTimer = window.setTimeout(function () {
-              try { e.preventDefault(); } catch (err) {}
+              try { e.preventDefault(); } catch (err) {} // wrapped in try/catch because some browsers throw here
             }, 450);
           }, { passive: false });
+          // Any of these mean the touch ended, moved (scrolling) or was released, so cancel the pending long-press
           img.addEventListener('touchend',    cancelTimer, { passive: true });
           img.addEventListener('touchmove',   cancelTimer, { passive: true });
           img.addEventListener('pointerup',   cancelTimer, { passive: true });
+          // iOS: blocks pinch-zoom/rotate gestures that start on an image
           img.addEventListener('gesturestart', function (e) { e.preventDefault(); }, { passive: false });
         });
       });
