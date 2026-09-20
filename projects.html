@@ -159,42 +159,44 @@
     /* ============================================================
        PAGE HERO (the "My Portfolio" intro box)
        ============================================================ */
-    /* Light gray-beige box below the logo. The 5% left/right margin insets it from the screen edges
-       (removed on mobile below so it goes edge to edge). */
+    /* Full-width cream band below the logo, matching the footer and card panels. Cream #FFF4F1
+       replaces the old tan #f2f1ec. There are no side margins, so it runs edge to edge, and no
+       coral divider lines on this section. */
     .page-hero {
-      background-color: #f2f1ec;
+      background-color: #FFF4F1;
       text-align: center;
-      padding: 5rem 2rem 4.5rem;
-      margin: 0 5%;
+      padding: 4rem 2rem;
+    }
+    /* Small coral line ABOVE the heading ("Portraits & Engagements"): a <p> with the extra class
+       "hero-sub". Same treatment as the small line above "Contact Me" on contact.html. */
+    .page-hero .hero-sub {
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #F47068;           /* coral, matches the nav hover and the Instagram handle */
+      margin-bottom: 1rem;
     }
     /* "My Portfolio" heading */
     .page-hero h1 {
       font-family: 'Black Mango', cursive;
       font-weight: 300;
-      font-size: 2.2rem;
+      font-size: clamp(2.5rem, 6vw, 4.5rem); /* fluid: never smaller than 2.5rem or larger than 4.5rem, scales with screen width in between (same as contact.html) */
       letter-spacing: 10px;      /* wide tracking for the headline look */
       text-transform: uppercase;
-      color: #1c1c1e;
-      margin-bottom: 1rem;       /* margins were reset to 0 globally, so spacing under the heading is set here */
-    }
-    /* Small subtitle line ("Portraits & Engagements"): a <p> with the extra class "hero-sub" */
-    .page-hero .hero-sub {
-      font-size: 0.85rem;
-      font-weight: 400;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #7a8a7a;            /* muted sage green */
-      margin-bottom: 1.75rem;
+      line-height: 1;            /* tight line height so the big heading doesn't leave extra space */
+      color: #1697a6;            /* teal, matches the navbar and footer */
+      margin-bottom: 1.5rem;     /* margins were reset to 0 globally, so spacing under the heading is set here */
     }
     /* Descriptive paragraph. This selector also matches the subtitle above (it's a <p> too), but the
        .hero-sub rule is more specific, so it wins for the properties they both set. */
     .page-hero p {
-      font-size: 1rem;
+      font-size: 1.2rem;
       font-weight: 300;
-      line-height: 1.9;          /* generous line spacing for readability */
-      color: #555;
-      max-width: 520px;          /* keeps the line length comfortable to read */
-      margin: 0 auto;            /* auto left/right margins center the narrow paragraph inside the box */
+      line-height: 1.85;         /* generous line spacing for readability */
+      color: #3a3a3a;            /* dark gray, same as contact.html and resume.html body text */
+      max-width: 480px;          /* keeps the line length comfortable to read */
+      margin: 0 auto;            /* auto left/right margins center the narrow paragraph inside the band */
     }
 
     /* ============================================================
@@ -417,7 +419,6 @@
         z-index: 100;             /* stack above the page content below it */
       }
 
-      .page-hero { margin: 0; }   /* hero box goes edge to edge (removes the 5% side margins) */
       /* Grid collapses to a single column of tiles with no side padding */
       .portfolio-grid { grid-template-columns: 1fr; padding: 8px 0 0; gap: 8px; }
       .portfolio-item { aspect-ratio: 4 / 3; }  /* tiles become landscape 4:3 so they aren't huge on a phone */
@@ -427,7 +428,7 @@
 
     /* Small phones (up to 480px wide) */
     @media (max-width: 480px) {
-      .page-hero h1 { font-size: 1.6rem; letter-spacing: 6px; }      /* smaller heading so it fits without wrapping badly */
+      .page-hero h1 { font-size: 2rem; letter-spacing: 6px; }        /* slightly smaller heading so it fits comfortably on narrow phones */
       .cp-interested-links { flex-direction: column; gap: 1.5rem; }  /* stack the three links vertically */
     }
 
@@ -494,8 +495,9 @@
        aria-labelledby points to the id of the <h1> below, so screen readers announce this section as "My Portfolio"
        ========================================================== -->
   <section class="page-hero" aria-labelledby="portfolio-heading">
+    <!-- Small coral line sits ABOVE the heading (matches contact.html); &amp; is how an "&" is written in HTML -->
+    <p class="hero-sub">Portraits &amp; Engagements</p>
     <h1 id="portfolio-heading">My Portfolio</h1>
-    <p class="hero-sub">Portraits &amp; Engagements</p> <!-- &amp; is how an "&" is written in HTML -->
     <p>Every photo tells a story worth remembering. Browse through my work and see the moments that matter most.</p>
   </section>
 

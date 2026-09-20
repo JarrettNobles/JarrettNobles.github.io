@@ -102,17 +102,18 @@
 
     /* ── HERO ── */
     .page-hero {
-      background-color: #f2f1ec;
+      background-color: #FFF4F1;         /* cream, matches the footer and card panels (replaces the old tan #f2f1ec) */
       text-align: center;
-      padding: 5rem 2rem 4.5rem;
+      padding: 4rem 2rem;
     }
     .page-hero h1 {
       font-family: 'Black Mango', cursive;
       font-weight: 300;
-      font-size: 2.2rem;
-      letter-spacing: 12px;
+      font-size: clamp(2.5rem, 6vw, 4.5rem); /* scales fluidly between mobile and desktop, same as contact.html's heading */
+      letter-spacing: 10px;
       text-transform: uppercase;
-      color: #1c1c1e;
+      line-height: 1;
+      color: #1697a6;                    /* teal, matches the navbar and footer */
     }
 
     /* ── MASONRY GALLERY ── */
@@ -233,7 +234,7 @@
     @media (max-width: 480px) {
       .masonry-grid { flex-direction: column; }
       .masonry-col:last-child { display: flex; }
-      .page-hero h1 { font-size: 1.6rem; letter-spacing: 8px; }
+      .page-hero h1 { font-size: 2rem; letter-spacing: 6px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
