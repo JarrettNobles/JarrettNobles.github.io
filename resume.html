@@ -32,6 +32,9 @@
        in the (currently commented-out) <img> tag below. Improves Largest Contentful Paint if that section is enabled. -->
   <link rel="preload" as="image" href="assets/AboutMe2.png" imagesizes="(max-width: 820px) 100vw, 800px" />
 
+  <!-- Preload the site font so the navbar renders in Black Mango immediately instead of flashing the fallback font -->
+  <link rel="preload" href="fonts/Black%20Mango%20Regular.ttf" as="font" type="font/ttf" crossorigin />
+
   <!-- All page-specific CSS for resume.html lives in this <style> block -->
   <style>
     /* Custom font declaration: loads the local "Black Mango Regular.ttf" file from /fonts
