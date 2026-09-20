@@ -195,10 +195,18 @@
 
     /* ── YOU MAY BE INTERESTED ── */
     .cp-interested {
-      background: #f2f1ec;
-      margin: 3.5rem 5% 0;
-      padding: 3.5rem 4rem;
+      background: #cfe8ea url("assets/shell4.png") center / cover no-repeat;
+      margin: 3.5rem 0 0;
+      border-top: 4px solid #FFB3AE; /* coral divider line, matches the footer line below */
+      padding: 4rem;
       text-align: center;
+    }
+    /* Translucent white card so the text stays readable over the artwork */
+    .cp-interested-inner {
+      background: rgba(255, 255, 255, 0.85);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 4rem;
     }
     .cp-interested h2 {
       font-family: 'Black Mango', cursive;
@@ -235,6 +243,7 @@
     /* ── FOOTER ── */
     .instagram-footer {
       background-color: #FFF4F1; /* cream, matches index.html/contact.html */
+      border-top: 4px solid #FFB3AE; /* coral divider line between the page content and the footer */
       padding: 4rem 2rem;
       text-align: center;
     }
@@ -301,7 +310,8 @@
       .page-hero { margin: 0; }
       .portfolio-grid { grid-template-columns: 1fr; padding: 8px 0 0; gap: 8px; }
       .portfolio-item { aspect-ratio: 4 / 3; }
-      .cp-interested { margin: 2rem 0 0; padding: 2.5rem 2rem; }
+      .cp-interested { margin: 2rem 0 0; padding: 2rem 1rem; }
+      .cp-interested-inner { padding: 2rem 1.25rem; }
     }
 
     @media (max-width: 480px) {
@@ -379,12 +389,14 @@
 
   <!-- You May Be Interested -->
   <section class="cp-interested" aria-label="More links">
-    <h2>You May Be Interested</h2>
-    <hr>
-    <div class="cp-interested-links">
-      <a href="contact.html">Contact Me</a>
-      <a href="resume.html">Read About Me</a>
-      <a href="PricingGuide.html">Check Investment</a>
+    <div class="cp-interested-inner">
+      <h2>You May Be Interested</h2>
+      <hr>
+      <div class="cp-interested-links">
+        <a href="contact.html">Contact Me</a>
+        <a href="resume.html">Read About Me</a>
+        <a href="PricingGuide.html">Check Investment</a>
+      </div>
     </div>
   </section>
 
