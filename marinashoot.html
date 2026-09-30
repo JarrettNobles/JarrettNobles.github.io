@@ -306,10 +306,11 @@
              loading="lazy" decoding="async" draggable="false">
       </div> 
 
+      <!--
       <div class="masonry-item">
         <img src="assets/grad8.jpg" alt="grad8"
              loading="lazy" decoding="async" draggable="false">
-      </div> 
+      </div> -->
 
       <div class="masonry-item">
         <img src="assets/grad9.jpg" alt="grad9"
@@ -341,45 +342,26 @@
              loading="lazy" decoding="async" draggable="false">
       </div>
 
-      <div class="masonry-item">
-        <img src="assets/portrait1.jpg" alt="Portrait 8"
-             loading="lazy" decoding="async" draggable="false">
-      </div>
-
-      <div class="masonry-item">
-        <img src="assets/portrait4.jpg" alt="Portrait 7"
-             loading="lazy" decoding="async" draggable="false">
-      </div>
+   
 
       <div class="masonry-item">
         <img src="assets/elly3.jpg" alt="Portrait 1"
              loading="lazy" decoding="async" draggable="false">
       </div>
 
-      <div class="masonry-item">
-        <img src="assets/portrait2.jpg" alt="Portrait 2"
-             loading="lazy" decoding="async" draggable="false">
-      </div>
+ 
 
-      <div class="masonry-item">
-        <img src="assets/portrait5.jpg" alt="Portrait 3"
-             loading="lazy" decoding="async" draggable="false">
-      </div>
+ 
 
       <div class="masonry-item">
         <img src="assets/elly4.jpg" alt="Portrait 4"
              loading="lazy" decoding="async" draggable="false">
       </div>
 
-      <div class="masonry-item">
-        <img src="assets/portrait3.jpg" alt="Portrait 5"
-             loading="lazy" decoding="async" draggable="false">
-      </div>
 
-      <div class="masonry-item">
-        <img src="assets/portrait6.jpg" alt="Portrait 6"
-             loading="lazy" decoding="async" draggable="false">
-      </div>
+
+
+     
 
     </div>
   </section>
@@ -455,32 +437,6 @@
   </script>
 
   <!-- Cloudinary dynamic image loading -->
-  <script>
-    (function () {
-      'use strict';
-      fetch('https://res.cloudinary.com/dgqsc76ni/image/list/portraits.json')
-        .then(function (res) { return res.json(); })
-        .then(function (data) {
-          if (!data.resources || data.resources.length === 0) { return; }
-          var grid = document.querySelector('.masonry-grid');
-          if (!grid) { return; }
-          grid.innerHTML = '';
-          data.resources.forEach(function (resource, index) {
-            var item = document.createElement('div');
-            item.className = 'masonry-item';
-            var img = document.createElement('img');
-            img.src = 'https://res.cloudinary.com/dgqsc76ni/image/upload/q_auto,f_auto/' + resource.public_id;
-            img.alt = 'Portrait photo';
-            img.loading = index === 0 ? 'eager' : 'lazy';
-            img.draggable = false;
-            img.style.pointerEvents = 'none';
-            item.appendChild(img);
-            grid.appendChild(item);
-          });
-        })
-        .catch(function () { /* fetch failed — keep static images */ });
-    })();
-  </script>
 
 </body>
 </html>

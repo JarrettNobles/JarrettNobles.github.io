@@ -16,7 +16,6 @@ A clean, minimal photography portfolio website for Coral Olson, built with stati
 ├── resume.html               ← About page
 ├── contact.html              ← Contact form (Formspree) with hero background
 ├── PricingGuide.html         ← Investment / pricing page
-├── admin.html                ← Password-protected photo upload admin page
 ├── assets/                   ← All images (photos, favicon)
 ├── css/
 │   └── styles.css            ← Legacy shared styles (used by some older pages)
@@ -63,14 +62,6 @@ All three gallery pages share the same design language:
 - Powered by [Formspree](https://formspree.io) — form action: `https://formspree.io/f/mnnzoqjz`
 - Client-side validation: requires at least email or phone
 
-### Admin (`admin.html`)
-Password-protected upload page for managing gallery photos.
-- Password: stored client-side (change in `admin.html` → `var PASSWORD`)
-- Select a gallery (Portraits / Engagements / Family)
-- Choose photos from your computer — they are automatically compressed to under 9MB at 90% quality before uploading
-- Photos upload directly to Cloudinary tagged with the selected gallery name
-- Live per-file status: Compressing → Uploading → Done
-
 ---
 
 ## Cloudinary Integration
@@ -89,12 +80,6 @@ Gallery pages dynamically load photos from Cloudinary at page load.
 - If Cloudinary returns images, they replace the static fallback images in the HTML
 - If Cloudinary returns empty or errors, the hardcoded static images show instead
 - Compression library used: [browser-image-compression](https://github.com/Donaldcwl/browser-image-compression) v2.0.2
-
-**To add photos to a gallery:**
-1. Go to `yoursite.com/admin.html`
-2. Enter the admin password
-3. Select the gallery, choose photos, upload
-4. Photos appear on the live site immediately
 
 **To delete photos:**
 Log in at [cloudinary.com](https://cloudinary.com) → Media Library → select and delete. Deletion requires the API secret and cannot be done safely from a static page.
@@ -144,9 +129,7 @@ Hosted on **GitHub Pages** with a custom domain.
 
 | Task | Notes |
 |---|---|
-| Add photos to a gallery | Use `admin.html` — select gallery, upload |
 | Delete photos | Log into cloudinary.com → Media Library |
 | Update contact form | Change Formspree endpoint in `contact.html` |
-| Change admin password | Edit `var PASSWORD` in `admin.html` |
 | Update copyright year | Search for `Coral Olson 2025` across all files |
 | Add a new gallery | Create a new HTML page modelled on `family.html`, add a tile to `projects.html`, use a new Cloudinary tag |
