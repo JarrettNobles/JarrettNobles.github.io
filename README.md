@@ -10,8 +10,8 @@ A clean, minimal photography portfolio website for Coral Olson, built with stati
 /
 ├── index.html                ← Home — hero carousel, philosophy, testimonials, Instagram grid
 ├── projects.html             ← Portfolio — 2-column tile grid linking to each gallery
-├── marinashoot.html          ← Portraits gallery (3-column masonry)
-├── vincentengagment.html     ← Engagements gallery (3-column masonry)
+├── portraits.html            ← Portraits gallery (3-column masonry)
+├── engagement.html           ← Engagements gallery (3-column masonry)
 ├── family.html               ← Family gallery (3 explicit flex columns)
 ├── resume.html               ← About page
 ├── contact.html              ← Contact form (Formspree) with hero background
@@ -51,8 +51,8 @@ All three gallery pages share the same design language:
 
 | Page | Layout | Cloudinary Tag |
 |---|---|---|
-| `marinashoot.html` | CSS `column-count: 3` masonry | `portraits` |
-| `vincentengagment.html` | CSS `column-count: 3` masonry | `engagements` |
+| `portraits.html` | CSS `column-count: 3` masonry | `portraits` |
+| `engagement.html` | CSS `column-count: 3` masonry | `engagements` |
 | `family.html` | 3 explicit flex columns (4 / 3 / 3 split) | `family` |
 
 ### Contact (`contact.html`)

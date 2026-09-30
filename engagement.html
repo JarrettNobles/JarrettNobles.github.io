@@ -123,21 +123,26 @@
     }
     .masonry-grid {
       column-count: 3;
-      column-gap: 8px;
+      column-gap: 12px;
     }
     .masonry-item {
       break-inside: avoid;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      overflow: hidden; /* clips the img so its hover zoom stays within the rounded corners */
     }
     .masonry-item img {
       display: block;
       width: 100%;
       height: auto;
+      transition: transform 0.35s ease;
       -webkit-touch-callout: none;
       user-select: none;
       -webkit-user-select: none;
       -webkit-user-drag: none;
-      pointer-events: none;
+    }
+    .masonry-item:hover img {
+      transform: scale(1.04);
     }
 
     /* ── CTA ── */
@@ -285,6 +290,7 @@
              loading="eager" fetchpriority="high" decoding="async" draggable="false">
       </div>
 
+
       <div class="masonry-item">
         <img src="assets/CoralOlsonPORTRAITS-1-6.jpg" alt="Engagement portrait with soft natural light"
              loading="eager" fetchpriority="high" decoding="async" draggable="false">
@@ -296,15 +302,9 @@
       </div>
 
       <div class="masonry-item">
-        <img src="assets/CoralOlsonPORTRAITS-2-2.jpg" alt="Engagement portrait with soft natural light"
-             loading="eager" fetchpriority="high" decoding="async" draggable="false">
-      </div>
-
-      <div class="masonry-item">
         <img src="assets/CoralOlsonPORTRAITS-2.jpg" alt="Engagement portrait with soft natural light"
              loading="eager" fetchpriority="high" decoding="async" draggable="false">
       </div>
-
 
       <div class="masonry-item">
         <img src="assets/engagement3.jpg" alt="Candid engagement moment"
@@ -313,6 +313,11 @@
 
       <div class="masonry-item">
         <img src="assets/engagmentback.jpg" alt="Backlit engagement silhouette"
+             loading="lazy" decoding="async" draggable="false">
+      </div>
+
+      <div class="masonry-item">
+        <img src="assets/CoralOlsonPORTRAITS-2-2.jpg" alt="Engagement portrait with soft natural light"
              loading="lazy" decoding="async" draggable="false">
       </div>
 
@@ -388,8 +393,5 @@
       });
     })();
   </script>
-
-  <!-- Cloudinary dynamic image loading -->
-
 </body>
 </html>
