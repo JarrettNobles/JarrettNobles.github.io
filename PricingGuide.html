@@ -15,8 +15,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
   <link href="css/styles.css" rel="stylesheet" />
-  <!-- PERFORMANCE ADD: Preload first pricing image to improve LCP -->
-  <link rel="preload" as="image" href="assets/guide1.png" imagesizes="(max-width: 880px) 100vw, 880px" />
 
   <!-- Preload the site font so the navbar renders in Black Mango immediately instead of flashing the fallback font -->
   <link rel="preload" href="fonts/Black%20Mango%20Regular.ttf" as="font" type="font/ttf" crossorigin />
@@ -124,15 +122,170 @@
       }
     }
 
-    .about-image-section {
-      padding: 4rem 0;
+    /* ── PRICING HERO (replaces the old guide1.png cover image) ── */
+    /* Centered intro block, matches contact.html's .contact-intro pattern exactly */
+    .pricing-intro {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .pricing-intro .hero-eyebrow {
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #F47068; /* coral accent, matches contact.html's eyebrow line */
+      margin-bottom: 1rem;
+    }
+    .pricing-intro h1 {
+      font-family: 'Black Mango', cursive;
+      font-weight: 300;
+      font-size: clamp(2.5rem, 6vw, 4.5rem); /* scales fluidly between mobile and desktop, matches contact.html */
+      letter-spacing: 10px;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      color: #1697a6; /* teal, matches the navbar and footer */
+    }
+    .pricing-intro p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: #3a3a3a; /* dark gray, matches contact.html/resume.html body text */
     }
 
-    .about-image-section img {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      display: block;
+    /* ── PRICING CATEGORIES (Graduates / Portraits / Mini Sessions) ── */
+    .pricing-category {
+      padding: 2.5rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .pricing-category h2 {
+      text-align: center;
+      font-family: 'Black Mango', cursive;
+      font-weight: 300;
+      font-size: 1.8rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #1c1c1e;
+      margin-bottom: 2.5rem;
+    }
+    /* Three tiers side by side (Bronze/Silver/Gold); wraps to one column on phones below */
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    /* Used for the single "Mini" tier so it doesn't stretch full width */
+    .pricing-cards.single {
+      grid-template-columns: minmax(260px, 420px);
+      justify-content: center;
+    }
+    /* One pricing tier card */
+    .pricing-card {
+      background: #FFF4F1; /* cream, matches the card panels used elsewhere on the site */
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-top: 4px solid #FFB3AE; /* pink divider line, matches the navbar/panel dividers */
+    }
+    .pricing-card h3 {
+      font-family: 'Black Mango', cursive;
+      font-weight: 400;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #1c1c1e;
+      margin-bottom: 0.5rem;
+    }
+    .pricing-card .price {
+      font-family: 'Black Mango', cursive;
+      font-size: 2.25rem;
+      color: #1697a6; /* teal, same accent as the headings */
+      margin-bottom: 1.5rem;
+    }
+    .pricing-card ul {
+      list-style: none;
+      text-align: left;
+      display: inline-block; /* shrinks the list to its own content so text-align:center on the card still centers it */
+    }
+    .pricing-card li {
+      position: relative;
+      padding-left: 1.25rem; /* room for the coral bullet dot below */
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #3a3a3a;
+    }
+    .pricing-card li:last-child { margin-bottom: 0; }
+    /* Small coral dot standing in for the default list bullet */
+    .pricing-card li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #F47068;
+    }
+
+    /* ── ADD-ONS ── */
+    .pricing-addons {
+      background: #FFF4F1;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    .pricing-addons h2 {
+      font-family: 'Black Mango', cursive;
+      font-weight: 300;
+      font-size: 1.8rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #1c1c1e;
+      margin-bottom: 2rem;
+    }
+    .addons-list {
+      list-style: none;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .addons-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      font-size: 1.05rem;
+      color: #3a3a3a;
+    }
+    .addons-list li:last-child { border-bottom: none; }
+    /* The price half of each add-on row */
+    .addons-list li span:last-child {
+      color: #1697a6;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* ── CLOSING THANK-YOU NOTE ── */
+    .pricing-thankyou {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+      text-align: center;
+    }
+    .pricing-thankyou p {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: #3a3a3a;
+    }
+
+    @media (max-width: 768px) {
+      .pricing-cards,
+      .pricing-cards.single {
+        grid-template-columns: 1fr; /* stack tiers vertically on phones */
+      }
     }
 
     /* The footer band that contains the "click to open Instagram" call-to-action, matches
@@ -194,27 +347,6 @@
     .navbar-toggler { border: 1px solid rgba(0,0,0,0.2) !important; }
     .navbar-nav .nav-link { padding: .75rem .75rem; } /* bigger tap targets */
 
-    /* Constrain content width while staying centered on large screens */
-    .pricing-container { max-width: 960px; margin-inline: auto; }
-
-    /* Gentle elevation for the pricing images (kept subtle) */
-    .about-image-section img { box-shadow: 0 2px 18px rgba(0,0,0,0.06); }
-
-    /* Phone-friendly spacing */
-    @media (max-width: 576px) {
-      .about-image-section { padding: 2.25rem 0; }
-    }
-
-    /* Avoid iOS white gaps: ensure images keep natural aspect on small screens */
-    @media (max-width: 768px) {
-      .about-image-section img {
-        width: 100% !important;
-        height: auto !important;
-        object-fit: contain !important;
-        display: block;
-      }
-    }
-
     /* Respect reduced motion */
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 
@@ -267,24 +399,109 @@
     </a>
   </div>
 
-  <!-- About Image Section -->
-  <section class="about-image-section" aria-labelledby="pricing-heading">
-    <h1 id="pricing-heading" class="sr-only">Photography Pricing Guide</h1>
-    <div class="container px-5 pricing-container">
-      <!-- Added attributes are non-destructive; your <img> tags remain -->
-      <img src="assets/guide1.png" alt="Pricing guide 1" class="no-save"
-           loading="eager" fetchpriority="high" decoding="async"
-           width="1200" height="1600" sizes="(max-width: 960px) 100vw, 960px">
-      <img src="assets/guide3.png" alt="Pricing guide 3" class="no-save"
-           loading="lazy" decoding="async"
-           width="1200" height="1600" sizes="(max-width: 960px) 100vw, 960px">
-      <img src="assets/guide2.png" alt="Pricing guide 2" class="no-save"
-           loading="lazy" decoding="async"
-           width="1200" height="1600" sizes="(max-width: 960px) 100vw, 960px">
-      <img src="assets/guide4.png" alt="Pricing guide 4" class="no-save"
-           loading="lazy" decoding="async"
-           width="1200" height="1600" sizes="(max-width: 960px) 100vw, 960px">
+  <!-- Intro heading: replaces the old guide1.png cover image (title + photo + "Book Now!" badge).
+       Plain text, matching contact.html's intro treatment, instead of a static picture. -->
+  <section class="pricing-intro" aria-labelledby="pricing-heading">
+    <p class="hero-eyebrow">Portrait &middot; Family &middot; Engagements</p>
+    <h1 id="pricing-heading">Pricing Guide</h1>
+    <p>Every session is tailored to you. Browse the packages below, or reach out and I'll help you find the right fit.</p>
+  </section>
+
+  <!-- Graduates: replaces guide3.png -->
+  <section class="pricing-category" aria-labelledby="graduates-heading">
+    <h2 id="graduates-heading">Graduates</h2>
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        <h3>Bronze</h3>
+        <p class="price">$150</p>
+        <ul>
+          <li>30 minute photo session</li>
+          <li>1 outfit; 1 location</li>
+          <li>$50 non-refundable deposit</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Silver</h3>
+        <p class="price">$230</p>
+        <ul>
+          <li>45 minute photo session</li>
+          <li>2 outfits; 2 locations (if on a campus, within that campus)</li>
+          <li>$75 non-refundable deposit</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Gold</h3>
+        <p class="price">$320</p>
+        <ul>
+          <li>60 minute photo session</li>
+          <li>3 outfits; 3 locations (if on a campus, within that campus)</li>
+          <li>$100 non-refundable deposit</li>
+        </ul>
+      </div>
     </div>
+  </section>
+
+  <!-- Portraits: replaces guide2.png -->
+  <section class="pricing-category" aria-labelledby="portraits-heading">
+    <h2 id="portraits-heading">Portraits</h2>
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        <h3>Bronze</h3>
+        <p class="price">$170</p>
+        <ul>
+          <li>30 minute photo session</li>
+          <li>1 location</li>
+          <li>$50 non-refundable deposit</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Silver</h3>
+        <p class="price">$250</p>
+        <ul>
+          <li>45 minute photo session</li>
+          <li>1 location</li>
+          <li>$75 non-refundable deposit</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Gold</h3>
+        <p class="price">$340</p>
+        <ul>
+          <li>60 minute photo session</li>
+          <li>1 location</li>
+          <li>$100 non-refundable deposit</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mini Sessions + Add-Ons: replaces guide4.png -->
+  <section class="pricing-category" aria-labelledby="mini-heading">
+    <h2 id="mini-heading">Mini Sessions</h2>
+    <div class="pricing-cards single">
+      <div class="pricing-card">
+        <h3>Mini</h3>
+        <p class="price">$120</p>
+        <ul>
+          <li>15 minute photo session</li>
+          <li>1 location</li>
+          <li>$50 non-refundable deposit</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing-addons" aria-labelledby="addons-heading">
+    <h2 id="addons-heading">Add-Ons</h2>
+    <ul class="addons-list">
+      <li><span>Travel Fee (40+ miles)</span><span>$50</span></li>
+      <li><span>Rush Delivery (within 48 hours)</span><span>$50</span></li>
+    </ul>
+  </section>
+
+  <!-- Closing note: replaces the thank-you paragraph at the bottom of guide4.png -->
+  <section class="pricing-thankyou">
+    <p>Thank you so much for considering me to capture your special moments! I truly appreciate your support. If you have any questions about my pricing or which package is right for you, feel free to reach out &mdash; I'm always happy to help. Please note that my turnaround time for edited photos is about 2-3 weeks, but you'll receive sneak peeks within a few days so you can relive the moment right away. I can't wait to work with you!</p>
   </section>
 
 </main>
