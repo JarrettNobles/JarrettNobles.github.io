@@ -145,6 +145,17 @@
       display: block;
     }
 
+    /* Logo, pinned to the navbar's left corner (mirrors .cp-nav-decor on the right) */
+    .cp-nav-logo {
+      position: absolute;
+      left: 2.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 55px;
+      width: auto;
+      display: block;
+    }
+
     /* ============================================
        LOGO (moved out of the navbar; its own block
        above the hero carousel)
@@ -570,6 +581,7 @@
       .cp-nav-links { display: none; }
       .cp-nav-toggle { display: block; }
       .cp-nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
+      .cp-nav-logo { height: 45px; }
 
       .cp-logo-block img { height: 170px; }
       .cp-hero-box-wrap { padding: 0 1.5rem 4rem; }
@@ -595,6 +607,7 @@
     }
 
     @media (max-width: 576px) {
+      .cp-nav-logo { height: 38px; }
       .cp-logo-block img { height: 130px; }
       .cp-hero-box-wrap { padding: 0 1.25rem 3rem; }
       .cp-hero-box { height: 320px; }
@@ -631,6 +644,10 @@
        NAVBAR
        ========================================== -->
   <nav class="cp-nav" aria-label="Primary navigation">
+    <a href="/" aria-label="Coral Olson Photography — Home">
+      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography" class="cp-nav-logo">
+    </a>
+
     <ul class="cp-nav-links">
       <li><a href="/">Home</a></li>
       <li><a href="resume.html">About</a></li>

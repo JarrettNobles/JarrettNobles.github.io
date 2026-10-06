@@ -90,15 +90,15 @@
       width: auto;
       display: block;
     }
-    /* ── LOGO (moved out of the navbar; its own block below it, matches index.html) ── */
-    .logo-block {
-      text-align: center;
-      padding: 2.5rem 1.5rem 2rem;
-    }
-    .logo-block img {
-      height: 180px;
+    /* ── LOGO (pinned to the navbar's left corner) ── */
+    .nav-logo {
+      position: absolute;
+      left: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 55px;
       width: auto;
-      display: inline-block;
+      display: block;
     }
     /* The hamburger menu button, hidden by default and only shown on small screens (see media query below) */
     .nav-toggle {
@@ -121,7 +121,7 @@
     /* Slightly reduce the nav's horizontal padding on medium/tablet screens */
     @media (max-width: 900px) {
       .site-nav { padding: 1.1rem 2rem; }
-      .logo-block img { height: 130px; }
+      .nav-logo { height: 45px; }
     }
     /* Mobile nav behavior: collapse the link group into a hamburger-triggered dropdown menu */
     @media (max-width: 768px) {
@@ -129,7 +129,7 @@
       .nav-group { display: none; } /* hide the link group by default on mobile */
       .nav-toggle { display: flex; } /* show the hamburger button */
       .nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
-      .logo-block img { height: 100px; }
+      .nav-logo { height: 38px; }
       /* When JS adds the "open" class to #siteNav (see toggle script below), reveal the nav links
          as a full-width dropdown panel positioned right under the nav bar */
       .site-nav.open .nav-group {
@@ -356,6 +356,10 @@
        with a hamburger dropdown on mobile). id="siteNav" is targeted by the toggle script below, which
        adds/removes the "open" class to show/hide the mobile dropdown menu. -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="Primary">
+    <a href="/" aria-label="Coral Olson Photography — Home">
+      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography" class="nav-logo">
+    </a>
+
     <!-- Nav links, merged into a single centered group now that the logo lives below the nav -->
     <div class="nav-group">
       <a class="nav-link" href="/">Home</a>
@@ -374,13 +378,6 @@
 
     <img src="assets/seashell.jpg" alt="" class="nav-decor" aria-hidden="true">
   </nav>
-
-  <!-- Logo (moved out of the navbar) -->
-  <div class="logo-block">
-    <a href="/" aria-label="Coral Olson Photography — Home">
-      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography">
-    </a>
-  </div>
 
   <!-- Intro heading: replaces the old full-bleed photo hero. Plain text on the white page
        background instead of white text overlaid on a photo. -->

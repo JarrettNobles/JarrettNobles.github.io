@@ -72,15 +72,15 @@
       width: auto;
       display: block;
     }
-    /* ── LOGO (moved out of the navbar; its own block below it, matches index.html) ── */
-    .logo-block {
-      text-align: center;
-      padding: 2.5rem 1.5rem 2rem;
-    }
-    .logo-block img {
-      height: 180px;
+    /* ── LOGO (pinned to the navbar's left corner) ── */
+    .nav-logo {
+      position: absolute;
+      left: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 55px;
       width: auto;
-      display: inline-block;
+      display: block;
     }
 
     /* hamburger (mobile) */
@@ -202,7 +202,7 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
       .site-nav { padding: 1.1rem 2rem; }
-      .logo-block img { height: 130px; }
+      .nav-logo { height: 45px; }
     }
 
     @media (max-width: 768px) {
@@ -212,7 +212,7 @@
       .nav-group { display: none; }
       .nav-toggle { display: flex; }
       .nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
-      .logo-block img { height: 100px; }
+      .nav-logo { height: 38px; }
 
       .site-nav.open .nav-group {
         display: flex;
@@ -244,6 +244,10 @@
 
   <!-- Navigation -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="Primary">
+    <a href="/" aria-label="Coral Olson Photography — Home">
+      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography" class="nav-logo">
+    </a>
+
     <div class="nav-group">
       <a class="nav-link" href="/">Home</a>
       <a class="nav-link" href="resume.html">About</a>
@@ -258,13 +262,6 @@
 
     <img src="assets/seashell.jpg" alt="" class="nav-decor" aria-hidden="true">
   </nav>
-
-  <!-- Logo (moved out of the navbar) -->
-  <div class="logo-block">
-    <a href="/" aria-label="Coral Olson Photography — Home">
-      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography">
-    </a>
-  </div>
 
   <!-- Hero -->
   <section class="page-hero" aria-labelledby="portraits-heading">

@@ -118,19 +118,16 @@
     }
 
     /* ============================================================
-       LOGO (sits BELOW the navbar, not inside it; matches index.html)
+       LOGO (pinned to the navbar's left corner)
        ============================================================ */
-    /* Wrapper that centers the logo and gives it breathing room above and below */
-    .logo-block {
-      text-align: center;
-      padding: 2.5rem 1.5rem 2rem; /* top / left+right / bottom */
-    }
-    /* The logo image; only the height is set so the width scales automatically to keep its proportions.
-       The height is reduced on smaller screens in the @media queries near the bottom. */
-    .logo-block img {
-      height: 180px;
+    .nav-logo {
+      position: absolute;
+      left: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 55px;
       width: auto;
-      display: inline-block;
+      display: block;
     }
 
     /* ============================================================
@@ -391,7 +388,7 @@
     /* Tablet and below (up to 900px wide) */
     @media (max-width: 900px) {
       .site-nav { padding: 1.1rem 2rem; }   /* tighter navbar padding */
-      .logo-block img { height: 130px; }    /* smaller logo (180px on desktop) */
+      .nav-logo { height: 45px; }
     }
 
     /* Phones and small tablets (up to 768px wide) */
@@ -401,7 +398,7 @@
       .nav-group { display: none; }         /* hide the row of links */
       .nav-toggle { display: flex; }        /* show the hamburger button */
       .nav-decor { display: none; }         /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
-      .logo-block img { height: 100px; }    /* even smaller logo */
+      .nav-logo { height: 38px; }
 
       /* When the hamburger is tapped, the script at the bottom adds the class "open" to the navbar.
          That turns the hidden link group into a full-width dropdown panel under the bar. */
@@ -456,6 +453,11 @@
        role + aria-label tell screen readers this is the main site navigation.
        ========================================================== -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="Primary">
+    <!-- Logo, pinned to the navbar's left corner by CSS -->
+    <a href="/" aria-label="Coral Olson Photography — Home">
+      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography" class="nav-logo">
+    </a>
+
     <!-- The five links, grouped in one wrapper so CSS can lay them out as a row (desktop) or a dropdown (mobile) -->
     <div class="nav-group">
       <a class="nav-link" href="/">Home</a>
@@ -478,17 +480,6 @@
          decorative so screen readers skip it. -->
     <img src="assets/seashell.jpg" alt="" class="nav-decor" aria-hidden="true">
   </nav>
-
-  <!-- ==========================================================
-       LOGO
-       Sits below the navbar (moved out of it) and links back to the homepage.
-       The link's aria-label describes where it goes; the image's alt text is its accessible description.
-       ========================================================== -->
-  <div class="logo-block">
-    <a href="/" aria-label="Coral Olson Photography — Home">
-      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography">
-    </a>
-  </div>
 
   <!-- ==========================================================
        HERO / PAGE INTRO
