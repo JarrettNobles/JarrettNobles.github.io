@@ -164,10 +164,68 @@
       text-align: center;
       padding: 2.5rem 1.5rem 2rem;
     }
-    .cp-logo-block img {
+    .cp-logo-block a img {
       height: 560px;
       width: auto;
       display: inline-block;
+    }
+
+    /* ============================================
+       LOGO + FRAMED PHOTOS (replaces the hero carousel)
+       Six portfolio photos, pre-composited into frame1/2/3/6/7/8.png via Pillow
+       (see about.html's framed photo for the same technique — ovals use an
+       elliptical mask, the rest are plain rectangular pastes), scattered
+       around the centered logo at crooked angles, scrapbook-style.
+       ============================================ */
+    .cp-logo-photos-row {
+      position: relative;
+      max-width: 1300px;
+      margin: 0 auto;
+      min-height: 820px;
+      padding: 2rem 1.5rem 3rem;
+    }
+    .cp-logo-photos-row .cp-logo-img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: 320px;
+      width: auto;
+      z-index: 2;
+    }
+    .cp-framed-photo {
+      position: absolute;
+      height: 280px;
+      width: auto;
+      z-index: 1;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.18));
+    }
+    .cp-framed-photo-1 { top: 2%; right: 2%; transform: rotate(9deg); }                         /* upper right */
+    .cp-framed-photo-4 { top: 2%; left: 2%; transform: rotate(-9deg); }                          /* upper left */
+    .cp-framed-photo-2 { top: 46%; left: -2%; transform: translateY(-50%) rotate(-7deg); }       /* left */
+    .cp-framed-photo-5 { top: 46%; right: -2%; transform: translateY(-50%) rotate(8deg); }       /* right */
+    .cp-framed-photo-3 { bottom: 0; left: 36%; transform: translateX(-50%) rotate(-12deg); }     /* bottom left-of-center */
+    .cp-framed-photo-6 { bottom: 2%; left: 66%; transform: translateX(-50%) rotate(14deg); }     /* bottom right-of-center */
+    @media (max-width: 1100px) {
+      .cp-logo-photos-row { min-height: 640px; }
+      .cp-logo-photos-row .cp-logo-img { height: 260px; }
+      .cp-framed-photo { height: 200px; }
+    }
+    @media (max-width: 700px) {
+      .cp-logo-photos-row { min-height: 440px; }
+      .cp-logo-photos-row .cp-logo-img { height: 200px; }
+      .cp-framed-photo { height: 140px; }
+    }
+    @media (max-width: 576px) {
+      .cp-logo-photos-row { min-height: 420px; padding: 1.5rem 1rem 2rem; }
+      .cp-logo-photos-row .cp-logo-img { height: 150px; }
+      .cp-framed-photo { height: 90px; }
+      .cp-framed-photo-1 { top: 0; right: 2%; }
+      .cp-framed-photo-4 { top: 0; left: 2%; }
+      .cp-framed-photo-2 { left: 0; }
+      .cp-framed-photo-5 { right: 0; }
+      .cp-framed-photo-3 { bottom: -2%; }
+      .cp-framed-photo-6 { bottom: 0; }
     }
 
     /* ============================================
@@ -664,12 +722,18 @@
   </nav>
 
   <!-- ==========================================
-       LOGO (moved out of the navbar)
+       LOGO + FRAMED PHOTOS (moved out of the navbar, replaces the hero carousel)
        ========================================== -->
-  <div class="cp-logo-block">
+  <div class="cp-logo-block cp-logo-photos-row">
+    <img src="assets/family-framed.png" alt="Family portrait session" class="cp-framed-photo cp-framed-photo-1">
+    <img src="assets/family2-framed.png" alt="Family portrait session" class="cp-framed-photo cp-framed-photo-4">
+    <img src="assets/engagement-framed.png" alt="Engagement session" class="cp-framed-photo cp-framed-photo-3">
+    <img src="assets/gradcap-framed.png" alt="Graduation details" class="cp-framed-photo cp-framed-photo-6">
     <a href="/" aria-label="Coral Olson Photography — Home">
-      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography">
+      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography" class="cp-logo-img">
     </a>
+    <img src="assets/grad-framed.png" alt="Graduation portrait session" class="cp-framed-photo cp-framed-photo-2">
+    <img src="assets/elly-framed.png" alt="Portrait session" class="cp-framed-photo cp-framed-photo-5">
   </div>
 
   <!-- ==========================================
@@ -727,10 +791,10 @@
     </div>-->
   </section>
 
-  <!-- Decorative divider between Selected Works and Testimonials -->
+  <!-- Decorative divider between Selected Works and Testimonials 
   <div class="cp-divider">
     <img src="assets/seashell_divider_variety.png" alt="" aria-hidden="true">
-  </div>
+  </div>-->
 
   <!-- ==========================================
        TESTIMONIALS
