@@ -298,12 +298,12 @@
       .about-panel-top { margin-top: 0; }
     }
 
-    /* ── FRAMED PHOTO (Coral holding her camera, sits above the "Meet Your Photographer" panel) ──
+    /* ── MEET YOUR PHOTOGRAPHER (framed photo of Coral + her bio text, side by side) ──
        coralbeach-framed1.png is a pre-composited image (cropped from camera-to-face + frame1.png
-       overlaid, via Pillow) so this is just a single image, not a CSS layering trick. */
-    .framed-photo-section {
-      text-align: center;
-      padding: 2.5rem 1.5rem 0.5rem;
+       overlaid, via Pillow) so the photo itself is just a single <img>, not a CSS layering trick.
+       The vertical-stripe background covers this whole section so it runs continuously down to
+       where the Instagram footer starts. */
+    .meet-photographer-panel {
       background: repeating-linear-gradient(
         90deg,               /* 90deg = horizontal direction, so the hard color stops read as vertical stripes */
         #ffffff 0px,
@@ -312,10 +312,30 @@
         #FFB3AE 80px
       );
     }
-    .framed-photo-section img {
+    .meet-photographer-row {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .meet-photographer-photo {
+      flex: 0 0 auto;
       width: 100%;
       max-width: 420px;
       height: auto;
+    }
+    /* The translucent white card that keeps the text readable over the stripes (same treatment
+       the stripes/waves panels use) */
+    .meet-photographer-text {
+      flex: 1 1 auto;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 2.5rem 2rem;
+      text-align: left;
+    }
+    @media (max-width: 768px) {
+      .meet-photographer-row { flex-direction: column; }
+      .meet-photographer-text { text-align: center; }
     }
 
     /* Watercolor sea life pattern background (first panel, "Behind the Lens"), replaces the old
@@ -406,26 +426,36 @@
     </div>
   </section>-->
 
-  <!-- Framed photo of Coral with her camera, above the "Meet Your Photographer" panel -->
-  <section class="framed-photo-section" aria-label="Coral holding her camera">
-    <img src="assets/coralbeach-framed1.png" alt="Coral holding her camera">
+  <!-- Meet Your Photographer: framed photo of Coral to the left of her bio text -->
+  <section class="about-panel meet-photographer-panel" aria-labelledby="about-heading-1">
+    <div class="container meet-photographer-row">
+      <img src="assets/coralbeach-framed1.png" alt="Coral holding her camera" class="meet-photographer-photo">
+      <div class="meet-photographer-text">
+        <h2 id="about-heading-1">Meet Your Photographer</h2>
+        <p>Hi, I'm Coral! I'm all about capturing those real, honest moments that make life special. Whether it's a grad celebrating a big milestone, a family hanging out together, or just a portrait that shows who you really are—I'm here to freeze those memories in time. What keeps me going? Seeing my clients light up when they see their photos. I'm excited to be turning my passion for photography into a business and sharing it with you.</p>
+        <p>Outside of photography, I love spending time at the beach and hanging out with friends and family. If you're ready to capture some great moments, I'd love to work with you.</p>
+      </div>
+    </div>
   </section>
 
-  <!-- About panel 1: Shell pattern background -->
+  <!-- About panel 1: Shell pattern background
   <section class="about-panel about-panel-top stripes" aria-labelledby="about-heading-1">
     <div class="container about-panel-inner">
       <h2 id="about-heading-1">Meet Your Photographer</h2>
       <p>Hi, I'm Coral! I'm all about capturing those real, honest moments that make life special. Whether it's a grad celebrating a big milestone, a family hanging out together, or just a portrait that shows who you really are—I'm here to freeze those memories in time. What keeps me going? Seeing my clients light up when they see their photos. I'm excited to be turning my passion for photography into a business and sharing it with you.</p>
+      <p>Outside of photography, I love spending time at the beach and hanging out with friends and family. If you're ready to capture some great moments, I'd love to work with you.</p>
     </div>
   </section>
+  -->
 
-  <!-- About panel 2: tiled wave background -->
+  <!-- About panel 2: tiled wave background
   <section class="about-panel waves" aria-labelledby="about-heading-2">
     <div class="container about-panel-inner">
       <h2 id="about-heading-2">My Hobbies</h2>
       <p>Outside of photography, I love spending time at the beach and hanging out with friends and family. If you're ready to capture some great moments, I'd love to work with you.</p>
     </div>
   </section>
+  -->
 
 </main>
 
