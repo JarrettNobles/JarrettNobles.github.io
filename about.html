@@ -270,7 +270,7 @@
     }
     /* Pushes the panels further down from the nav bar */
     .about-panel-top {
-      margin-top: 2rem;
+      margin-top: 0;
       border-top: 4px solid #FFB3AE; /* divider line above the first panel */
     }
     .about-panel-inner {
@@ -295,7 +295,7 @@
     }
     @media (max-width: 576px) {
       .about-panel { padding: 3rem 1.5rem; }
-      .about-panel-top { margin-top: 1.5rem; }
+      .about-panel-top { margin-top: 0; }
     }
 
     /* ── FRAMED PHOTO (Coral holding her camera, sits above the "Meet Your Photographer" panel) ──
@@ -304,6 +304,13 @@
     .framed-photo-section {
       text-align: center;
       padding: 2.5rem 1.5rem 0.5rem;
+      background: repeating-linear-gradient(
+        90deg,               /* 90deg = horizontal direction, so the hard color stops read as vertical stripes */
+        #ffffff 0px,
+        #ffffff 40px,
+        #FFB3AE 40px,
+        #FFB3AE 80px
+      );
     }
     .framed-photo-section img {
       width: 100%;
@@ -314,19 +321,34 @@
     /* Watercolor sea life pattern background (first panel, "Behind the Lens"), replaces the old
        diagonal stripes. The text sits on a translucent white card so it stays readable over the art. */
     .stripes {
-      background: #cfe8ea url("assets/—Pngtree—watercolor sea life pattern with_18635358.jpg") center / cover no-repeat;
+      background: #cfe8ea url("assets/shell1.jpg") center / cover no-repeat;
+      min-height: 60vh; /* gives the panel enough height that cover doesn't have to crop most of the photo away */
+    }
+    @media (max-width: 576px) {
+      .stripes { min-height: 45vh; }
     }
     .stripes .about-panel-inner {
       background: rgba(255, 255, 255, 0.85);
       padding: 2.5rem 2rem;
     }
 
-    /* Tiled soft sine-wave background (second panel) */
+    /* Beach photo background (second panel). beach.jpg is a tall portrait shot (mostly sky, with the
+       horizon/pier near the bottom), so it's positioned toward the bottom rather than center so cover
+       doesn't just show empty sky. */
     .waves {
-      background-color: #cfe3d8;  /* base mint */
-      background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='400'%20height='200'%20viewBox='0%200%20400%20200'%3E%3Cpath%20d='M0%20100%20C%2060%2060,%20140%2060,%20200%20100%20S%20340%20140,%20400%20100%20L400%20200%20L0%20200%20Z'%20fill='%23bcd8c8'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 400px 200px;   /* tile size = how "long" each wave is */
+      background-color: #cfe3d8;  /* base mint, shows briefly while the photo loads */
+      background-image: url("assets/beach2.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center bottom;
+      min-height: 60vh; /* gives cover enough room that it doesn't have to crop most of the photo away */
+    }
+    @media (max-width: 576px) {
+      .waves { min-height: 45vh; }
+    }
+    .waves .about-panel-inner {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 2.5rem 2rem;
     }
   </style>
 </head>
