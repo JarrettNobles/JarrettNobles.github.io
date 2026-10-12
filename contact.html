@@ -30,7 +30,7 @@
   <style>
     /* Custom font declaration: loads the local "Black Mango Regular.ttf" file from /fonts
        and registers it under the family name 'Black Mango' so it can be used anywhere below via font-family.
-       (Matches the font used on resume.html/About.) */
+       (Matches the font used on about.html/About.) */
     @font-face {
   font-family: 'Black Mango';
   src: url('fonts/Black Mango Regular.ttf') format('truetype');
@@ -58,7 +58,7 @@
       justify-content: center; /* single unified link list, centered now that the logo has moved out of the navbar (matches index.html) */
       padding: 1.4rem 4rem;
       background: #fff; /* plain white nav, matches projects.html/family.html/etc. */
-      border-bottom: 4px solid #FFB3AE; /* pink divider line, matches resume.html/About's panel divider */
+      border-bottom: 4px solid #FFB3AE; /* pink divider line, matches about.html/About's panel divider */
       position: relative; /* lets the mobile dropdown menu below be positioned relative to this bar */
     }
     /* The nav links */
@@ -193,7 +193,7 @@
       padding: 0 1.5rem 5rem;
       background: #fff; /* matches the white body background */
     }
-    /* The card containing the actual form fields, in resume.html/About's off-white/pink tone.
+    /* The card containing the actual form fields, in about.html/About's off-white/pink tone.
        Kept as its own cream card (with a soft shadow) so it stands out against the white page. */
     .contact-panel {
       background: #FFF4F1;
@@ -264,7 +264,7 @@
       display: block;
       width: auto;
       margin: 2.5rem auto 0; /* centers the button under the form fields */
-      background: #1697a6; /* teal accent, matches resume.html/About's footer strip color */
+      background: #1697a6; /* teal accent, matches about.html/About's footer strip color */
       color: #fff;
       border: none;
       font-family: 'Black Mango', cursive;
@@ -291,7 +291,7 @@
 
     /* ── FOOTER ── */
     /* Off-white/pink band containing the "click to open Instagram" call-to-action, matching
-       resume.html/About's Instagram footer colors. Like that page, the icon, heading, and handle
+       about.html/About's Instagram footer colors. Like that page, the icon, heading, and handle
        are always fully visible; hovering only dims the link slightly (see :hover below). */
     .instagram-footer {
       background-color: #FFF4F1;
@@ -300,7 +300,7 @@
     }
     .instagram-footer a {
       display: inline-block;
-      color: #1697a6; /* teal, matches resume.html/About's Instagram footer color */
+      color: #1697a6; /* teal, matches about.html/About's Instagram footer color */
       text-decoration: none;
     }
     /* Slight dim on hover as a "this is clickable" cue — content itself never disappears */
@@ -322,14 +322,14 @@
       font-size: 1rem;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #F47068; /* coral, matches resume.html/About's handle text color */
+      color: #F47068; /* coral, matches about.html/About's handle text color */
     }
-    /* Bottom-most strip with the copyright line, matches resume.html/About's teal footer strip */
+    /* Bottom-most strip with the copyright line, matches about.html/About's teal footer strip */
     .footer-bottom {
       background: #1697a6;
       color: #fff;
       padding: 1.1rem 3rem;
-      font-size: 0.85rem; /* matches the slightly-reduced copyright size used on resume.html */
+      font-size: 0.85rem; /* matches the slightly-reduced copyright size used on about.html */
       letter-spacing: 1px;
     }
 
@@ -352,7 +352,7 @@
 
 <body>
 
-  <!-- Navigation (matches resume.html/About's split-nav design: left links, center brand, right links,
+  <!-- Navigation (matches about.html/About's split-nav design: left links, center brand, right links,
        with a hamburger dropdown on mobile). id="siteNav" is targeted by the toggle script below, which
        adds/removes the "open" class to show/hide the mobile dropdown menu. -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="Primary">
@@ -363,7 +363,7 @@
     <!-- Nav links, merged into a single centered group now that the logo lives below the nav -->
     <div class="nav-group">
       <a class="nav-link" href="/">Home</a>
-      <a class="nav-link" href="resume.html">About</a>
+      <a class="nav-link" href="about.html">About</a>
       <a class="nav-link" href="projects.html">Portfolio</a>
       <a class="nav-link" href="PricingGuide.html">Investment</a>
       <a class="nav-link" href="contact.html">Contact</a> <!-- this page -->
@@ -491,7 +491,7 @@
 
   <!-- Mobile nav toggle -->
   <!-- Wires up the hamburger button (#navToggle) to open/close the mobile nav dropdown (#siteNav).
-       Same pattern used on resume.html/About. -->
+       Same pattern used on about.html/About. -->
   <script>
     (function () {
       'use strict';

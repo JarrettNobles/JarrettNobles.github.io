@@ -13,7 +13,7 @@ A clean, minimal photography portfolio website for Coral Olson, built with stati
 ├── portraits.html            ← Portraits gallery (3-column masonry)
 ├── engagement.html           ← Engagements gallery (3-column masonry)
 ├── family.html               ← Family gallery (3 explicit flex columns)
-├── resume.html               ← About page
+├── about.html               ← About page
 ├── contact.html              ← Contact form (Formspree) with hero background
 ├── PricingGuide.html         ← Investment / pricing page
 ├── assets/                   ← All images (photos, favicon)

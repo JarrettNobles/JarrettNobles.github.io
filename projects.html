@@ -46,7 +46,7 @@
        ============================================================ */
     /* Registers the local font file "fonts/Black Mango Regular.ttf" under the family name 'Black Mango'
        so any rule below can use it via font-family: 'Black Mango'. It's the site-wide font (same on
-       index.html / contact.html / resume.html). */
+       index.html / contact.html / about.html). */
     @font-face {
   font-family: 'Black Mango';
   src: url('fonts/Black Mango Regular.ttf') format('truetype');
@@ -83,7 +83,7 @@
       justify-content: center; /* single unified link list, centered now that the logo has moved out of the navbar (matches index.html) */
       padding: 1.4rem 4rem;    /* top/bottom 1.4rem, left/right 4rem (reduced on smaller screens below) */
       background: #fff;
-      border-bottom: 4px solid #FFB3AE; /* pink divider line, matches resume.html/About's panel divider */
+      border-bottom: 4px solid #FFB3AE; /* pink divider line, matches about.html/About's panel divider */
       position: relative;      /* makes this the positioning anchor for the seashell image and the mobile dropdown menu */
     }
     /* Wrapper around the five links: lays them out in a row with even spacing */
@@ -191,7 +191,7 @@
       font-size: 1.2rem;
       font-weight: 300;
       line-height: 1.85;         /* generous line spacing for readability */
-      color: #3a3a3a;            /* dark gray, same as contact.html and resume.html body text */
+      color: #3a3a3a;            /* dark gray, same as contact.html and about.html body text */
       max-width: 480px;          /* keeps the line length comfortable to read */
       margin: 0 auto;            /* auto left/right margins center the narrow paragraph inside the band */
     }
@@ -461,7 +461,7 @@
     <!-- The five links, grouped in one wrapper so CSS can lay them out as a row (desktop) or a dropdown (mobile) -->
     <div class="nav-group">
       <a class="nav-link" href="/">Home</a>
-      <a class="nav-link" href="resume.html">About</a>
+      <a class="nav-link" href="about.html">About</a>
       <!-- aria-current="page" tells screen readers this link is the page the visitor is currently on -->
       <a class="nav-link" href="projects.html" aria-current="page">Portfolio</a>
       <a class="nav-link" href="PricingGuide.html">Investment</a>
@@ -540,7 +540,7 @@
       <hr> <!-- the thin divider line under the heading -->
       <div class="cp-interested-links">
         <a href="contact.html">Contact Me</a>
-        <a href="resume.html">Read About Me</a>
+        <a href="about.html">Read About Me</a>
         <a href="PricingGuide.html">Check Investment</a>
       </div>
     </div>
