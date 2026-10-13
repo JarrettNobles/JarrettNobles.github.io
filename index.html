@@ -177,11 +177,20 @@
        elliptical mask, the rest are plain rectangular pastes), scattered
        around the centered logo at crooked angles, scrapbook-style.
        ============================================ */
+    /* Fixed px sizes + percentage positions only avoid overlap at ONE specific container width.
+       Instead, the whole composition scales fluidly: aspect-ratio keeps the stage's height
+       locked to the same 2000:1600 ratio it was verified non-overlapping at (so percentage
+       positions stay geometrically identical at any width), and the logo/photo sizes scale
+       with viewport width (clamped to their original 560px at the 2000px design width) so
+       nothing grows large enough, relative to the shrinking stage, to collide. This replaces
+       the old fixed-px + breakpoint approach, which actually overlapped on most real desktop
+       widths (anything narrower than ~1700px), not just mobile. */
     .cp-logo-photos-row {
       position: relative;
+      width: 100%;
       max-width: 2000px;
       margin: 0 auto;
-      min-height: 1600px;
+      aspect-ratio: 2000 / 1600;
       padding: 2rem 1.5rem 1.5rem;
     }
     .cp-logo-photos-row .cp-logo-img {
@@ -189,13 +198,13 @@
       top: 34%;
       left: 50%;
       transform: translate(-50%, -50%);
-      height: 560px;
+      height: min(560px, 28vw);
       width: auto;
       z-index: 2;
     }
     .cp-framed-photo {
       position: absolute;
-      height: 560px;
+      height: min(560px, 28vw);
       width: auto;
       z-index: 1;
       filter: drop-shadow(0 10px 18px rgba(0,0,0,0.18));
@@ -204,23 +213,6 @@
     .cp-framed-photo-4 { top: 2%; left: 2%; transform: rotate(-9deg); }                          /* upper left */
     .cp-framed-photo-2 { top: 62%; left: 8%; transform: translateY(-50%) rotate(-7deg); }        /* left */
     .cp-framed-photo-5 { top: 62%; right: 8%; transform: translateY(-50%) rotate(8deg); }        /* right */
-    @media (max-width: 1100px) {
-      .cp-logo-photos-row { min-height: 1080px; }
-      .cp-logo-photos-row .cp-logo-img { height: 420px; }
-      .cp-framed-photo { height: 380px; }
-    }
-    @media (max-width: 700px) {
-      .cp-logo-photos-row { min-height: 760px; }
-      .cp-logo-photos-row .cp-logo-img { height: 320px; }
-      .cp-framed-photo { height: 260px; }
-    }
-    @media (max-width: 576px) {
-      .cp-logo-photos-row { min-height: 460px; padding: 1.5rem 1rem 1rem; }
-      .cp-logo-photos-row .cp-logo-img { height: 230px; }
-      .cp-framed-photo { height: 160px; }
-      .cp-framed-photo-1 { top: 0; right: 2%; }
-      .cp-framed-photo-4 { top: 0; left: 2%; }
-    }
 
     /* ============================================
        HERO CAROUSEL (contained box, not full-bleed)
@@ -635,7 +627,6 @@
       .cp-nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
       .cp-nav-logo { height: 45px; }
 
-      .cp-logo-block img { height: 400px; }
       .cp-hero-box-wrap { padding: 0 1.5rem 4rem; }
       .cp-hero-box { height: 420px; }
 
@@ -660,7 +651,6 @@
 
     @media (max-width: 576px) {
       .cp-nav-logo { height: 38px; }
-      .cp-logo-block img { height: 300px; }
       .cp-hero-box-wrap { padding: 0 1.25rem 3rem; }
       .cp-hero-box { height: 320px; }
       .cp-works-grid {
@@ -720,7 +710,7 @@
        ========================================== -->
   <div class="cp-logo-block cp-logo-photos-row">
     <img src="assets/family-framed.png" alt="Family portrait session" class="cp-framed-photo cp-framed-photo-1">
-    <img src="assets/family2-framed.png" alt="Family portrait session" class="cp-framed-photo cp-framed-photo-4">
+    <img src="assets/grad1-framed.png" alt="Graduation portrait session" class="cp-framed-photo cp-framed-photo-4">
     <a href="/" aria-label="Coral Olson Photography — Home">
       <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography" class="cp-logo-img">
     </a>
