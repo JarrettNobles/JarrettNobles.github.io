@@ -686,7 +686,8 @@
       .cp-nav-links { display: none; }
       .cp-nav-toggle { display: block; }
       .cp-nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
-      .cp-nav-logo { height: 62px; }
+      .cp-nav { padding: 0.5rem 1.25rem; min-height: 64px; } /* slimmer bar on mobile, still tall enough to fit the logo */
+      .cp-nav-logo { height: 52px; left: 1.25rem; }
 
       .cp-hero-box-wrap { padding: 0 1.5rem 4rem; }
       .cp-hero-box { height: 420px; }
@@ -716,7 +717,19 @@
     }
 
     @media (max-width: 576px) {
-      .cp-nav-logo { height: 56px; }
+      .cp-nav { min-height: 60px; }
+      .cp-nav-logo { height: 48px; }
+
+      /* Logo + framed photos, phone layout: the desktop 2000:1600 stage makes everything tiny
+         on a narrow screen, so use a taller stage with two frames on top, the logo in the
+         middle and two frames on the bottom, all sized off the screen width (vw). */
+      .cp-logo-photos-row { aspect-ratio: 100 / 148; padding: 0; }
+      .cp-logo-photos-row .cp-logo-img { top: 51%; height: 64vw; }
+      .cp-framed-photo { height: 46vw; }
+      .cp-framed-photo-4 { top: 2%; left: 5%; bottom: auto; right: auto; transform: rotate(-9deg); }  /* upper left */
+      .cp-framed-photo-1 { top: 2%; right: 5%; bottom: auto; left: auto; transform: rotate(9deg); }   /* upper right */
+      .cp-framed-photo-2 { top: auto; bottom: 2%; left: 5%; transform: rotate(-7deg); }              /* lower left */
+      .cp-framed-photo-5 { top: auto; bottom: 2%; right: 5%; transform: rotate(8deg); }              /* lower right */
       .cp-hero-box-wrap { padding: 0 1.25rem 3rem; }
       .cp-hero-box { height: 320px; }
       .cp-works-grid {
