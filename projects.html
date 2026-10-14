@@ -264,9 +264,7 @@
     /* With three tiles in a 2-column grid, the third tile would sit alone on the left. This rule matches
        a tile that is BOTH the last child AND an odd-numbered child (i.e. a lone tile on the last row),
        makes it span the full row, and centers it at just under half width (calc(50% - 4px) = the width
-       of one column, accounting for half of the 8px gap).
-       NOTE: this rule is not reset in the mobile query, so on phones (where the grid is 1 column)
-       this tile keeps that half width. */
+       of one column, accounting for half of the 8px gap). The mobile query below resets it to full width. */
     .portfolio-item:last-child:nth-child(odd) {
       grid-column: 1 / -1;            /* span from the first to the last grid line = the full row */
       justify-self: center;           /* center the narrower tile within that full-width row */
@@ -423,7 +421,10 @@
 
       /* Grid collapses to a single column of tiles with no side padding */
       .portfolio-grid { grid-template-columns: 1fr; padding: 8px 0 0; gap: 8px; }
-      .portfolio-item { aspect-ratio: 4 / 3; }  /* tiles become landscape 4:3 so they aren't huge on a phone */
+      /* Tiles match the photos' own 2:3 portrait shape so nothing gets cropped off on phones */
+      .portfolio-item { aspect-ratio: 2 / 3; }
+      /* Undo the desktop "lone last tile at half width" rule, so Family is full width like the others */
+      .portfolio-item:last-child:nth-child(odd) { width: auto; justify-self: stretch; }
       .cp-interested { margin: 2rem 0 0; padding: 2rem 1rem; }  /* smaller gap above, less padding around the card */
       .cp-interested-inner { padding: 2rem 1.25rem; }
     }
@@ -535,21 +536,21 @@
   </main>
 
   <!-- ==========================================================
-       YOU MAY BE INTERESTED
+        DO NOT UNCOMMENT YOU MAY BE INTERESTED
        Full-width band with the shell artwork as its background (set in CSS). The .cp-interested-inner
        wrapper is the translucent white card that keeps the text readable over the artwork.
-       ========================================================== -->
+       ========================================================== 
   <section class="cp-interested" aria-label="More links">
     <div class="cp-interested-inner">
       <h2>You May Be Interested</h2>
-      <hr> <!-- the thin divider line under the heading -->
+      <hr>  the thin divider line under the heading 
       <div class="cp-interested-links">
         <a href="contact.html">Contact Me</a>
         <a href="about.html">Read About Me</a>
         <a href="PricingGuide.html">Check Investment</a>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- ==========================================================
        FOOTER
