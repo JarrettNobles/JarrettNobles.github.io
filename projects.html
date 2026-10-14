@@ -392,7 +392,7 @@
     /* Tablet and below (up to 900px wide) */
     @media (max-width: 900px) {
       .site-nav { padding: 1.1rem 2rem; }   /* tighter navbar padding */
-      .nav-logo { height: 45px; }
+      .nav-logo { height: 62px; }
     }
 
     /* Phones and small tablets (up to 768px wide) */
@@ -402,7 +402,8 @@
       .nav-group { display: none; }         /* hide the row of links */
       .nav-toggle { display: flex; }        /* show the hamburger button */
       .nav-decor { display: none; }         /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
-      .nav-logo { height: 38px; }
+      .nav-logo { height: 56px; }
+      .site-nav { min-height: 82px; } /* keeps the bar tall enough to fit the bigger mobile logo */
 
       /* When the hamburger is tapped, the script at the bottom adds the class "open" to the navbar.
          That turns the hidden link group into a full-width dropdown panel under the bar. */

@@ -128,7 +128,7 @@
     /* Slightly reduce the nav's horizontal padding on medium/tablet screens */
     @media (max-width: 900px) {
       .site-nav { padding: 1.1rem 2rem; }
-      .nav-logo { height: 45px; }
+      .nav-logo { height: 62px; }
     }
     /* Mobile nav behavior: collapse the link group into a hamburger-triggered dropdown menu */
     @media (max-width: 768px) {
@@ -136,7 +136,8 @@
       .nav-group { display: none; } /* hide the link group by default on mobile */
       .nav-toggle { display: flex; } /* show the hamburger button */
       .nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
-      .nav-logo { height: 38px; }
+      .nav-logo { height: 56px; }
+      .site-nav { min-height: 82px; } /* keeps the bar tall enough to fit the bigger mobile logo */
       /* When JS adds the "open" class to #siteNav (see toggle script below), reveal the nav links
          as a full-width dropdown panel positioned right under the nav bar */
       .site-nav.open .nav-group {

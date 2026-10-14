@@ -104,14 +104,15 @@
     }
     @media (max-width: 900px) {
       .site-nav { padding: 1.1rem 2rem; }
-      .nav-logo { height: 45px; }
+      .nav-logo { height: 62px; }
     }
     @media (max-width: 768px) {
       .site-nav { justify-content: flex-end; } /* the hamburger is now the only visible nav child, so push it to the right edge */
       .nav-group { display: none; }
       .nav-toggle { display: flex; }
       .nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
-      .nav-logo { height: 38px; }
+      .nav-logo { height: 56px; }
+      .site-nav { min-height: 82px; } /* keeps the bar tall enough to fit the bigger mobile logo */
       .site-nav.open .nav-group {
         display: flex;
         flex-direction: column;
