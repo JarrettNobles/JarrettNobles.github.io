@@ -8,7 +8,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Coral Olson Photography</title>
-  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="assets/seashell.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet" />
@@ -725,10 +725,14 @@
       }
       .cp-works-grid .cp-tall { grid-row: span 1; }
       .cp-works-grid img { height: 250px !important; }
-      .cp-testimonials { padding: 3rem 1.75rem; }
+      .cp-testimonials { padding: 2rem 1.25rem; }
       .cp-connect { height: 360px; }
       .cp-connect-content { padding: 2rem 1.75rem; }
-      .cp-testimonials-wrap { padding: 0 0 3rem; }
+      .cp-testimonials-wrap { padding: 0 0 2rem; }
+      /* Shorter testimonials on phones: smaller quote text, tighter spacing */
+      .cp-testimonials-hd { margin-bottom: 1.75rem; }
+      .cp-testimonial blockquote { font-size: 1.15rem; line-height: 1.6; margin-bottom: 1rem; }
+      .cp-testimonial .cp-client { font-size: 1.1rem; margin-bottom: 0; }
     }
 
     @media (prefers-reduced-motion: reduce) {
