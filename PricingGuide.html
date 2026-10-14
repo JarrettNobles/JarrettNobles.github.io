@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <!-- BEST PRACTICES ADD: SEO + theming (non-destructive) -->
   <meta name="description" content="Pricing Guide — Coral Olson Photography. Packages and investment details for portraits, weddings, and engagements." />
-  <meta name="theme-color" content="#E4DFD8" />
+  <meta name="theme-color" content="#fff" />
   <meta name="color-scheme" content="light" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -15,32 +15,33 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
   <link href="css/styles.css" rel="stylesheet" />
-  <!-- PERFORMANCE ADD: Preload first pricing image to improve LCP -->
-  <link rel="preload" as="image" href="assets/guide1.png" imagesizes="(max-width: 880px) 100vw, 880px" />
+
+  <!-- Preload the site font so the navbar renders in Black Mango immediately instead of flashing the fallback font -->
+  <link rel="preload" href="fonts/Black%20Mango%20Regular.ttf" as="font" type="font/ttf" crossorigin />
 
   <style>
+    /* Site font, matches index.html/contact.html/about.html */
     @font-face {
-  font-family: 'Juniper Bay';
-  src: url('fonts/JuniperBay-Regular.woff2') format('woff2'),
-       url('fonts/JuniperBay-Regular.woff') format('woff');
+  font-family: 'Black Mango';
+  src: url('fonts/Black Mango Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
     body {
-      font-family: 'Juniper Bay', cursive;
-      background-color: #f9f8f4;
+      font-family: 'Black Mango', cursive;
+      background-color: #fff; /* white page background, matches index.html */
     }
 
     /* ── SPLIT NAV ── */
     .site-nav {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center; /* single unified link list, centered now that the logo has moved out of the navbar (matches index.html) */
       padding: 1.4rem 4rem;
       background: #fff;
-      border-bottom: 1px solid rgba(0,0,0,0.07);
+      border-bottom: 4px solid #FFB3AE; /* pink divider line, matches about.html/About's panel divider */
       position: relative;
     }
     .nav-group {
@@ -50,23 +51,36 @@
     }
     .nav-link {
       text-decoration: none;
-      color: #1c1c1e;
+      color: #1697a6; /* teal, matches index.html's navbar text color */
+      font-family: 'Black Mango', cursive;
       font-size: 1.45rem;
       font-weight: 400;
       letter-spacing: 2.5px;
       text-transform: uppercase;
-      transition: opacity 0.2s;
+      transition: color 0.2s;
     }
-    .nav-link:hover { opacity: 0.5; }
-    .nav-brand {
-      font-family: 'Juniper Bay', cursive;
-      font-size: 1.45rem;
-      font-weight: 300;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #1c1c1e;
-      text-decoration: none;
-      white-space: nowrap;
+    /* Coral on hover, matches index.html's navbar hover + the @coralolsonphotography handle color */
+    .nav-link:hover { color: #F47068; }
+    /* Decorative seashell image pinned to the navbar's right corner (desktop only; hidden on
+       mobile below so it doesn't collide with the hamburger button, which takes that spot). */
+    .nav-decor {
+      position: absolute;
+      right: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 60px;
+      width: auto;
+      display: block;
+    }
+    /* ── LOGO (pinned to the navbar's left corner) ── */
+    .nav-logo {
+      position: absolute;
+      left: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 55px;
+      width: auto;
+      display: block;
     }
     .nav-toggle {
       display: none;
@@ -84,10 +98,16 @@
       background: #1c1c1e;
       transition: transform 0.25s, opacity 0.25s;
     }
-    @media (max-width: 900px) { .site-nav { padding: 1.1rem 2rem; } }
+    @media (max-width: 900px) {
+      .site-nav { padding: 1.1rem 2rem; }
+      .nav-logo { height: 45px; }
+    }
     @media (max-width: 768px) {
+      .site-nav { justify-content: flex-end; } /* the hamburger is now the only visible nav child, so push it to the right edge */
       .nav-group { display: none; }
       .nav-toggle { display: flex; }
+      .nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
+      .nav-logo { height: 38px; }
       .site-nav.open .nav-group {
         display: flex;
         flex-direction: column;
@@ -100,71 +120,227 @@
         border-bottom: 1px solid rgba(0,0,0,0.07);
         z-index: 100;
       }
-      .site-nav.open .nav-group:first-child { border-top: 1px solid rgba(0,0,0,0.07); }
     }
 
-    .about-image-section {
-      padding: 4rem 0;
-    }
-
-    .about-image-section img {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      display: block;
-    }
-
-    .instagram-footer {
-      position: relative;
-      height: 300px;
-      background-color: #1a1a1a;
-      overflow: hidden;
-    }
-
-    .instagram-footer .overlay-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      width: 100%;
-      color: white;
-      text-decoration: none;
-      position: relative;
-      z-index: 2;
-      transition: background-color 0.3s ease;
-      font-family: 'Juniper Bay', cursive;
-    }
-
-    .instagram-footer .overlay-link:hover {
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    .instagram-footer .overlay-content {
+    /* ── PRICING HERO (replaces the old guide1.png cover image) ── */
+    /* Centered intro block, matches contact.html's .contact-intro pattern exactly */
+    .pricing-intro {
       text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .pricing-intro .hero-eyebrow {
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #F47068; /* coral accent, matches contact.html's eyebrow line */
+      margin-bottom: 1rem;
+    }
+    .pricing-intro h1 {
+      font-family: 'Black Mango', cursive;
+      font-weight: 300;
+      font-size: clamp(2.5rem, 6vw, 4.5rem); /* scales fluidly between mobile and desktop, matches contact.html */
+      letter-spacing: 10px;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 1.5rem;
+      color: #1697a6; /* teal, matches the navbar and footer */
+    }
+    .pricing-intro p {
+      font-size: 1.2rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: #3a3a3a; /* dark gray, matches contact.html/about.html body text */
     }
 
-    .instagram-footer i.bi-instagram {
-      font-size: 1.5rem;
-      display: block;
+    /* ── PRICING CATEGORIES (Graduates / Portraits / Mini Sessions) ── */
+    .pricing-category {
+      padding: 2.5rem 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .pricing-category h2 {
+      text-align: center;
+      font-family: 'Black Mango', cursive;
+      font-weight: 300;
+      font-size: 1.8rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #1c1c1e;
+      margin-bottom: 2.5rem;
+    }
+    /* Three tiers side by side (Bronze/Silver/Gold); wraps to one column on phones below */
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    /* Used for the single "Mini" tier so it doesn't stretch full width */
+    .pricing-cards.single {
+      grid-template-columns: minmax(260px, 420px);
+      justify-content: center;
+    }
+    /* One pricing tier card */
+    .pricing-card {
+      background: #FFF4F1; /* cream, matches the card panels used elsewhere on the site */
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-top: 4px solid #FFB3AE; /* pink divider line, matches the navbar/panel dividers */
+    }
+    .pricing-card h3 {
+      font-family: 'Black Mango', cursive;
+      font-weight: 400;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #1c1c1e;
       margin-bottom: 0.5rem;
     }
-
-    .instagram-footer h2 {
-      font-weight: bold;
-      font-size: 1.5rem;
-      margin-bottom: 0.25rem;
+    .pricing-card .price {
+      font-family: 'Black Mango', cursive;
+      font-size: 2.25rem;
+      color: #1697a6; /* teal, same accent as the headings */
+      margin-bottom: 1.5rem;
+    }
+    .pricing-card ul {
+      list-style: none;
+      text-align: left;
+      display: inline-block; /* shrinks the list to its own content so text-align:center on the card still centers it */
+    }
+    .pricing-card li {
+      position: relative;
+      padding-left: 1.25rem; /* room for the coral bullet dot below */
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #3a3a3a;
+    }
+    .pricing-card li:last-child { margin-bottom: 0; }
+    /* Small coral dot standing in for the default list bullet */
+    .pricing-card li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #F47068;
     }
 
-    .instagram-footer p {
+    /* ── ADD-ONS ── */
+    .pricing-addons {
+      background: #FFF4F1;
+      padding: 3rem 1.5rem;
+      text-align: center;
+      border-top: 4px solid #FFB3AE; /* coral divider line, matches the pricing cards/navbar dividers */
+      border-bottom: 4px solid #FFB3AE; /* coral divider line, closes off the section */
+    }
+    .pricing-addons h2 {
+      font-family: 'Black Mango', cursive;
+      font-weight: 300;
+      font-size: 1.8rem;
+      letter-spacing: 6px;
       text-transform: uppercase;
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-      color: #e0e0e0;
+      color: #1c1c1e;
+      margin-bottom: 2rem;
+    }
+    .addons-list {
+      list-style: none;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .addons-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      font-size: 1.05rem;
+      color: #3a3a3a;
+    }
+    .addons-list li:last-child { border-bottom: none; }
+    /* The price half of each add-on row */
+    .addons-list li span:last-child {
+      color: #1697a6;
+      font-weight: 600;
+      white-space: nowrap;
     }
 
-    footer .small {
-      font-family: 'Juniper Bay', cursive;
+    /* ── CLOSING THANK-YOU NOTE ── */
+    .pricing-thankyou {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+      text-align: center;
+    }
+    .pricing-thankyou p {
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: #3a3a3a;
+    }
+
+    @media (max-width: 768px) {
+      .pricing-cards,
+      .pricing-cards.single {
+        grid-template-columns: 1fr; /* stack tiers vertically on phones */
+      }
+    }
+
+    /* The footer band that contains the "click to open Instagram" call-to-action, matches
+       index.html/contact.html's Instagram footer exactly. */
+    .instagram-footer {
+      background-color: #FFF4F1;
+      padding: 4rem 2rem;
+      text-align: center;
+      border-top: 4px solid #FFB3AE; /* coral divider line, matches the pricing cards/navbar dividers */
+      /* Overrides css/styles.css's old .instagram-footer rules (position/height/overflow),
+         which are leftovers from the original dark hover-reveal design and no longer apply here */
+      position: static;
+      height: auto;
+      overflow: visible;
+    }
+    /* css/styles.css also adds an invisible ::after overlay for that old design
+       (position:absolute; inset:0), which — even at opacity:0 — sits on top of the link
+       and silently blocks clicks. Removing it entirely fixes the Instagram link. */
+    .instagram-footer::after {
+      display: none;
+    }
+    .instagram-footer a {
+      display: inline-block;
+      color: #1697a6; /* teal, matches index.html's Instagram footer */
+      text-decoration: none;
+    }
+    .instagram-footer a:hover { opacity: 0.75; }
+    .instagram-footer i {
+      font-size: 1.4rem;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .instagram-footer h2 {
+      font-family: 'Black Mango', cursive;
+      font-weight: 300;
+      font-size: 1.4rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .instagram-footer p {
       font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #F47068; /* coral, matches the @coralolsonphotography handle on index.html */
+    }
+    /* Bottom-most strip with the copyright line, matches index.html/contact.html's teal footer strip */
+    .footer-bottom {
+      background: #1697a6;
+      color: #fff;
+      padding: 1.1rem 3rem;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
     }
 
     /* --------- MOBILE & A11Y ENHANCEMENTS (ADDED) --------- */
@@ -173,31 +349,6 @@
     .navbar { border-bottom: 1px solid rgba(0,0,0,0.06); }
     .navbar-toggler { border: 1px solid rgba(0,0,0,0.2) !important; }
     .navbar-nav .nav-link { padding: .75rem .75rem; } /* bigger tap targets */
-
-    /* Constrain content width while staying centered on large screens */
-    .pricing-container { max-width: 960px; margin-inline: auto; }
-
-    /* Gentle elevation for the pricing images (kept subtle) */
-    .about-image-section img { box-shadow: 0 2px 18px rgba(0,0,0,0.06); }
-
-    /* Phone-friendly spacing and footer sizing */
-    @media (max-width: 576px) {
-      .about-image-section { padding: 2.25rem 0; }
-      .instagram-footer { height: 220px; }
-      .instagram-footer h2 { font-size: 1.25rem; }
-      .instagram-footer i.bi-instagram { font-size: 1.25rem; }
-      .instagram-footer p { font-size: 0.7rem; letter-spacing: 1.5px; }
-    }
-
-    /* Avoid iOS white gaps: ensure images keep natural aspect on small screens */
-    @media (max-width: 768px) {
-      .about-image-section img {
-        width: 100% !important;
-        height: auto !important;
-        object-fit: contain !important;
-        display: block;
-      }
-    }
 
     /* Respect reduced motion */
     @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
@@ -229,15 +380,14 @@
 
   <!-- Navigation -->
   <nav class="site-nav" id="siteNav" role="navigation" aria-label="Primary">
+    <a href="/" aria-label="Coral Olson Photography — Home">
+      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography" class="nav-logo">
+    </a>
+
     <div class="nav-group">
       <a class="nav-link" href="/">Home</a>
-      <a class="nav-link" href="resume.html">About</a>
+      <a class="nav-link" href="about.html">About</a>
       <a class="nav-link" href="projects.html">Portfolio</a>
-    </div>
-
-    <a class="nav-brand" href="/">Coral Olson Photography</a>
-
-    <div class="nav-group">
       <a class="nav-link" href="PricingGuide.html">Investment</a>
       <a class="nav-link" href="contact.html">Contact</a>
     </div>
@@ -245,52 +395,133 @@
     <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
+
+    <img src="assets/seashell.jpg" alt="" class="nav-decor" aria-hidden="true">
   </nav>
 
-  <!-- About Image Section -->
-  <section class="about-image-section" aria-labelledby="pricing-heading">
-    <h1 id="pricing-heading" class="sr-only">Photography Pricing Guide</h1>
-    <div class="container px-5 pricing-container">
-      <!-- Added attributes are non-destructive; your <img> tags remain -->
-      <img src="assets/guide1.png" alt="Pricing guide 1" class="no-save"
-           loading="eager" fetchpriority="high" decoding="async"
-           width="1200" height="1600" sizes="(max-width: 960px) 100vw, 960px">
-      <img src="assets/guide3.png" alt="Pricing guide 3" class="no-save"
-           loading="lazy" decoding="async"
-           width="1200" height="1600" sizes="(max-width: 960px) 100vw, 960px">
-      <img src="assets/guide2.png" alt="Pricing guide 2" class="no-save"
-           loading="lazy" decoding="async"
-           width="1200" height="1600" sizes="(max-width: 960px) 100vw, 960px">
-      <img src="assets/guide4.png" alt="Pricing guide 4" class="no-save"
-           loading="lazy" decoding="async"
-           width="1200" height="1600" sizes="(max-width: 960px) 100vw, 960px">
+  <!-- Intro heading: replaces the old guide1.png cover image (title + photo + "Book Now!" badge).
+       Plain text, matching contact.html's intro treatment, instead of a static picture. -->
+  <section class="pricing-intro" aria-labelledby="pricing-heading">
+    <p class="hero-eyebrow">Portrait &middot; Family &middot; Engagements</p>
+    <h1 id="pricing-heading">Pricing Guide</h1>
+    <p>Every session is tailored to you. Browse the packages below, or reach out and I'll help you find the right fit.</p>
+  </section>
+
+  <!-- Graduates: replaces guide3.png -->
+  <section class="pricing-category" aria-labelledby="graduates-heading">
+    <h2 id="graduates-heading">Graduates</h2>
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        <h3>Bronze</h3>
+        <p class="price">$150</p>
+        <ul>
+          <li>30 minute photo session</li>
+          <li>1 outfit; 1 location</li>
+          <li>$50 non-refundable deposit</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Silver</h3>
+        <p class="price">$230</p>
+        <ul>
+          <li>45 minute photo session</li>
+          <li>2 outfits; 2 locations (if on a campus, within that campus)</li>
+          <li>$75 non-refundable deposit</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Gold</h3>
+        <p class="price">$320</p>
+        <ul>
+          <li>60 minute photo session</li>
+          <li>3 outfits; 3 locations (if on a campus, within that campus)</li>
+          <li>$100 non-refundable deposit</li>
+        </ul>
+      </div>
     </div>
+  </section>
+
+  <!-- Portraits: replaces guide2.png -->
+  <section class="pricing-category" aria-labelledby="portraits-heading">
+    <h2 id="portraits-heading">Portraits</h2>
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        <h3>Bronze</h3>
+        <p class="price">$170</p>
+        <ul>
+          <li>30 minute photo session</li>
+          <li>1 location</li>
+          <li>$50 non-refundable deposit</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Silver</h3>
+        <p class="price">$250</p>
+        <ul>
+          <li>45 minute photo session</li>
+          <li>1 location</li>
+          <li>$75 non-refundable deposit</li>
+        </ul>
+      </div>
+      <div class="pricing-card">
+        <h3>Gold</h3>
+        <p class="price">$340</p>
+        <ul>
+          <li>60 minute photo session</li>
+          <li>1 location</li>
+          <li>$100 non-refundable deposit</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mini Sessions + Add-Ons: replaces guide4.png -->
+  <section class="pricing-category" aria-labelledby="mini-heading">
+    <h2 id="mini-heading">Mini Sessions</h2>
+    <div class="pricing-cards single">
+      <div class="pricing-card">
+        <h3>Mini</h3>
+        <p class="price">$120</p>
+        <ul>
+          <li>15 minute photo session</li>
+          <li>1 location</li>
+          <li>$50 non-refundable deposit</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing-addons" aria-labelledby="addons-heading">
+    <h2 id="addons-heading">Add-Ons</h2>
+    <ul class="addons-list">
+      <li><span>Travel Fee (40+ miles)</span><span>$50</span></li>
+      <li><span>Rush Delivery (within 48 hours)</span><span>$50</span></li>
+    </ul>
+  </section>
+
+  <!-- Closing note: replaces the thank-you paragraph at the bottom of guide4.png -->
+  <section class="pricing-thankyou">
+    <p>Thank you so much for considering me to capture your special moments! I truly appreciate your support. If you have any questions about my pricing or which package is right for you, feel free to reach out &mdash; I'm always happy to help. Please note that my turnaround time for edited photos is about 2-3 weeks, but you'll receive sneak peeks within a few days so you can relive the moment right away. I can't wait to work with you!</p>
   </section>
 
 </main>
 
 <!-- Footer -->
 <footer class="mt-auto" role="contentinfo">
+  <!-- Instagram call-to-action band: clicking anywhere opens the Instagram profile in a new tab.
+       Matches index.html/contact.html's Instagram footer exactly. -->
   <section class="instagram-footer">
-    <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3" target="_blank" rel="noopener" class="overlay-link" aria-label="Open Coral Olson Photography on Instagram in a new tab">
-      <div class="overlay-content">
-        <i class="bi bi-instagram" aria-hidden="true"></i>
-        <h2>Instagram</h2>
-        <p>@coralolsonphotography</p>
-      </div>
+    <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3"
+       target="_blank" rel="noopener"
+       aria-label="Open Coral Olson Photography on Instagram in a new tab">
+      <i class="bi bi-instagram" aria-hidden="true"></i>
+      <h2>Instagram</h2>
+      <p>@coralolsonphotography</p>
     </a>
   </section>
-
-  <div class="py-4" style="background-color: #1a1a1a; color: white;">
-    <div class="container px-5">
-      <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-        <div class="col-auto">
-          <div class="small m-0 text-center text-sm-start">
-            Copyright &copy; Coral Olson 2025
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- Bottom-most copyright strip -->
+  <div class="footer-bottom">
+    Copyright &copy; Coral Olson 2025
   </div>
 </footer>
 

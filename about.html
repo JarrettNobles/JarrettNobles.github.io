@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character encoding for the document -->
+  <meta charset="utf-8" />
+  <!-- BEST PRACTICES ADD: SEO + theming (non-destructive) -->
+  <!-- SEO: description shown in search engine results and social link previews -->
+  <meta name="description" content="Meet Coral Olson — Louisiana based photographer specializing in timeless, natural-light imagery." />
+  <!-- Sets the color of the browser UI (e.g. mobile browser address bar) to match this page's cream background -->
+  <meta name="theme-color" content="#fff" />
+  <!-- Tells the browser this page only supports light mode (prevents forced dark-mode form controls, etc.) -->
+  <meta name="color-scheme" content="light" />
+
+  <!-- Makes the page render at device width and scale 1 on phones/tablets instead of a zoomed-out desktop layout -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Browser tab title / search result title -->
+  <title>About Me | Coral Olson Photography</title>
+  <!-- Browser tab favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Preconnect hints: open the connection to Google Fonts' domains early so the actual font request (below) is faster -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Loads the Google Fonts "Cormorant Garamond" and "Montserrat" families (used elsewhere on the site, e.g. shared styles.css) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet" />
+  <!-- Bootstrap Icons icon font, used below for the Instagram icon (<i class="bi bi-instagram">) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Site-wide shared stylesheet (Bootstrap layout classes like .container, .row, .py-4, etc. come from here) -->
+  <link href="css/styles.css" rel="stylesheet" />
+
+  <!-- PERFORMANCE ADD: Preload the hero image to improve LCP -->
+  <!-- Tells the browser to start downloading this image immediately instead of waiting for it to be discovered
+       in the (currently commented-out) <img> tag below. Improves Largest Contentful Paint if that section is enabled. -->
+  <link rel="preload" as="image" href="assets/AboutMe2.png" imagesizes="(max-width: 820px) 100vw, 800px" />
+
+  <!-- Preload the site font so the navbar renders in Black Mango immediately instead of flashing the fallback font -->
+  <link rel="preload" href="fonts/Black%20Mango%20Regular.ttf" as="font" type="font/ttf" crossorigin />
+
+  <!-- All page-specific CSS for about.html lives in this <style> block -->
+  <style>
+    /* Custom font declaration: loads the local "Black Mango Regular.ttf" file from /fonts
+       and registers it under the family name 'Black Mango' so it can be used anywhere below via font-family. */
+    @font-face {
+  font-family: 'Black Mango';
+  src: url('fonts/Black Mango Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* show fallback text immediately, swap to Black Mango once it finishes loading (avoids invisible text) */
+}
+
+    /* Base page styling: applies to the whole <body> unless overridden by a more specific rule */
+    body {
+      font-family: 'Black Mango', cursive; /* custom display font, falls back to a generic cursive font if it fails to load */
+      background-color: #fff; /* white page background, matches index.html */
+    }
+
+    /* ── SPLIT NAV ── */
+    /* The top navigation bar: a flex row with links on the left, the site name/logo in the middle, and links on the right */
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* single unified link list, centered now that the logo has moved out of the navbar (matches index.html) */
+      padding: 1.4rem 4rem;
+      background: #fff; /* plain white nav, matches projects.html/family.html/etc. */
+      border-bottom: 4px solid #FFB3AE; /* pink divider line, matches this page's About panel divider */
+      position: relative; /* lets the mobile dropdown menu below be positioned relative to this bar */
+    }
+    /* The nav links */
+    .nav-group {
+      display: flex;
+      gap: 2.25rem; /* spacing between individual nav links */
+      align-items: center;
+    }
+    /* Individual nav link styling (Home, About, Portfolio, Investment, Contact) */
+    .nav-link {
+      text-decoration: none; /* removes the default underline on <a> tags */
+      color: #1697a6; /* teal, matches index.html's navbar text color */
+      font-size: 1.45rem;
+      font-weight: 400;
+      letter-spacing: 2.5px; /* extra spacing between letters for a stylized uppercase look */
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    /* Coral on hover, matches index.html's navbar hover + the @coralolsonphotography handle color */
+    .nav-link:hover { color: #F47068; }
+    /* Decorative seashell image pinned to the navbar's right corner (desktop only; hidden on
+       mobile below so it doesn't collide with the hamburger button, which takes that spot). */
+    .nav-decor {
+      position: absolute;
+      right: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 60px;
+      width: auto;
+      display: block;
+    }
+    /* ── LOGO (pinned to the navbar's left corner) ── */
+    .nav-logo {
+      position: absolute;
+      left: 1.25rem;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 55px;
+      width: auto;
+      display: block;
+    }
+    /* The hamburger menu button, hidden by default and only shown on small screens (see media query below) */
+    .nav-toggle {
+      display: none; /* hidden on desktop; flipped to display:flex at <=768px */
+      background: none;
+      border: none;
+      cursor: pointer;
+      flex-direction: column; /* stacks the 3 <span> bars vertically to form the hamburger icon */
+      gap: 5px;
+      padding: 4px;
+    }
+    /* The three horizontal bars that make up the hamburger icon */
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: #1c1c1e;
+      transition: transform 0.25s, opacity 0.25s; /* reserved for animating the icon if it's ever turned into an X on open */
+    }
+    /* Slightly reduce the nav's horizontal padding on medium/tablet screens */
+    @media (max-width: 900px) {
+      .site-nav { padding: 1.1rem 2rem; }
+      .nav-logo { height: 45px; }
+    }
+    /* Mobile nav behavior: collapse the link group into a hamburger-triggered dropdown menu */
+    @media (max-width: 768px) {
+      .site-nav { justify-content: flex-end; } /* the hamburger is now the only visible nav child, so push it to the right edge */
+      .nav-group { display: none; } /* hide the link group by default on mobile */
+      .nav-toggle { display: flex; } /* show the hamburger button */
+      .nav-decor { display: none; } /* hide the seashell so it doesn't collide with the hamburger button in the same corner */
+      .nav-logo { height: 38px; }
+      /* When JS adds the "open" class to #siteNav (see toggle script below), reveal the nav links
+         as a full-width dropdown panel positioned right under the nav bar */
+      .site-nav.open .nav-group {
+        display: flex;
+        flex-direction: column; /* stack links vertically in the dropdown */
+        gap: 1.25rem;
+        position: absolute;
+        top: 100%; /* sits directly below the nav bar */
+        left: 0; right: 0; /* stretches full width */
+        background: #fff;
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid rgba(0,0,0,0.07);
+        z-index: 100; /* sits above other page content */
+      }
+    }
+
+    /* Vertical padding around the (currently disabled/commented-out) About image section */
+    .about-image-section {
+      padding: 4rem 0;
+    }
+
+    /* Styling for the hero/about image inside .about-image-section, if that section is re-enabled */
+    .about-image-section img {
+      width: 100%;
+      height: auto; /* preserves aspect ratio as width scales */
+      border-radius: 12px; /* rounded corners on the photo */
+      display: block; /* removes the small inline-image gap under the element */
+    }
+
+    /* The footer band that contains the "click to open Instagram" call-to-action, matches
+       index.html/contact.html's Instagram footer exactly. */
+    .instagram-footer {
+      background-color: #FFF4F1;
+      padding: 4rem 2rem;
+      text-align: center;
+      /* Overrides css/styles.css's old .instagram-footer rules (position/height/overflow),
+         which are leftovers from the original dark hover-reveal design and no longer apply here */
+      position: static;
+      height: auto;
+      overflow: visible;
+    }
+    /* css/styles.css also adds an invisible ::after overlay for that old design
+       (position:absolute; inset:0), which — even at opacity:0 — sits on top of the link
+       and silently blocks clicks. Removing it entirely fixes the Instagram link. */
+    .instagram-footer::after {
+      display: none;
+    }
+    .instagram-footer a {
+      display: inline-block;
+      color: #1697a6; /* teal, matches index.html's Instagram footer */
+      text-decoration: none;
+    }
+    .instagram-footer a:hover { opacity: 0.75; }
+    .instagram-footer i {
+      font-size: 1.4rem;
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .instagram-footer h2 {
+      font-family: 'Black Mango', cursive;
+      font-weight: 300;
+      font-size: 1.4rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .instagram-footer p {
+      font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #F47068; /* coral, matches the @coralolsonphotography handle on index.html */
+    }
+    /* Bottom-most strip with the copyright line, matches index.html/contact.html's teal footer strip */
+    .footer-bottom {
+      background: #1697a6;
+      color: #fff;
+      padding: 1.1rem 3rem;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    /* --------- MOBILE & A11Y ENHANCEMENTS (ADDED) --------- */
+
+    /* Tappable nav targets + subtle divider */
+    /* These target Bootstrap's own .navbar classes (not the custom .site-nav above) — kept in case
+       Bootstrap's navbar component is used elsewhere on this page or reused from shared markup. */
+    .navbar { border-bottom: 1px solid rgba(0,0,0,0.06); }
+    .navbar-toggler { border: 1px solid rgba(0,0,0,0.2) !important; }
+    .navbar-nav .nav-link { padding: .75rem .75rem; } /* bigger tap target for touch screens */
+
+    /* Constrain content width nicely on larger tablets/desktops */
+    /* Centers and caps the width of the (currently disabled) About section's inner container */
+    .about-container { max-width: 960px; margin-inline: auto; }
+
+    /* Phone-friendly spacing/typography: shrinks paddings/font sizes on very small screens (<=576px, e.g. phones) */
+    @media (max-width: 576px) {
+      .about-image-section { padding: 2.25rem 0; }
+    }
+
+    /* Respect reduced motion: disables all CSS transitions/animations site-wide for users who have
+       enabled "reduce motion" in their OS accessibility settings (helps with motion sensitivity) */
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+    /* LONG‑PRESS / SAVE PROTECTION (ADDED, NON‑DESTRUCTIVE) */
+    /* Applied to <img> elements (see protection script below) to make it harder to select/drag/long-press-save
+       the photographer's images. Note: this is a deterrent only, not real DRM — images can still be saved
+       via browser dev tools, screenshots, etc. */
+    .no-save {
+      -webkit-touch-callout: none; /* disables the iOS Safari "save image / copy" long-press menu */
+      -webkit-user-select: none;   /* disables text/image selection (Safari/old WebKit) */
+      -ms-user-select: none;       /* disables selection in old Edge/IE */
+      user-select: none;           /* disables selection in modern standards-based browsers */
+      -webkit-user-drag: none;     /* disables the native drag-to-desktop/drag-to-tab behavior in WebKit */
+      -user-drag: none;
+      touch-action: manipulation;  /* removes the 300ms tap delay and disables some touch gestures like double-tap-zoom */
+      -webkit-tap-highlight-color: transparent; /* removes the gray flash Android/iOS shows when tapping a link/image */
+    }
+
+    /* Helper for screen readers: visually hides an element (e.g. the <h1> below) while keeping it
+       readable by assistive technology — standard "sr-only" accessibility utility pattern */
+    .sr-only {
+      position: absolute !important;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,1px,1px);
+      white-space: nowrap; border: 0;
+    }
+
+    /* ── ABOUT PAGE PANELS ── */
+    /* Shared layout/typography for the two full-width content bands below (.stripes and .waves
+       supply the background patterns; this class handles spacing + text styling for both). */
+    .about-panel {
+      padding: 5rem 1.5rem;
+      border-bottom: 4px solid #FFB3AE; /* divider line between/after panels */
+    }
+    /* Pushes the panels further down from the nav bar */
+    .about-panel-top {
+      margin-top: 0;
+      border-top: 4px solid #FFB3AE; /* divider line above the first panel */
+    }
+    .about-panel-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .about-panel h2 {
+      font-family: 'Black Mango', cursive;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: #1c1c1e;
+      margin-bottom: 1.25rem;
+    }
+    .about-panel p {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      line-height: 1.9;
+      color: #3a3a3a;
+      margin: 0;
+    }
+    .about-panel p + p {
+      margin-top: 1.25rem;
+    }
+    @media (max-width: 576px) {
+      .about-panel { padding: 3rem 1.5rem; }
+      .about-panel-top { margin-top: 0; }
+    }
+
+    /* ── MEET YOUR PHOTOGRAPHER (framed photo of Coral + her bio text, side by side) ──
+       coralbeach-framed1.png is a pre-composited image (cropped from camera-to-face + frame1.png
+       overlaid, via Pillow) so the photo itself is just a single <img>, not a CSS layering trick.
+       The vertical-stripe background covers this whole section so it runs continuously down to
+       where the Instagram footer starts. */
+    .meet-photographer-panel {
+      background: repeating-linear-gradient(
+        90deg,               /* 90deg = horizontal direction, so the hard color stops read as vertical stripes */
+        #ffffff 0px,
+        #ffffff 40px,
+        #FFB3AE 40px,
+        #FFB3AE 80px
+      );
+      padding-top: 0.5rem;    /* shrinks the gap below the nav/striped photo section */
+      padding-bottom: 0.5rem; /* shrinks the gap before the Instagram footer, pulling it up */
+    }
+    .meet-photographer-row {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    .meet-photographer-photo {
+      flex: 0 0 auto;
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+    }
+    /* The translucent white card that keeps the text readable over the stripes (same treatment
+       the stripes/waves panels use) */
+    .meet-photographer-text {
+      flex: 1 1 auto;
+      background: rgba(255, 255, 255, 0.85);
+      padding: 2.5rem 2rem;
+      text-align: left;
+    }
+    @media (max-width: 768px) {
+      .meet-photographer-row { flex-direction: column; }
+      .meet-photographer-text { text-align: center; }
+    }
+
+    /* Watercolor sea life pattern background (first panel, "Behind the Lens"), replaces the old
+       diagonal stripes. The text sits on a translucent white card so it stays readable over the art. */
+    .stripes {
+      background: #cfe8ea url("assets/shell1.jpg") center / cover no-repeat;
+      min-height: 60vh; /* gives the panel enough height that cover doesn't have to crop most of the photo away */
+    }
+    @media (max-width: 576px) {
+      .stripes { min-height: 45vh; }
+    }
+    .stripes .about-panel-inner {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 2.5rem 2rem;
+    }
+
+    /* Beach photo background (second panel). beach.jpg is a tall portrait shot (mostly sky, with the
+       horizon/pier near the bottom), so it's positioned toward the bottom rather than center so cover
+       doesn't just show empty sky. */
+    .waves {
+      background-color: #cfe3d8;  /* base mint, shows briefly while the photo loads */
+      background-image: url("assets/beach2.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center bottom;
+      min-height: 60vh; /* gives cover enough room that it doesn't have to crop most of the photo away */
+    }
+    @media (max-width: 576px) {
+      .waves { min-height: 45vh; }
+    }
+    .waves .about-panel-inner {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 2.5rem 2rem;
+    }
+  </style>
+</head>
+<!-- d-flex flex-column h-100: Bootstrap utility classes that make the body a full-height flex column,
+     so the footer sticks to the bottom of the viewport even on short pages -->
+<body class="d-flex flex-column h-100">
+<!-- Main landmark region: everything between the nav and the footer. role="main" + id="main-content"
+     helps screen readers and any "skip to content" link jump straight here. -->
+<main class="flex-shrink-0" role="main" id="main-content"><!-- landmark added -->
+  <!-- Navigation -->
+  <!-- Top navigation bar. id="siteNav" is targeted by the mobile-toggle script below, which adds/removes
+       the "open" class to show/hide the mobile dropdown menu (see .site-nav.open CSS above). -->
+  <nav class="site-nav" id="siteNav" role="navigation" aria-label="Primary">
+    <a href="/" aria-label="Coral Olson Photography — Home">
+      <img src="assets/Coral's Logo-Blue.png" alt="Coral Olson Photography" class="nav-logo">
+    </a>
+
+    <!-- Nav links, merged into a single centered group now that the logo lives below the nav -->
+    <div class="nav-group">
+      <a class="nav-link" href="/">Home</a>
+      <a class="nav-link" href="about.html">About</a> <!-- this page (About/Resume) -->
+      <a class="nav-link" href="projects.html">Portfolio</a>
+      <a class="nav-link" href="PricingGuide.html">Investment</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </div>
+
+    <!-- Hamburger menu button, only visible on mobile widths (<=768px). Clicking it runs the toggle
+         script below, which flips the "open" class on <nav id="siteNav"> and updates aria-expanded
+         for screen readers. -->
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span> <!-- the 3 bars of the hamburger icon -->
+    </button>
+
+    <img src="assets/seashell.jpg" alt="" class="nav-decor" aria-hidden="true">
+  </nav>
+
+
+
+  <!-- Meet Your Photographer: framed photo of Coral to the left of her bio text -->
+  <section class="about-panel meet-photographer-panel" aria-labelledby="about-heading-1">
+    <div class="container meet-photographer-row">
+      <img src="assets/coralbeach-framed1.png" alt="Coral holding her camera" class="meet-photographer-photo">
+      <div class="meet-photographer-text">
+        <h2 id="about-heading-1">Meet Your Photographer</h2>
+        <p>Hi, I'm Coral! I'm all about capturing those real, honest moments that make life special. Whether it's a grad celebrating a big milestone, a family hanging out together, or just a portrait that shows who you really are! I'm here to freeze those memories in time. What keeps me going? Seeing my clients light up when they see their photos. I'm excited to be turning my passion for photography into a business and sharing it with you.</p>
+        <p>Outside of photography, I love spending time at the beach and hanging out with friends and family. If you're ready to capture some great moments, I'd love to work with you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DO NOT UNCOMMENT About panel 1: Shell pattern background 
+  <section class="about-panel about-panel-top stripes" aria-labelledby="about-heading-1">
+    <div class="container about-panel-inner">
+      <h2 id="about-heading-1">Meet Your Photographer</h2>
+      <p>Hi, I'm Coral! I'm all about capturing those real, honest moments that make life special. Whether it's a grad celebrating a big milestone, a family hanging out together, or just a portrait that shows who you really are—I'm here to freeze those memories in time. What keeps me going? Seeing my clients light up when they see their photos. I'm excited to be turning my passion for photography into a business and sharing it with you.</p>
+      <p>Outside of photography, I love spending time at the beach and hanging out with friends and family. If you're ready to capture some great moments, I'd love to work with you.</p>
+    </div>
+  </section>
+  -->
+
+  <!-- DO NOT UNCOMMENT About panel 2: tiled wave background
+  <section class="about-panel waves" aria-labelledby="about-heading-2">
+    <div class="container about-panel-inner">
+      <h2 id="about-heading-2">My Hobbies</h2>
+      <p>Outside of photography, I love spending time at the beach and hanging out with friends and family. If you're ready to capture some great moments, I'd love to work with you.</p>
+    </div>
+  </section>
+  -->
+
+</main>
+
+<!-- Footer -->
+<!-- Site footer: contains the Instagram call-to-action band and the copyright strip -->
+<footer class="mt-auto" role="contentinfo">
+  <!-- Instagram call-to-action band: clicking anywhere opens the Instagram profile in a new tab.
+       Matches index.html/contact.html's Instagram footer exactly. -->
+  <section class="instagram-footer">
+    <a href="https://www.instagram.com/coralolsonphotography/?igsh=dXpzNXQ2dGx3cWs3"
+       target="_blank" rel="noopener"
+       aria-label="Open Coral Olson Photography on Instagram in a new tab">
+      <i class="bi bi-instagram" aria-hidden="true"></i> <!-- decorative icon; aria-hidden because the aria-label above already describes the link -->
+      <h2>Instagram</h2>
+      <p>@coralolsonphotography</p>
+    </a>
+  </section>
+  <!-- Bottom-most copyright strip -->
+  <div class="footer-bottom">
+    Copyright &copy; Coral Olson 2025
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<!-- Mobile nav toggle -->
+<!-- Wires up the hamburger button (#navToggle) to open/close the mobile nav dropdown (#siteNav) -->
+<script>
+  (function () {
+    'use strict';
+    var nav = document.getElementById('siteNav'); // the <nav class="site-nav"> element
+    var btn = document.getElementById('navToggle'); // the hamburger <button>
+    if (btn && nav) { // guard in case either element is missing from the page
+      btn.addEventListener('click', function () {
+        // toggle() returns true if the "open" class ended up added, false if removed
+        var open = nav.classList.toggle('open');
+        // keep the button's ARIA state in sync with the visual state for screen readers
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+  })();
+</script>
+
+<!-- Protection Script -->
+<!-- Best-effort deterrents against copying page text and saving/dragging images. These are UX
+     speed bumps, not real security — the underlying image files are still reachable via dev tools,
+     view-source, or a screenshot. Also adds a couple of small accessibility/UX touches. -->
+<script>
+  /* BEST PRACTICES: isolate in IIFE + strict mode; keep your original behavior intact */
+  (function(){
+    'use strict';
+    document.addEventListener('DOMContentLoaded', function () {
+      // Disable cut, copy, paste
+      // Blocks the browser's native cut/copy/paste actions anywhere in the page body
+      document.body.addEventListener('cut', e => e.preventDefault(), { passive: false });
+      document.body.addEventListener('copy', e => e.preventDefault(), { passive: false });
+      document.body.addEventListener('paste', e => e.preventDefault(), { passive: false });
+
+      // Disable right-click and drag on images
+      // Grabs every <img> currently in the DOM at page load
+      const images = document.querySelectorAll('img');
+      images.forEach(img => {
+        img.addEventListener('contextmenu', e => e.preventDefault(), { passive: false }); // blocks right-click "Save image as..." menu
+        img.addEventListener('dragstart', e => e.preventDefault(), { passive: false }); // blocks dragging the image out to desktop/another tab
+        img.setAttribute('draggable', 'false'); // belt-and-braces: also disables HTML5 drag via the attribute
+        // ensure mobile protection class even if not in markup
+        img.classList.add('no-save'); // applies the .no-save CSS (defined above) even to images that didn't already have the class in HTML
+      });
+
+      // a11y: visible focus ring without global CSS changes
+      // Adds a visible outline to any link/button while it's keyboard-focused (Tab key navigation),
+      // without having to add a global :focus CSS rule that might clash with other styles
+      document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('focus', () => el.style.outline = '2px solid rgba(0,0,0,0.35)', { passive: true });
+        el.addEventListener('blur',  () => el.style.outline = 'none', { passive: true });
+      });
+
+      /* EXTRA: iOS/Android long-press guard (non-destructive) */
+      // contextmenu/dragstart don't reliably fire on touch devices, so this recreates similar
+      // protection for phones/tablets: if a touch on an image is held for 450ms+, treat it as a
+      // long-press and suppress it (this is what normally triggers the iOS "Save Image" sheet).
+      let pressTimer;
+      images.forEach(img => {
+        const cancelTimer = () => { if (pressTimer) { clearTimeout(pressTimer); pressTimer = null; } };
+
+        img.addEventListener('touchstart', (e) => {
+          // allow normal taps/scroll; only block if it becomes a long press
+          pressTimer = setTimeout(() => { try { e.preventDefault(); } catch {} }, 450);
+        }, { passive: false });
+
+        // any of these signal the touch ended or turned into a scroll/tap, so cancel the pending long-press block
+        img.addEventListener('touchend', cancelTimer, { passive: true });
+        img.addEventListener('touchmove', cancelTimer, { passive: true });
+        img.addEventListener('pointerup', cancelTimer, { passive: true });
+
+        // iOS gesture safeguard: blocks pinch-zoom/rotate gestures starting on an image
+        img.addEventListener('gesturestart', (e) => e.preventDefault(), { passive: false });
+      });
+
+      // Reduced data mode: slightly lighten lazy decode if present later
+      // If the user's browser/OS has "reduce data usage" enabled, drop the decoding="async" hint
+      // from any lazy-loaded images so the browser doesn't reserve extra resources decoding them ahead of need
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-data: reduce)').matches) {
+        document.querySelectorAll('img[loading="lazy"]').forEach(img => img.removeAttribute('decoding'));
+      }
+    });
+  })();
+</script>
+</body>
+</html>
