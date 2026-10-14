@@ -32,7 +32,7 @@ A clean, minimal photography portfolio website for Coral Olson, built with stati
 - Hero image carousel (Bootstrap) — **currently commented out** in the HTML; re-enable by removing the wrapping comment around the "HERO CAROUSEL" section
 - Philosophy section with offset stacked photos
 - Selected Works 3-column grid
-- Testimonials section — 4 reviews displayed 3 at a time with ← → arrow navigation
+- Testimonials section — swipeable carousel (3 per page on desktop, 1 on mobile) with ← → arrows, page dots / page count, and autoplay (30s desktop, 10s mobile) with a progress bar and pause button
 - Instagram grid (6 photos) + social links
 - Footer with nav links
 

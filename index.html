@@ -3,13 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Ask browsers to re-check for updates instead of reusing an old cached copy -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Coral Olson Photography</title>
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-  <link href="css/styles.css" rel="stylesheet" />
+  <link href="css/styles.css?v=2026-10-13" rel="stylesheet" />
   <!-- Preload the site font so the navbar renders in Black Mango immediately instead of flashing the fallback font -->
   <link rel="preload" href="fonts/Black%20Mango%20Regular.ttf" as="font" type="font/ttf" crossorigin />
 
@@ -440,6 +444,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap; /* lets the controls drop below the label on very narrow screens */
+      gap: 1rem;
       margin-bottom: 3.5rem;
     }
 
@@ -455,11 +461,66 @@
       transition: color 0.2s;
     }
     .cp-t-arrows button:hover { color: #1a1a1a; }
+    .cp-t-arrows button:disabled { opacity: .35; cursor: not-allowed; }
+    .cp-t-arrows button:disabled:hover { color: #666; }
+
+    /* Carousel controls: arrows, page dots (desktop) / page count (mobile),
+       autoplay progress bar and pause toggle */
+    .cp-t-arrows {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .cp-t-dots { display: flex; gap: 8px; align-items: center; }
+    .cp-t-dot {
+      width: 6px;
+      height: 6px;
+      padding: 0 !important;
+      border-radius: 99px;
+      background: #cfc8bc !important;
+      transition: width 0.2s, background 0.2s;
+    }
+    .cp-t-dot[aria-current="true"] { width: 18px; background: #B5914A !important; }
+    .cp-t-count {
+      display: none;
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      color: #666;
+      white-space: nowrap;
+    }
+    .cp-t-progress {
+      width: 56px;
+      height: 2px;
+      background: #dcd6cb;
+      overflow: hidden;
+      flex: 0 0 56px;
+    }
+    .cp-t-progress-fill {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #B5914A;
+      transform: scaleX(0);
+      transform-origin: left center;
+    }
+    .cp-t-arrows .cp-t-pause { font-size: 0.85rem; }
+    .cp-t-arrows .cp-t-pause[aria-pressed="true"] { color: #B5914A; }
 
     .cp-testimonials-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      display: flex;
       gap: 3rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      overscroll-behavior-x: contain;
+    }
+    .cp-testimonials-grid::-webkit-scrollbar { display: none; }
+    .cp-testimonials-grid:focus-visible { outline: 1px dotted #B5914A; outline-offset: 6px; }
+    .cp-testimonial {
+      flex: 0 0 calc((100% - 6rem) / 3);
+      min-width: 0;
+      scroll-snap-align: start;
     }
 
     .cp-testimonial blockquote {
@@ -642,7 +703,12 @@
       }
       .cp-works-grid .cp-tall { grid-row: span 2; }
 
-      .cp-testimonials-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .cp-testimonials-grid { gap: 2.5rem; }
+      .cp-testimonial { flex-basis: 100%; }
+      .cp-t-dots { display: none; }
+      .cp-t-count { display: inline; }
+      .cp-t-progress { width: 36px; flex-basis: 36px; }
+      .cp-t-arrows { gap: 0.25rem; }
 
       .cp-connect { height: 420px; }
       .cp-connect-content { padding: 2.5rem 2.5rem; }
@@ -667,6 +733,7 @@
 
     @media (prefers-reduced-motion: reduce) {
       .carousel-item { transition: none !important; }
+      .cp-testimonials-grid { scroll-behavior: auto; }
     }
   </style>
 </head>
@@ -785,13 +852,17 @@
     <section class="cp-testimonials" aria-label="Testimonials">
       <div class="cp-testimonials-hd">
         <span class="cp-section-label">Testi<span class="cp-gold">monials</span></span>
-        <div class="cp-t-arrows">
-          <button id="tPrev" aria-label="Previous testimonials">&#8592;</button>
-          <button id="tNext" aria-label="Next testimonials">&#8594;</button>
-        </div>
+        <nav class="cp-t-arrows" aria-label="Testimonial navigation">
+          <button type="button" id="tPrev" aria-label="Previous testimonials">&#8592;</button>
+          <div class="cp-t-dots" id="tDots" aria-label="Choose testimonial group"></div>
+          <span class="cp-t-count" id="tCount" aria-live="polite"></span>
+          <button type="button" id="tNext" aria-label="Next testimonials">&#8594;</button>
+          <div class="cp-t-progress" id="tProgress" role="progressbar" aria-label="Time until next testimonial" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="cp-t-progress-fill" id="tProgressFill"></span></div>
+          <button type="button" class="cp-t-pause" id="tPause" aria-label="Pause automatic rotation" aria-pressed="false" title="Pause automatic rotation">&#10074;&#10074;</button>
+        </nav>
       </div>
 
-      <div class="cp-testimonials-grid">
+      <div class="cp-testimonials-grid" id="tTrack" aria-label="Client testimonials" tabindex="0">
         <div class="cp-testimonial">
           <blockquote>"Coral did my casual graduation photos, and I genuinely couldn’t be happier with how everything turned out. The results were absolutely STUNNING—even better than I imagined. She was so flexible with my vision and really listened to what I wanted, while also giving professional guidance that took everything to the next level. The entire session felt so comfortable, easy, and honestly just really fun, which made a huge difference. You can tell she truly cares about her work and the people she’s photographing. The final photos completely speak for themselves—I’ll be cherishing them forever!"</blockquote>
           <p class="cp-client">Emily</p>
@@ -887,29 +958,157 @@
       link.addEventListener('click', () => mobileNav.classList.remove('open'));
     });
 
-    // Testimonial slider — show 3 at a time, shift by 1
+    // Testimonial carousel — pages of 3 on desktop / 1 on mobile, swipeable,
+    // with dots, page count, and autoplay (30s desktop / 10s mobile) that can be paused
     (function () {
-      const items = Array.from(document.querySelectorAll('.cp-testimonial'));
-      const perPage = 3;
-      let offset = 0;
+      const track = document.getElementById('tTrack');
+      const cards = Array.from(track.querySelectorAll('.cp-testimonial'));
+      const dots = document.getElementById('tDots');
+      const count = document.getElementById('tCount');
+      const prev = document.getElementById('tPrev');
+      const next = document.getElementById('tNext');
+      const autoplayButton = document.getElementById('tPause');
+      const progress = document.getElementById('tProgress');
+      const progressFill = document.getElementById('tProgressFill');
+      // Matches the breakpoint where the old grid collapsed to one column
+      const mobile = window.matchMedia('(max-width: 991px)');
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let activePage = 0;
+      let paused = false;
+      let remainingMs = 30000;
+      let lastFrameTime = null;
+      let lastAnnouncedPercent = -1;
+      let ignoreScrollUntil = 0;
+      let scrollTimeout;
 
-      function render() {
-        items.forEach(function (el, i) {
-          el.style.display = (i >= offset && i < offset + perPage) ? '' : 'none';
-        });
+      const rotationDelay = () => mobile.matches ? 10000 : 30000;
+      const pageSize = () => mobile.matches ? 1 : 3;
+      const totalPages = () => Math.ceil(cards.length / pageSize());
+
+      function drawProgress() {
+        const percent = Math.max(0, Math.min(100, (1 - remainingMs / rotationDelay()) * 100));
+        progressFill.style.transform = `scaleX(${percent / 100})`;
+        // Avoid unnecessary accessibility updates on every animation frame
+        const rounded = Math.floor(percent);
+        if (rounded !== lastAnnouncedPercent) {
+          progress.setAttribute('aria-valuenow', String(rounded));
+          lastAnnouncedPercent = rounded;
+        }
       }
 
-      render();
+      function resetCountdown() {
+        remainingMs = rotationDelay();
+        lastFrameTime = null;
+        lastAnnouncedPercent = -1;
+        drawProgress();
+      }
 
-      document.getElementById('tNext').addEventListener('click', function () {
-        offset = (offset + 1) % (items.length - perPage + 1);
-        render();
+      function tick(timestamp) {
+        if (!paused && !document.hidden) {
+          if (lastFrameTime !== null) remainingMs -= Math.min(timestamp - lastFrameTime, 1000);
+          lastFrameTime = timestamp;
+          if (remainingMs <= 0) {
+            goTo((activePage + 1) % totalPages());
+            resetCountdown();
+          }
+        } else {
+          lastFrameTime = null;
+        }
+        drawProgress();
+        window.requestAnimationFrame(tick);
+      }
+
+      function syncAutoplayButton() {
+        // ︎ forces text (not emoji) rendering of the play glyph
+        autoplayButton.textContent = paused ? '▶︎' : '❚❚';
+        autoplayButton.setAttribute('aria-pressed', String(paused));
+        const label = paused ? 'Resume automatic rotation' : 'Pause automatic rotation';
+        autoplayButton.setAttribute('aria-label', label);
+        autoplayButton.title = label;
+      }
+
+      function renderControls() {
+        const pages = totalPages();
+        dots.replaceChildren();
+        for (let i = 0; i < pages; i++) {
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'cp-t-dot';
+          dot.setAttribute('aria-label', `Go to testimonials ${i * pageSize() + 1}–${Math.min((i + 1) * pageSize(), cards.length)}`);
+          dot.addEventListener('click', () => { goTo(i); resetCountdown(); });
+          dots.appendChild(dot);
+        }
+        setActive(Math.min(activePage, pages - 1));
+      }
+
+      function setActive(page) {
+        activePage = Math.max(0, Math.min(totalPages() - 1, page));
+        Array.from(dots.children).forEach((dot, i) => dot.setAttribute('aria-current', String(i === activePage)));
+        count.textContent = `${activePage + 1} / ${totalPages()}`;
+        prev.disabled = activePage === 0;
+        next.disabled = activePage === totalPages() - 1;
+      }
+
+      function goTo(page, behavior = 'smooth') {
+        setActive(page);
+        const index = activePage * pageSize();
+        const left = cards[index].offsetLeft - cards[0].offsetLeft;
+        if (behavior === 'instant' || reducedMotion.matches) {
+          // Temporarily disable CSS smooth scrolling (e.g. during a breakpoint change)
+          const original = track.style.scrollBehavior;
+          track.style.scrollBehavior = 'auto';
+          track.scrollLeft = left;
+          track.style.scrollBehavior = original;
+        } else {
+          track.scrollTo({ left, behavior: 'smooth' });
+        }
+      }
+
+      prev.addEventListener('click', () => { goTo(activePage - 1); resetCountdown(); });
+      next.addEventListener('click', () => { goTo(activePage + 1); resetCountdown(); });
+      autoplayButton.addEventListener('click', () => {
+        paused = !paused;
+        syncAutoplayButton();
+        lastFrameTime = null;
+      });
+      document.addEventListener('visibilitychange', () => { lastFrameTime = null; });
+
+      // Keep dots/arrows in sync when the user swipes or scrolls the track
+      track.addEventListener('scroll', () => {
+        if (performance.now() < ignoreScrollUntil) return;
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          if (performance.now() < ignoreScrollUntil) return;
+          // With 4 cards on desktop the last page can't scroll a full page width,
+          // so treat "scrolled to the end" as the last page
+          const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+          if (atEnd) { setActive(totalPages() - 1); return; }
+          const size = pageSize();
+          const step = cards[Math.min(size, cards.length - 1)].offsetLeft - cards[0].offsetLeft;
+          setActive(Math.round(track.scrollLeft / (step || 1)));
+        }, 90);
+      }, { passive: true });
+
+      mobile.addEventListener('change', () => {
+        // The change event fires after mobile.matches flips, so recover the
+        // first visible card using the OLD page size
+        const previousPageSize = mobile.matches ? 3 : 1;
+        const firstVisible = activePage * previousPageSize;
+        const newPage = Math.floor(firstVisible / pageSize());
+
+        // Prevent stale smooth-scroll events from overriding the new page
+        clearTimeout(scrollTimeout);
+        ignoreScrollUntil = performance.now() + 350;
+        activePage = newPage;
+        renderControls();
+        goTo(newPage, 'instant');
+        resetCountdown();
       });
 
-      document.getElementById('tPrev').addEventListener('click', function () {
-        offset = offset === 0 ? items.length - perPage : offset - 1;
-        render();
-      });
+      renderControls();
+      syncAutoplayButton();
+      resetCountdown();
+      window.requestAnimationFrame(tick);
     })();
 
     // Image protections
